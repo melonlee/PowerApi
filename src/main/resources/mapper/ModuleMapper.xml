@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="powerapi.mapper.ModuleMapper">
+    <resultMap id="BaseResultMap" type="powerapi.entity.Module">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="createdate" property="createdate" jdbcType="TIMESTAMP"/>
+        <result column="p_id" property="pId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="is_update" property="isUpdate" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		id, title, url, description, createdate, p_id, user_id,
+		status, is_update
+	</sql>
+
+    <select id="list" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_module
+        where p_id = #{pId,jdbcType=INTEGER}
+    </select>
+
+    <select id="findModulesByPro" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+		select id , title, url, description,(select 
+		count(t_function.id) from t_function where t_function.m_ID =t_module.id )
+		as functions
+		from t_module
+		where p_id = #{pId,jdbcType=INTEGER}
+	</select>
+
+</mapper>

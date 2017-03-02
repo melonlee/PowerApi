@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="powerapi.mapper.RequesterMapper">
+
+    <resultMap id="BaseResultMap" type="powerapi.entity.Requester">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="method" property="method" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="params" property="params" jdbcType="VARCHAR"/>
+        <result column="response_code" property="responseCode"
+                jdbcType="INTEGER"/>
+        <result column="response_header" property="responseHeader"
+                jdbcType="VARCHAR"/>
+        <result column="response_body" property="responseBody"
+                jdbcType="VARCHAR"/>
+        <result column="createdate" property="createdate" jdbcType="VARCHAR"/>
+        <result column="request_time" property="requestTime" jdbcType="INTEGER"/>
+        <result column="response_size" property="responseSize"
+                jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		id, user_id, method, url, params, response_code,
+		response_header,
+		response_body,
+		createdate, request_time, response_size
+	</sql>
+
+    <select id="history" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_requester
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="count" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+
+		select count(t_requester.id) from t_requester where user_id =
+		#{userId,jdbcType=INTEGER}
+
+	</select>
+
+</mapper>

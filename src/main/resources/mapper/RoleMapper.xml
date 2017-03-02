@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="powerapi.mapper.RoleMapper">
+
+
+    <resultMap id="BaseResultMap" type="powerapi.entity.Role">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="role" property="role" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="selected" property="selected" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id, role, description,
+    </sql>
+
+    <insert id="insertPermissions">
+        INSERT INTO t_role_permission (role_id,permission_id) values (#{roleId},#{permissionId})
+    </insert>
+
+    <delete id="deletePermissions">
+        DELETE FROM t_role_permission where role_id = #{roleId} AND permission_id = #{permissionId}
+    </delete>
+
+    <delete id="deletePermissionByRole">
+      DELETE FROM t_role_permission where role_id = #{roleId}
+    </delete>
+
+    <select id="findByAdmin" resultMap="BaseResultMap">
+        select r.*
+        from (  (SELECT t_role.*,1 as selected  from t_role
+         left join t_admin_role on t_role.id = t_admin_role.role_id
+         where t_admin_role.admin_id = #{adminId} )
+        UNION ALL
+          (SELECT t_role.*,0 as selected from t_role ) ) as r group by r.role order by r.id
+    </select>
+
+</mapper>

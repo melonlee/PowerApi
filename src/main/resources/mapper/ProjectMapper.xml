@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="powerapi.mapper.ProjectMapper">
+    <resultMap id="BaseResultMap" type="powerapi.entity.Project">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="host_url" property="hostUrl" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="createdate" property="createdate" jdbcType="TIMESTAMP"/>
+        <result column="version" property="version" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="isupdate" property="isupdate" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		id, title, host_url, description, createdate,
+		version,icon,isupdate,
+		user_id
+	</sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_project
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="list" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_project where user_id = #{userId,jdbcType=INTEGER} order by createdate desc
+
+    </select>
+
+
+    <select id="count" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+
+		select count(t_project.id) from t_project where user_id =
+		#{userId,jdbcType=INTEGER}
+
+	</select>
+
+
+
+</mapper>
