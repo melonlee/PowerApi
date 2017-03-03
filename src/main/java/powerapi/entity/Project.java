@@ -6,23 +6,27 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 @TableName("t_project")
 public class Project extends BaseEntity {
-    
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
     private String title;
 
+    @TableField(value = "host_url")
     private String hostUrl;
 
     private String description;
 
     private String version;
 
+    @TableField(value = "user_id")
     private Long userId;
 
     private String icon;
 
     private Integer isupdate;
+
+    private String pattern;
 
     public String getTitle() {
         return title;
@@ -80,5 +84,11 @@ public class Project extends BaseEntity {
         this.isupdate = isupdate;
     }
 
+    public String getPattern() {
+        return pattern;
+    }
 
+    public void setPattern(String pattern) {
+        this.pattern = pattern;
+    }
 }

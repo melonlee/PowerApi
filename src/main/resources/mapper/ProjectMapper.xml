@@ -11,10 +11,11 @@
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="icon" property="icon" jdbcType="VARCHAR"/>
         <result column="isupdate" property="isupdate" jdbcType="INTEGER"/>
+        <result column="pattern" property="pattern" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
 		id, title, host_url, description, createdate,
-		version,icon,isupdate,
+		version,icon,isupdate,pattern,
 		user_id
 	</sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -39,7 +40,6 @@
 		#{userId,jdbcType=INTEGER}
 
 	</select>
-
 
 
 </mapper>

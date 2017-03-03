@@ -10,7 +10,7 @@ import powerapi.service.CodeService;
 /**
  * Created by Melon on 17/2/22.
  */
-@Service("codeService")
+@Service
 public class CodeServiceImpl extends ServiceImpl<CodeMapper,Code> implements CodeService {
 
 

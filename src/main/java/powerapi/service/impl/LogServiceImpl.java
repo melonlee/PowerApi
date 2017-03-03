@@ -10,7 +10,7 @@ import powerapi.service.LogService;
 /**
  * Created by Melon on 17/2/22.
  */
-@Service("logService")
+@Service
 public class LogServiceImpl extends ServiceImpl<LogMapper,Log> implements LogService {
 
 

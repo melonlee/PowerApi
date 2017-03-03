@@ -10,7 +10,7 @@ import powerapi.service.BugService;
 /**
  * Created by Melon on 17/2/22.
  */
-@Service("bugService")
+@Service
 public class BugServiceImpl extends ServiceImpl<BugMapper, Bug> implements BugService {
 
 

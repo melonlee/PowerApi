@@ -10,7 +10,7 @@ import powerapi.service.ProjectService;
 /**
  * Created by Melon on 17/2/22.
  */
-@Service("projectService")
+@Service
 public class ProjectServiceImpl extends ServiceImpl<ProjectMapper,Project> implements ProjectService {
 
 

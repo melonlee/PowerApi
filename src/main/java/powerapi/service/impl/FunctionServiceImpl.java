@@ -10,7 +10,7 @@ import powerapi.service.FunctionService;
 /**
  * Created by Melon on 17/2/22.
  */
-@Service("functionService")
+@Service
 public class FunctionServiceImpl extends ServiceImpl<FunctionMapper,Function> implements FunctionService {
 
 

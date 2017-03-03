@@ -1,7 +1,5 @@
 package powerapi.web.controller;
 
-import java.util.ArrayList;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
-import powerapi.entity.User;
 import powerapi.service.ModuleService;
 import powerapi.service.ProjectService;
 
+import java.util.List;
+
 
 @Controller
-@RequestMapping("module")
+@RequestMapping("/module")
 public class ModuleController {
 
     @Resource
@@ -29,19 +28,14 @@ public class ModuleController {
     @Resource
     private ProjectService projectService;
 
-    private User user;
-
-    @RequestMapping(value = "interfaces", method = {RequestMethod.POST,
+    @RequestMapping(value = "/all", method = {RequestMethod.POST,
             RequestMethod.GET})
-    public String interfaces(
-            ModelMap model,
-            @RequestParam(value = "proID", required = false, defaultValue = "0") Long proID) {
+    public String all(ModelMap model, @RequestParam(value = "proID", required = true) Long proID) {
 
         Project project = projectService.selectById(proID);
-//		ArrayList<Module> list = moduleService.findModulesByPro(proID);
-//		model.addAttribute("list", list);
+        List<Module> modules = moduleService.selectByProjectId(proID);
+        model.addAttribute("modules", modules);
         model.addAttribute("project", project);
-
         return "interfaces";
     }
 
@@ -67,11 +61,10 @@ public class ModuleController {
     public String submit(ModelMap model, HttpServletRequest request,
                          HttpSession session, Module module) {
 
-        user = (User) session.getAttribute("curUser");
-        module.setUserId(user.getId());
+        module.setUserId(1L);
         model.addAttribute("status", moduleService.insert(module));
 
-        return interfaces(model, module.getpId());
+        return all(model, module.getpId());
     }
 
     @ResponseBody

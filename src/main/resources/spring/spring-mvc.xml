@@ -17,9 +17,7 @@
     <!-- 扫描插件,redis,cache,jsonp,aop -->
     <context:component-scan base-package="powerapi.plugin"></context:component-scan>
     <!-- 开启aop，对类代理-->
-
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-
     <aop:config proxy-target-class="true"></aop:config>
 
     <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
@@ -30,6 +28,7 @@
 
     <!-- 静态资源映射 -->
     <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/userdata/**" location="/userdata/"/>
 
     <!-- 处理请求时返回json字符串的中文乱码问题 -->
     <mvc:annotation-driven>

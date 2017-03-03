@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Created by Melon on 17/2/22.
  */
-@Service("userService")
+@Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     public Set<String> findRoles(String username) {
