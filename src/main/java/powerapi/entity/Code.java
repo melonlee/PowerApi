@@ -16,11 +16,13 @@ public class Code extends BaseEntity {
 
     private String description;
 
+    @TableField(value = "p_id")
     private Long pId;
 
+    @TableField(value = "user_id")
     private Long userId;
 
-    @TableField(exist = false)
+    @TableField(value = "is_update")
     private Integer isUpdate;
 
     public String getCode() {

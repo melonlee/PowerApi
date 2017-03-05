@@ -18,10 +18,13 @@ public class Bug extends BaseEntity {
 
     private Integer status;
 
+    @TableField(value = "is_update")
     private Integer isUpdate;
 
+    @TableField(value = "p_id")
     private Long pId;
 
+    @TableField(value = "user_id")
     private Long userId;
 
     public String getSign() {

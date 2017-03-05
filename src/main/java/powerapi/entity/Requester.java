@@ -9,6 +9,7 @@ public class Requester extends BaseEntity {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
+    @TableField(value = "user_id")
     private Integer userId;
 
     private String method;
@@ -16,15 +17,15 @@ public class Requester extends BaseEntity {
     private String url;
 
     private String params;
-
+    @TableField(value = "response_code")
     private Integer responseCode;
-
+    @TableField(value = "response_header")
     private String responseHeader;
-
+    @TableField(value = "response_body")
     private String responseBody;
-
+    @TableField(value = "request_time")
     private Integer requestTime;// 请求耗时
-
+    @TableField(value = "response_size")
     private Integer responseSize;// 请求返回内容大小
 
     public Integer getUserId() {

@@ -3,10 +3,8 @@ package powerapi.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 
-@TableName("t_param")
 public class Param extends BaseEntity {
 
-    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
     private String name;
@@ -14,7 +12,7 @@ public class Param extends BaseEntity {
     private String type;
 
     private String value;
-
+    
     private Integer quickId;
 
     public String getName() {

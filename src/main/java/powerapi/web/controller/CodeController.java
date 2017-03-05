@@ -1,6 +1,7 @@
 package powerapi.web.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,67 +29,57 @@ public class CodeController {
     @Resource
     private ProjectService projectService;
 
-    private User user;
-
-    @RequestMapping(value = "list", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(
             ModelMap model,
-            @RequestParam(value = "proID", required = false, defaultValue = "0") Long proID) {
+            @RequestParam(value = "proId", required = true) Long proId) {
 
-        Project project = projectService.selectById(proID);
-        ArrayList<Code> list = (ArrayList<Code>) codeService.selectList(null);
-        model.addAttribute("list", list);
+        Project project = projectService.selectById(proId);
+        List<Code> codes = codeService.selectByProjectId(proId);
+        model.addAttribute("codes", codes);
         model.addAttribute("project", project);
-
-        return "codes";
+        return "code/index";
     }
 
-    @RequestMapping(value = "create", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(
             ModelMap model,
-            @RequestParam(value = "proID", required = false, defaultValue = "0") Long proID) {
-        Project project = projectService.selectById(proID);
+            @RequestParam(value = "proId", required = true) Long proId) {
+        Project project = projectService.selectById(proId);
         model.addAttribute("project", project);
-        return "codeview";
+        return "code/detail";
     }
 
-    @RequestMapping(value = "submit", method = {RequestMethod.POST,
+    @RequestMapping(value = "/modify", method = {RequestMethod.POST,
             RequestMethod.GET})
-    public String submit(ModelMap model, HttpServletRequest request, Code code,
-                         HttpSession session) {
-        user = (User) session.getAttribute("curUser");
-        code.setUserId(user.getId());
-        model.addAttribute("status", codeService.insert(code));
-        return list(model, code.getpId());
+    public String submit(ModelMap model, Code code) {
+        code.setUserId(1L);
+        model.addAttribute("status", codeService.insertOrUpdate(code));
+        return "redirect:/code/all?proId=" + code.getpId();
     }
 
-    @RequestMapping(value = "basic", method = {RequestMethod.POST,
+    @RequestMapping(value = "/view", method = {RequestMethod.POST,
             RequestMethod.GET})
     public String basic(
             ModelMap model,
-            @RequestParam(value = "proID", required = false, defaultValue = "0") Long proID,
-            @RequestParam(value = "id", required = false, defaultValue = "0") Long id) {
+            @RequestParam(value = "proId", required = true) Long proId,
+            @RequestParam(value = "id", required = true) Long id) {
 
-        Project project = projectService.selectById(proID);
+        Project project = projectService.selectById(proId);
         model.addAttribute("project", project);
         Code code = codeService.selectById(id);
         model.addAttribute("code", code);
-
-        return "codeview";
+        return "code/detail";
     }
 
-    @RequestMapping(value = "remove", method = {RequestMethod.POST,
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,
             RequestMethod.GET})
     public String remove(
             ModelMap model,
-            @RequestParam(value = "id", required = false, defaultValue = "0") Long id) {
-
+            @RequestParam(value = "id", required = true) Long id) {
         Code code = codeService.selectById(id);
         model.addAttribute("status", codeService.deleteById(id));
-
-        return list(model, code.getpId());
+        return "redirect:/code/all?proId=" + code.getpId();
     }
 
 }

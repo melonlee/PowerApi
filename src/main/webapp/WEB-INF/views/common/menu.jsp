@@ -1,4 +1,5 @@
-<#import "/spring.ftl" as spring>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <div class="headerbar">
     <div class="header-left">
         <div class="logopanel">
@@ -9,22 +10,22 @@
         <div class="topnav">
             <a class="menutoggle"><i class="fa fa-bars"></i></a>
             <ul class="nav nav-horizontal">
-                <li>
-                    <a href="../dashboard/console.do"><i class="fa fa-home"></i> <span>总览</span></a></li>
-                <li>
-                    <a href="../pro/list.do"><i class="fa fa-briefcase"></i> <span>
-							项目管理</span> </a>
-                <li>
-                    <a href="../quick/view.do"><i class="fa fa-send"></i> <span>单元测试</span></a></li>
+                <li ${param.nav==1 ? "class='active'" : "" }><a
+                        href="../dashboard/console.do"><i class="fa fa-home"></i> <span>总览</span></a></li>
 
-                <li>
-                    <a href="../auto/list.do"><i
-                            class="fa fa-truck"></i> <span>自动测试</span><span
-                            class="pull-right badge badge-danger">Beta</span></a></li>
-                <li>
-                    <a href="../monitor/list.do"><i
-                            class="fa fa-rocket"></i> <span>自动监控</span><span
-                            class="pull-right badge badge-danger">Beta</span></a></li>
+                <li ${param.nav==2 ? "class='active'" : "" }><a
+                        href="../project/all"><i class="fa fa-briefcase"></i> <span>
+							项目管理</span> </a>
+                <li ${param.nav==4 ? "class='active'" : "" }><a
+                        href="../quick/view.do"><i class="fa fa-send"></i> <span>单元测试</span></a></li>
+
+                <li ${param.nav==5 ? "class='active'" : "" }><a href="../auto/list.do"><i
+                        class="fa fa-truck"></i> <span>自动测试</span><span
+                        class="pull-right badge badge-danger">Beta</span></a></li>
+
+                <li ${param.nav==6 ? "class='active'" : "" }><a href="../monitor/list.do"><i
+                        class="fa fa-rocket"></i> <span>自动监控</span><span
+                        class="pull-right badge badge-danger">Beta</span></a></li>
             </ul>
         </div>
     </div>
@@ -57,10 +58,13 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle"
                             data-toggle="dropdown">
-                        <img src="<@spring.url '/static/images/logo.jpg'/>" alt=""/> username <span
-                            class="caret"></span>
+                        <img src="<%=request.getScheme() + "://" + request.getServerName()
+					+ ":" + request.getServerPort() + request.getContextPath()
+					+ "/"%>static/images/logo.jpg"
+                             alt=""/> ${sessionScope.curUser.username} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+
                         <li><a href="../dashboard/changepwd.do"><i
                                 class="glyphicon glyphicon-cog"></i> 更改密码</a></li>
                         <li><a href="../signout.do"><i

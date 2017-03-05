@@ -2,10 +2,18 @@ package powerapi.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import powerapi.common.utils.RelativeDateFormat;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @TableName("t_project")
 public class Project extends BaseEntity {
+    
+    @TableField(exist = false)
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:m:s");
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -27,6 +35,9 @@ public class Project extends BaseEntity {
     private Integer isupdate;
 
     private String pattern;
+
+    @TableField(exist = false)
+    private String relativedate;
 
     public String getTitle() {
         return title;
@@ -90,5 +101,14 @@ public class Project extends BaseEntity {
 
     public void setPattern(String pattern) {
         this.pattern = pattern;
+    }
+
+    public String getRelativedate() {
+        try {
+            Date date = format.parse(createdate);
+            return RelativeDateFormat.format(date);
+        } catch (ParseException e) {
+            return "时间异常";
+        }
     }
 }

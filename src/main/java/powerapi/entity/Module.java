@@ -18,14 +18,18 @@ public class Module extends BaseEntity {
 
     private String description;
 
+    @TableField(value = "p_id")
     private Long pId;
 
+    @TableField(value = "user_id")
     private Long userId;
 
     private Integer status;
 
+    @TableField(value = "is_update")
     private Integer isUpdate;
-
+    
+    @TableField(exist = false)
     private Integer functions; // 该模块下的接口数
 
     public Integer getFunctions() {
@@ -90,5 +94,19 @@ public class Module extends BaseEntity {
 
     public void setIsUpdate(Integer isUpdate) {
         this.isUpdate = isUpdate;
+    }
+
+    @Override
+    public String toString() {
+        return "Module{" +
+                "title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", description='" + description + '\'' +
+                ", pId=" + pId +
+                ", userId=" + userId +
+                ", status=" + status +
+                ", isUpdate=" + isUpdate +
+                ", functions=" + functions +
+                '}';
     }
 }

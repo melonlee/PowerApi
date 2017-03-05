@@ -1,9 +1,8 @@
 package powerapi.web.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,68 +28,58 @@ public class BugController {
 
     private User user;
 
-    @RequestMapping(value = "list", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(
             ModelMap model,
-            @RequestParam(value = "proID", required = false, defaultValue = "0") Long proID) {
+            @RequestParam(value = "proId", required = true) Long proId) {
 
-        Project project = projectService.selectById(proID);
-        ArrayList<Bug> list = (ArrayList<Bug>) bugService.selectList(null);
-        model.addAttribute("list", list);
+        Project project = projectService.selectById(proId);
+        List<Bug> list = bugService.selectByProjectId(proId);
+        model.addAttribute("bugs", list);
         model.addAttribute("project", project);
-
-        return "bugs";
+        return "/bug/index";
     }
 
-    @RequestMapping(value = "create", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(
             ModelMap model,
-            @RequestParam(value = "proID", required = false, defaultValue = "0") Long proID) {
-        Project project = projectService.selectById(proID);
+            @RequestParam(value = "proId", required = true) Long proId) {
+        Project project = projectService.selectById(proId);
         model.addAttribute("project", project);
-        return "bugview";
+        return "bug/detail";
     }
 
-    @RequestMapping(value = "submit", method = {RequestMethod.POST,
-            RequestMethod.GET})
-    public String submit(ModelMap model, Bug bug, HttpSession session) {
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    public String submit(ModelMap model, Bug bug) {
 
-        user = (User) session.getAttribute("curUser");
+        bug.setUserId(1l);
 
-        bug.setUserId(user.getId());
+        model.addAttribute("status", bugService.insertOrUpdate(bug));
 
-        model.addAttribute("status", bugService.insert(bug));
-
-        return list(model, bug.getpId());
+        return "redirect:/bug/all?proId=" + bug.getpId();
     }
 
-    @RequestMapping(value = "basic", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String basic(
             ModelMap model,
-            @RequestParam(value = "proID", required = false, defaultValue = "0") Long proID,
-            @RequestParam(value = "id", required = false, defaultValue = "0") Long id) {
+            @RequestParam(value = "proId", required = true) Long proId,
+            @RequestParam(value = "id", required = true) Long id) {
 
-        Project project = projectService.selectById(proID);
+        Project project = projectService.selectById(proId);
         model.addAttribute("project", project);
         Bug bug = bugService.selectById(id);
         model.addAttribute("bug", bug);
-
-        return "bugview";
+        return "/bug/detail";
     }
 
-    @RequestMapping(value = "remove", method = {RequestMethod.POST,
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,
             RequestMethod.GET})
     public String remove(
             ModelMap model,
             @RequestParam(value = "id", required = false, defaultValue = "0") Long id) {
-
         Bug bug = bugService.selectById(id);
         model.addAttribute("status", bugService.deleteById(id));
-
-        return list(model, bug.getpId());
+        return "redirect:/bug/all?proId=" + bug.getpId();
     }
 
 }

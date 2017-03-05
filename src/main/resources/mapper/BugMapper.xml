@@ -6,14 +6,14 @@
         <result column="sign" property="sign" jdbcType="VARCHAR"/>
         <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="BIGINT"/>
-        <result column="isupdate" property="isUdate" jdbcType="INTEGER"/>
+        <result column="is_update" property="isUpdate" jdbcType="INTEGER"/>
         <result column="createdate" property="createdate" jdbcType="VARCHAR"/>
         <result column="p_id" property="pId" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id, sign, description, status, isupdate, createdate, p_id,
+		id, sign, description, status, is_update, createdate, p_id,
 		user_id
 	</sql>
 

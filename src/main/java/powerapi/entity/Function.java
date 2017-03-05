@@ -18,18 +18,22 @@ public class Function extends BaseEntity {
 
     private String method;
 
+    @TableField(value = "is_login")
     private Integer isLogin;
 
     private String params;
-
+    
+    @TableField(value = "response_body")
     private String responseBody;
 
+    @TableField(value = "m_id")
     private Long mId;
 
     private Integer status;
 
     private String description;
 
+    @TableField(value = "response_type")
     private String responseType;
 
     public String getResponseType() {

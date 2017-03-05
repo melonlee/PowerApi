@@ -45,7 +45,7 @@ public class ProjectController {
         List<Project> projects = projectService.selectPage(new Page<Project>(page, 10),
                 new EntityWrapper<Project>().orderBy("createdate", false)).getRecords();
         model.addAttribute("projects", projects);
-        return "/project/index.ftl";
+        return "/project/index";
     }
 
     /**
@@ -57,7 +57,7 @@ public class ProjectController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(ModelMap model) {
         model.addAttribute("project", new Project());
-        return "/project/detail.ftl";
+        return "/project/detail";
     }
 
     /**
@@ -75,10 +75,9 @@ public class ProjectController {
             String filePath = request.getSession().getServletContext()
                     .getRealPath("/userdata/");
             String fileName = UUID.randomUUID().toString();
-            FontImageUtils.generateImage
+            if (FontImageUtils.generateImage
                     (project.getTitle().substring(0, 1),
-                            project.getIcon() + fileName + ".png");
-            if (new File(filePath + fileName + ".png").exists()) {
+                            project.getIcon() + fileName + ".png")) {
                 project.setIcon(fileName + ".png");
             } else {
                 project.setIcon("default.png");
@@ -108,7 +107,7 @@ public class ProjectController {
     public String info(ModelMap model, @PathVariable("id") Long id) {
         Project project = projectService.selectById(id);
         model.addAttribute("project", project);
-        return "project/detail.ftl";
+        return "project/detail";
     }
 
     /**

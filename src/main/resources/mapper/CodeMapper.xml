@@ -8,10 +8,10 @@
         <result column="createdate" property="createdate" jdbcType="TIMESTAMP"/>
         <result column="p_id" property="pId" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="BIGINT"/>
-        <result column="isupdate" property="isupdate" jdbcType="INTEGER"/>
+        <result column="is_update" property="isUpdate" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-		id, code, description, createdate, p_id, user_id,isupdate
+		id, code, description, createdate, p_id, user_id,is_update
 	</sql>
 
     <select id="list" resultMap="BaseResultMap" parameterType="java.lang.Integer">
