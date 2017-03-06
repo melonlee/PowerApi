@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="host" value="${pageContext.request.contextPath}"></c:set>
 <div class="headerbar">
     <div class="header-left">
         <div class="logopanel">
@@ -11,20 +13,26 @@
             <a class="menutoggle"><i class="fa fa-bars"></i></a>
             <ul class="nav nav-horizontal">
                 <li ${param.nav==1 ? "class='active'" : "" }><a
-                        href="../dashboard/console.do"><i class="fa fa-home"></i> <span>总览</span></a></li>
+                        href="../dashboard/console.do"><i class="fa fa-home"></i> <span>
+                            总览</span></a></li>
 
                 <li ${param.nav==2 ? "class='active'" : "" }><a
                         href="../project/all"><i class="fa fa-briefcase"></i> <span>
-							项目管理</span> </a>
+							项目管理</span> </a></li>
+                <li ${param.nav==3 ? "class='active'" : "" }><a
+                        href="../project/all"><i class="fa fa-briefcase"></i> <span>
+							成员管理</span> </a></li>
                 <li ${param.nav==4 ? "class='active'" : "" }><a
-                        href="../quick/view.do"><i class="fa fa-send"></i> <span>单元测试</span></a></li>
-
-                <li ${param.nav==5 ? "class='active'" : "" }><a href="../auto/list.do"><i
-                        class="fa fa-truck"></i> <span>自动测试</span><span
+                        href="../quick/view.do"><i class="fa fa-send"></i> <span>
+                            单元测试</span></a></li>
+                <li ${param.nav==5 ? "class='active'" : "" }><a
+                        href="../auto/list.do"><i class="fa fa-truck"></i> <span>
+                            自动测试</span><span
                         class="pull-right badge badge-danger">Beta</span></a></li>
 
-                <li ${param.nav==6 ? "class='active'" : "" }><a href="../monitor/list.do"><i
-                        class="fa fa-rocket"></i> <span>自动监控</span><span
+                <li ${param.nav==6 ? "class='active'" : "" }><a
+                        href="../monitor/list.do"> <i class="fa fa-rocket"></i> <span>
+                            自动监控</span><span
                         class="pull-right badge badge-danger">Beta</span></a></li>
             </ul>
         </div>
@@ -58,9 +66,7 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle"
                             data-toggle="dropdown">
-                        <img src="<%=request.getScheme() + "://" + request.getServerName()
-					+ ":" + request.getServerPort() + request.getContextPath()
-					+ "/"%>static/images/logo.jpg"
+                        <img src="${host}/static/images/logo.jpg"
                              alt=""/> ${sessionScope.curUser.username} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">

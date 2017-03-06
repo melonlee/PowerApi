@@ -1,7 +1,5 @@
 package powerapi.web.controller;
 
-import java.util.ArrayList;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -10,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import powerapi.entity.Log;
 import powerapi.entity.User;
 import powerapi.service.*;
 
@@ -54,7 +51,7 @@ public class DashboardController {
 
         //	Integer bugCount = bugService.count(user.getId());
         modelMap.addAttribute("bugCount", 3);
-        return "index";
+        return "dashboard";
     }
 
     @RequestMapping(value = "changepwd", method = {RequestMethod.POST,
@@ -62,7 +59,7 @@ public class DashboardController {
     public String changepwd(ModelMap modelMap, HttpSession session) {
         user = (User) session.getAttribute("curUser");
         modelMap.addAttribute("user", user);
-        return "account";
+        return "account/account";
     }
 
     @RequestMapping(value = "change", method = {RequestMethod.POST,
@@ -81,6 +78,6 @@ public class DashboardController {
             session.setAttribute("curUser", user);
         }
         modelMap.addAttribute("status", status);
-        return "index";
+        return "dashboard";
     }
 }

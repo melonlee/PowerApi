@@ -2,7 +2,6 @@ package powerapi.web.controller;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class QuicktestController {
 //
 //		modelMap.addAttribute("list", list);
 
-        return "quicktest";
+        return "test/quicktest";
     }
 
     @ResponseBody

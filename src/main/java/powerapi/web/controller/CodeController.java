@@ -1,11 +1,8 @@
 package powerapi.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import powerapi.entity.Code;
 import powerapi.entity.Project;
-import powerapi.entity.User;
 import powerapi.service.CodeService;
 import powerapi.service.ProjectService;
 

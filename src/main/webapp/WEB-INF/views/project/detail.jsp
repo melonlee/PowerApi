@@ -1,6 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="host" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +86,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p>
-                                <button class="btn btn-danger btn-block" id="remove_pro">删除该项目</button>
+                                <button class="btn btn-danger btn-block" id="remove_pro" data-id="${project.id}">删除该项目
+                                </button>
                             </p>
                         </div>
                     </div>
@@ -95,18 +97,6 @@
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
-</body>
-
-<script type="text/javascript">
-    $(document).on("click", "#remove_pro", function () {
-        var $this = $(this);
-        if (window.confirm('确定删除该项目吗? 删除后该项目下的所有内容将被删除!')) {
-            window.location.href = 'delete?id=' +${project.id};
-            return true;
-        } else {
-            return false;
-        }
-    });
-</script>
+<script src="${host}/static/js/service/project.js"></script>
 </body>
 </html>

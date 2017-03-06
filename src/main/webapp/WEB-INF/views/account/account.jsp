@@ -4,12 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="common/style.jsp"></jsp:include>
+<jsp:include page="../common/style.jsp"></jsp:include>
 </head>
 <body class="horizontal-menu">
 	<section>
 		<div class="mainpanel">
-			<jsp:include page="common/menu.jsp" flush="true">
+			<jsp:include page="../common/menu.jsp" flush="true">
 				<jsp:param name="nav" value="1" /></jsp:include>
 			<div class="pageheader">
 				<h2>
@@ -56,5 +56,5 @@
 			</div>
 		</div>
 	</section>
-	<jsp:include page="common/scripts.jsp"></jsp:include></body>
+	<jsp:include page="../common/scripts.jsp"></jsp:include></body>
 </html>

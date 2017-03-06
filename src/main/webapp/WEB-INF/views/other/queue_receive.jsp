@@ -16,6 +16,6 @@
 <body>
 <h1>${textMessage }</h1>
 
-<h2><a href="index.jsp">返回主页</a></h2>
+<h2><a href="../dashboard.jsp">返回主页</a></h2>
 </body>
 </html>

@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="common/style.jsp"></jsp:include>
+    <jsp:include page="../common/style.jsp"></jsp:include>
     <link href="<%=request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + request.getContextPath() + "/"%>css/morris.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 
     <div class="mainpanel">
 
-        <jsp:include page="common/menu.jsp" flush="true">
+        <jsp:include page="../common/menu.jsp" flush="true">
             <jsp:param name="nav" value="5"/>
         </jsp:include>
 
@@ -158,7 +158,7 @@
     <!-- contentpanel -->
     <!-- mainpanel -->
 </section>
-<jsp:include page="common/scripts.jsp"></jsp:include>
+<jsp:include page="../common/scripts.jsp"></jsp:include>
 <script src="<%=request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + request.getContextPath() + "/"%>js/charts.js"></script>
