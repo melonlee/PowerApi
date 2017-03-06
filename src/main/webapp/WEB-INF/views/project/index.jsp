@@ -70,8 +70,7 @@
 
                                         <div class="media-body">
                                             <h4 class="person-name">
-                                                <a target="_blank"
-                                                   href="${project.id}">${project.title}</a><span
+                                                <a href="${project.id}">${project.title}</a><span
                                                     class="pull-right badge badge-danger">${project.version}</span>
                                             </h4>
 
@@ -95,12 +94,12 @@
                                                        class="tooltips" data-toggle="tooltip"
                                                        data-placement="top" title="Bug管理"><i
                                                         class="fa fa-bug"></i></a></li>
-                                                <li><a href="../code/list.do?proId=${project.id}"
+                                                <li><a href="../code/all?proId=${project.id}"
                                                        class="tooltips" data-toggle="tooltip"
                                                        data-placement="top" title="业务码管理"><i
                                                         class="fa fa-file-code-o"></i></a></li>
                                                 <li><a target="_blank"
-                                                       href="../preview/${project.id}.do" class="tooltips"
+                                                       href="doc?id=${project.id}" class="tooltips"
                                                        data-toggle="tooltip" data-placement="top" title="文档预览"><i
                                                         class="fa fa-eye"></i></a></li>
 

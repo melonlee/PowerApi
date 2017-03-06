@@ -1,21 +1,23 @@
 package powerapi.web.controller;
 
-import java.util.ArrayList;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import powerapi.common.utils.MJsonUtils;
-import powerapi.entity.Function;
-import powerapi.entity.Module;
-import powerapi.entity.Project;
+import powerapi.common.utils.HttpUtils;
+import powerapi.common.utils.JsonUtils;
+import powerapi.entity.*;
 import powerapi.service.FunctionService;
 import powerapi.service.ModuleService;
 import powerapi.service.ProjectService;
@@ -39,7 +41,7 @@ public class FunctionController {
     public String list(
             @RequestParam(value = "mId", required = true) Long mId) {
         List<Function> list = functionService.selectByModuleId(mId);
-        return MJsonUtils.getInstance().setList(list).result();
+        return JsonUtils.getInstance().setList(list).result();
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -63,7 +65,7 @@ public class FunctionController {
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify(Function function) {
         Integer status = functionService.insertOrUpdate(function) ? 1 : 0;
-        return MJsonUtils.getInstance().setStatus(status).result();
+        return JsonUtils.getInstance().setStatus(status).result();
     }
 
     @ResponseBody
@@ -71,7 +73,7 @@ public class FunctionController {
     public String remove(
             @RequestParam(value = "id", required = true) int id) {
         Integer status = functionService.deleteById(id) ? 1 : 0;
-        return MJsonUtils.getInstance().setStatus(status).result();
+        return JsonUtils.getInstance().setStatus(status).result();
     }
 
     /**
@@ -91,13 +93,12 @@ public class FunctionController {
         function.setStatus(status);
 //        Integer rs = functionService.tag(function);
 //
-//        return MJsonUtils.getInstance().setStatus(rs).result();
+//        return JsonUtils.getInstance().setStatus(rs).result();
         return null;
     }
 
 
-    @RequestMapping(value = "/test", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String modify(
             ModelMap model,
             @RequestParam(value = "proId", required = true) Long proId,
@@ -109,6 +110,39 @@ public class FunctionController {
                 + function.getUrl() + project.getPattern());
         model.addAttribute("function", function);
         return "interface/test";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public String test(ModelMap modelMap, Quicktest quicktest,
+                       HttpSession session) throws IllegalAccessException,
+            InvocationTargetException {
+
+        JSONObject paramObject = JSONObject.parseObject(quicktest.getParams());
+
+        JSONArray params = paramObject.getJSONArray("params");
+
+        Param param;
+
+        HashMap<String, String> paramsMap = new HashMap();
+        for (int loop = 0; loop < params.size(); loop++) {
+
+            JSONObject paramJson = params.getJSONObject(loop);
+
+            param = new Param();
+            param.setName(paramJson.getString("name"));
+            param.setType(paramJson.getString("type"));
+            param.setValue(paramJson.getString("value"));
+
+            paramsMap.put(param.getName(), param.getValue());
+        }
+
+        Requester requester = HttpUtils.doPost(quicktest.getUrl(), paramsMap);
+        requester.setUserId(1);
+        requester.setParams(quicktest.getParams());
+//		quicktestService.saveTest(requester);
+        return JsonUtils.getInstance().setBean(requester, 1)
+                .result();
     }
 
 }

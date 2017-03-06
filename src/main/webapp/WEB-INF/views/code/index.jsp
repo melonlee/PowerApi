@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-md-1">
                     <p>
-                        <a class="btn btn-primary btn-block" href="create?proID=${project.id}">添加业务码
+                        <a class="btn btn-primary btn-block" href="create?proId=${project.id}">添加业务码
                         </a>
                     </p>
                 </div>

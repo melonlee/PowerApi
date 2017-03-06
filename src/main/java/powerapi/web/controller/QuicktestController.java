@@ -43,7 +43,7 @@ public class QuicktestController {
             @RequestParam(value = "id", required = false, defaultValue = "0") int id) {
 
 //		Integer status = quicktestService.remove(id);
-//		return MJsonUtils.getInstance().setStatus(status).result();
+//		return JsonUtils.getInstance().setStatus(status).result();
         return null;
     }
 
@@ -55,7 +55,7 @@ public class QuicktestController {
 
 //		Requester requester = quicktestService.info(id);
 //
-//		return MJsonUtils.getInstance().setBean(requester, requester.getId())
+//		return JsonUtils.getInstance().setBean(requester, requester.getId())
 //				.result();
         return null;
     }
@@ -91,7 +91,7 @@ public class QuicktestController {
 //		requester.setUserId(user.getId());
 //		requester.setParams(quicktest.getParams());
 //		quicktestService.saveTest(requester);
-//		return MJsonUtils.getInstance().setBean(requester, requester.getId())
+//		return JsonUtils.getInstance().setBean(requester, requester.getId())
 //				.result();
         return null;
     }

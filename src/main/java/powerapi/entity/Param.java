@@ -1,7 +1,5 @@
 package powerapi.entity;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
 
 public class Param extends BaseEntity {
 

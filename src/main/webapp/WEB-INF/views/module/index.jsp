@@ -207,7 +207,7 @@
                                         .append(
                                                 '<tr class="interface_row">'
                                                 + '<td><a href="../function/view?id=' + functionObj.id + '&proId=' + ${project.id} +
-                                                        '&mID=' + functionObj.mId + '">'
+                                                        '&mId=' + functionObj.mId + '">'
                                                 + flag
                                                 + '&nbsp;'
                                                 + functionObj.title

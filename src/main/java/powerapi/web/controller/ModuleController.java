@@ -1,8 +1,6 @@
 package powerapi.web.controller;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import powerapi.common.utils.MJsonUtils;
+import powerapi.common.utils.JsonUtils;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
 import powerapi.service.ModuleService;
@@ -80,7 +78,7 @@ public class ModuleController {
 
         Integer status = moduleService.deleteById(id) ? 1 : 0;
 
-        return MJsonUtils.getInstance().setStatus(status).result();
+        return JsonUtils.getInstance().setStatus(status).result();
     }
 
 }

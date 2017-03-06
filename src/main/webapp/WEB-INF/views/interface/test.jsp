@@ -362,7 +362,7 @@
                         $
                                 .ajax({
                                     type: 'POST',
-                                    url: '../quick/test.do',
+                                    url: '../function/test',
                                     data: {
                                         method: $("#method").val(),
                                         url: $("#url").val(),
@@ -390,8 +390,8 @@
                                                     .html(
                                                             "头信息:"
                                                             + data.result.responseHeader);
-                                            $("#responsebody").html(
-                                                    data.result.responseBody);
+                                            //对返回结果进行格式化
+                                            format(data.result.responseBody);
 
                                             $("#history_row")
                                                     .append(
@@ -413,7 +413,7 @@
                                                             + '毫秒</td>'
                                                             + '<td>'
                                                             + data.result.responseSize
-                                                            + 'B</td>'
+                                                            + '</td>'
                                                             + '<td class="table-action"><a href="#" data-id="' + data.result.id + '" class="history_modify edit-row"><i'
                                                             + '	class="fa fa-pencil"></i></a> &nbsp;<a href="#" data-id="' + data.result.id + '" class="history_delete"><i class="fa fa-trash-o"></i>'
                                                             + '</a></td>'
@@ -446,7 +446,6 @@
             cache: false,
             dataType: 'json',
             success: function (data) {
-                /* 		data = JSON.parse(data); */
                 console.log(data);
                 if (data.code == 1000) {
                     console.log('ok');
@@ -567,6 +566,59 @@
 
                         $("#loading").click();
                     });
+
+    /* 格式化JSON源码(对象转换为JSON文本) */
+    function format(txt, compress/*是否为压缩模式*/) {
+        var indentChar = '    ';
+        if (/^\s*$/.test(txt)) {
+            $("#responsebody").html("<pre>数据为空,无法格式化! </pre>");
+            return;
+        }
+        try {
+            var data = eval('(' + txt + ')');
+        }
+        catch (e) {
+            $("#responsebody").html("<pre>数据源语法错误,格式化失败! 错误信息: " + e.description + "</pre>");
+            return;
+        }
+        ;
+        var draw = [], last = false, This = this, line = compress ? '' : '\n', nodeCount = 0, maxDepth = 0;
+
+        var notify = function (name, value, isLast, indent/*缩进*/, formObj) {
+            nodeCount++;
+            /*节点计数*/
+            for (var i = 0, tab = ''; i < indent; i++)tab += indentChar;
+            /* 缩进HTML */
+            tab = compress ? '' : tab;
+            /*压缩模式忽略缩进*/
+            maxDepth = ++indent;
+            /*缩进递增并记录*/
+            if (value && value.constructor == Array) {/*处理数组*/
+                draw.push(tab + (formObj ? ('"' + name + '":') : '') + '[' + line);
+                /*缩进'[' 然后换行*/
+                for (var i = 0; i < value.length; i++)
+                    notify(i, value[i], i == value.length - 1, indent, false);
+                draw.push(tab + ']' + (isLast ? line : (',' + line)));
+                /*缩进']'换行,若非尾元素则添加逗号*/
+            } else if (value && typeof value == 'object') {/*处理对象*/
+                draw.push(tab + (formObj ? ('"' + name + '":') : '') + '{' + line);
+                /*缩进'{' 然后换行*/
+                var len = 0, i = 0;
+                for (var key in value)len++;
+                for (var key in value)notify(key, value[key], ++i == len, indent, true);
+                draw.push(tab + '}' + (isLast ? line : (',' + line)));
+                /*缩进'}'换行,若非尾元素则添加逗号*/
+            } else {
+                if (typeof value == 'string')value = '"' + value + '"';
+                draw.push(tab + (formObj ? ('"' + name + '":') : '') + value + (isLast ? '' : ',') + line);
+            }
+            ;
+        };
+        var isLast = true, indent = 0;
+
+        notify('', data, isLast, indent, false);
+        $("#responsebody").html("<pre>" + draw.join('') + "</pre>");
+    }
 </script>
 </body>
 </html>

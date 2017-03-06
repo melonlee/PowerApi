@@ -1,13 +1,10 @@
 package powerapi.web.controller;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +44,7 @@ public class PreviewController {
 //		ArrayList<Module> list = moduleService.findModulesByPro(id);
 //		model.addAttribute("list", list);
         model.addAttribute("project", project);
-        return "preview";
+        return "project/doc";
     }
 
     @ResponseBody
@@ -58,7 +55,7 @@ public class PreviewController {
 
 //		ArrayList<Function> list = functionService.listByModule(mID);
 //
-//		return MJsonUtils.getInstance().setList(list).result();
+//		return JsonUtils.getInstance().setList(list).result();
         return null;
     }
 
@@ -105,7 +102,7 @@ public class PreviewController {
 //
 //        Requester requester = MHttpUtils.doPost(quicktest.getUrl(), paramsMap);
 //        requester.setParams(quicktest.getParams());
-//        return MJsonUtils.getInstance().setBean(requester, 1).result();
+//        return JsonUtils.getInstance().setBean(requester, 1).result();
         return null;
     }
 }

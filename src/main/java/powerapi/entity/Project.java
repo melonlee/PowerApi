@@ -2,7 +2,7 @@ package powerapi.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
-import powerapi.common.utils.RelativeDateFormat;
+import powerapi.common.utils.DateFormatUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -106,7 +106,7 @@ public class Project extends BaseEntity {
     public String getRelativedate() {
         try {
             Date date = format.parse(createdate);
-            return RelativeDateFormat.format(date);
+            return DateFormatUtils.format(date);
         } catch (ParseException e) {
             return "时间异常";
         }

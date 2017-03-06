@@ -1,6 +1,5 @@
 package powerapi.web.controller;
 
-import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
@@ -118,7 +117,7 @@ public class ProjectController {
      * @return
      */
 
-    @RequestMapping(value = "delete", method = {RequestMethod.POST,
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST,
             RequestMethod.GET})
     public String remove(ModelMap model, @RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
         model.addAttribute("status", projectService.deleteById(id));
@@ -132,14 +131,14 @@ public class ProjectController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "preview", method = {RequestMethod.POST,
+    @RequestMapping(value = "/doc", method = {RequestMethod.POST,
             RequestMethod.GET})
     public String preview(ModelMap model, @RequestParam(value = "id", required = true) Long id) {
         Project project = projectService.selectById(id);
         List<Module> modules = moduleService.selectByProjectId(id);
         model.addAttribute("modules", modules);
         model.addAttribute("project", project);
-        return "preview";
+        return "project/doc";
     }
 
 }

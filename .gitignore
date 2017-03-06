@@ -497,3 +497,4 @@ target/powerapi/WEB-INF/views/module/detail.jsp
 target/powerapi/WEB-INF/views/module/index.jsp
 target/powerapi/WEB-INF/views/project/detail.jsp
 target/powerapi/WEB-INF/views/project/index.jsp
+doc.jsp
