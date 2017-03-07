@@ -32,18 +32,16 @@
                     </ul>
                     <div class="mb20"></div>
                     <strong>还没开始使用Power.API?&nbsp;&nbsp;<a
-                            href="signup_view.do">免费注册</a></strong>
+                            href="signup">免费注册</a></strong>
                 </div>
             </div>
             <div class="col-md-5">
-                <c:if test="${param.status==0}">
-                    <div class="alert alert-danger">
-                        <button type="button" class="close" data-dismiss="alert"
-                                aria-hidden="true">&times;</button>
-                        登录失败!请检查您的用户名和密码!
-                    </div>
-                </c:if>
-                <form method="post" action="signin.do">
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert"
+                            aria-hidden="true">&times;</button>
+                    ${error}
+                </div>
+                <form method="post" action="signin">
                     <h4 class="nomargin">登录</h4>
                     <input type="text" name="username" class="form-control uname"
                            placeholder="用户名"/> <input type="password" name="passwd"
@@ -64,24 +62,5 @@
     </div>
 </section>
 <jsp:include page="common/scripts.jsp"></jsp:include>
-<script>
-    jQuery(document).ready(
-            function () {
-
-                // Please do not use the code below
-                // This is for demo purposes only
-                var c = jQuery.cookie('change-skin');
-                if (c && c == 'greyjoy') {
-                    jQuery('.btn-success').addClass('btn-orange')
-                            .removeClass('btn-success');
-                } else if (c && c == 'dodgerblue') {
-                    jQuery('.btn-success').addClass('btn-primary')
-                            .removeClass('btn-success');
-                } else if (c && c == 'katniss') {
-                    jQuery('.btn-success').addClass('btn-primary')
-                            .removeClass('btn-success');
-                }
-            });
-</script>
 </body>
 </html>

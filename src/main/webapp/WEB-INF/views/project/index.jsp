@@ -6,17 +6,13 @@
 <head>
     <jsp:include page="../common/style.jsp"></jsp:include>
 </head>
-
 <body class="horizontal-menu">
 <section>
     <div class="mainpanel">
-
         <jsp:include page="../common/menu.jsp" flush="true">
             <jsp:param name="nav" value="2"/>
         </jsp:include>
-
         <div class="pageheader">
-
             <div class="row">
                 <div class="col-md-11">
                     <h2>
@@ -29,9 +25,7 @@
                     </p>
                 </div>
             </div>
-
         </div>
-
         <div class="contentpanel">
             <div class="row">
                 <div class="people-list">
@@ -54,7 +48,6 @@
                                 </div>
                             </div>
                         </c:if>
-
                         <c:forEach var="project" items="${projects}">
 
                             <div class="col-md-6">
@@ -67,13 +60,11 @@
 						+ request.getContextPath() + "/"%>userdata/${project.icon}"
                                                                    class="thumbnail media-object">
                                         </a>
-
                                         <div class="media-body">
                                             <h4 class="person-name">
                                                 <a href="${project.id}">${project.title}</a><span
                                                     class="pull-right badge badge-danger">${project.version}</span>
                                             </h4>
-
                                             <div class="text-muted">
                                                 <i class="fa fa-calendar"></i> ${project.relativedate}
                                             </div>
@@ -107,7 +98,6 @@
                                                        href="../preview/${project.id}.do" class="tooltips"
                                                        data-toggle="tooltip" data-placement="top" title="成员管理"><i
                                                         class="fa fa-users"></i></a></li>
-
                                             </ul>
                                         </div>
                                     </div>

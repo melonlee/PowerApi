@@ -7,9 +7,39 @@
         <result column="passwd" property="passwd" jdbcType="VARCHAR"/>
         <result column="createdate" property="createdate" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="salt" property="salt" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <resultMap id="roles" type="java.lang.String">
+        <result column="role" property="role" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="permissions" type="java.lang.String">
+        <result column="permission" property="permission" jdbcType="VARCHAR"/>
+    </resultMap>
+    
     <sql id="Base_Column_List">
-		id, username, passwd, createdate, email
+		id, username, passwd, createdate, email,salt
 	</sql>
+
+
+    <select id="findByName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from t_user where username = #{username}
+    </select>
+
+    <select id="findRoles" resultMap="roles">
+      select role from t_user u, t_role role,t_user_role ur
+         where u.username= #{username}
+         and u.id=ur.user_id and role.id=ur.role_id
+    </select>
+
+    <select id="findPermissions" resultMap="permissions">
+        select permission from t_user u, t_role r, t_permission p,
+        t_user_role ur, t_role_permission rp
+        where u.username=#{username} and u.id=ur.user_id
+        and r.id=ur.role_id and r.id=rp.role_id and p.id=rp.permission_id
+    </select>
 
 </mapper>

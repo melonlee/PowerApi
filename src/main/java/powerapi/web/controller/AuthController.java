@@ -23,13 +23,20 @@ import powerapi.entity.User;
 public class AuthController {
 
 
-    @RequestMapping(method = {
+    @RequestMapping(value = "/signin", method = {
             RequestMethod.GET})
-    public String view() {
-        return "login.ftl";
+    public String signin() {
+        return "signin";
     }
 
-    @RequestMapping(value = "/login", method = {
+    @RequestMapping(value = "/signup", method = {
+            RequestMethod.GET})
+    public String signup() {
+        return "signup";
+    }
+
+
+    @RequestMapping(value = "/signin", method = {
             RequestMethod.POST})
     public String dashboard(ModelMap map, User admin) {
         String error = null;
@@ -40,7 +47,7 @@ public class AuthController {
             Subject currentUser = SecurityUtils.getSubject();
             Session session = currentUser.getSession();
             session.setAttribute("curUser", currentUser);
-            return "redirect:/video/all";
+            return "redirect:/project/all";
         } catch (UnknownAccountException uae) {
             error = "用户名错误!";
         } catch (IncorrectCredentialsException ice) {
@@ -49,6 +56,6 @@ public class AuthController {
             error = "用户被锁定!";
         }
         map.addAttribute("error", error);
-        return "login.ftl";
+        return "signin";
     }
 }

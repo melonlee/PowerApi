@@ -67,13 +67,13 @@
                     <button type="button" class="btn btn-default dropdown-toggle"
                             data-toggle="dropdown">
                         <img src="${host}/static/images/logo.jpg"
-                             alt=""/> ${sessionScope.curUser.username} <span class="caret"></span>
+                             alt=""/> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
 
                         <li><a href="../dashboard/changepwd.do"><i
                                 class="glyphicon glyphicon-cog"></i> 更改密码</a></li>
-                        <li><a href="../signout.do"><i
+                        <li><a href="signout"><i
                                 class="glyphicon glyphicon-log-out"></i> 退出</a></li>
                     </ul>
                 </div>
