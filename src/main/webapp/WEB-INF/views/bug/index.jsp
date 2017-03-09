@@ -12,23 +12,9 @@
         <jsp:include page="../common/menu.jsp" flush="true">
             <jsp:param name="nav" value="2"/>
         </jsp:include>
-        <div class="pageheader">
-            <div class="row">
-                <div class="col-md-11">
-                    <h2>
-                        <i class="fa fa-bug"></i>${project.title }<span>项目Bug清单</span>
-                    </h2>
-                </div>
-                <div class="col-md-1">
-                    <p>
-                        <button class="btn btn-primary btn-block"
-                                onclick="javascript:window.location.href='create?proId=${project.id}'">添加Bug
-                        </button>
-                    </p>
-                </div>
-            </div>
-        </div>
-
+        <jsp:include page="../common/pageheader.jsp">
+            <jsp:param name="entity" value="Bug"/>
+        </jsp:include>
         <div class="contentpanel">
             <div class="row">
                 <c:if test="${status>0}">

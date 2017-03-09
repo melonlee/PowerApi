@@ -5,13 +5,9 @@
  * 1.项目预览
  *  1.1 根据模块获取接口信息
  *  1.2 渲染选中接口信息的详情
- *
  * 2.接口测试跳转
- * 3.项目删除
  *
- *
- *
- *
+ * @type {*|{ID, TAG}|{}|jQuery}
  */
 //获取第一个模块导航条
 var $curModule = $("#module_nav").find("li:first");
@@ -112,7 +108,7 @@ function loaddetail(curfunction) {
     $("#detail_url").text(host + $curModule.data("url") + curfunction.url);
     $("#method").text(curfunction.method);
     $("#response_type").text(curfunction.responseType);
-    $("#response_body").html("<pre>" + format(curfunction.responseBody) + "</pre>");
+    format(curfunction.responseBody);
     $("#description").text(curfunction.description);
     $("#params").empty();
     //解析参数数组然后加入到table中
@@ -194,21 +190,6 @@ function format(txt, compress/*是否为压缩模式*/) {
     var isLast = true, indent = 0;
 
     notify('', data, isLast, indent, false);
-    $("#responsebody").html("<pre>" + draw.join('') + "</pre>");
-    return draw.join('');
+    $("#response_body").html("<pre><code class='language-json'>" + draw.join('') + "</code></pre>");
+    Prism.highlightAll();
 }
-
-/**
- *
- * 删除项目
- *
- */
-$(document).on("click", "#remove_pro", function () {
-    var $this = $(this);
-    if (window.confirm('确定删除该项目吗? 删除后该项目下的所有内容将被删除!')) {
-        window.location.href = 'delete?id=' + $this.data("id");
-        return true;
-    } else {
-        return false;
-    }
-});

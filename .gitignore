@@ -531,3 +531,7 @@ target/powerapi/WEB-INF/views/other/queue_receive.jsp
 target/powerapi/WEB-INF/views/other/welcome.jsp
 target/powerapi/WEB-INF/views/test/autotest.jsp
 target/powerapi/WEB-INF/views/test/quicktest.jsp
+target/powerapi/static/css/prism.css
+target/powerapi/static/js/basic/prism.js
+target/powerapi/static/js/service/module.js
+target/powerapi/WEB-INF/views/common/pageheader.jsp

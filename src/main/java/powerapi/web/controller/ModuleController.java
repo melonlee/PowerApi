@@ -38,6 +38,16 @@ public class ModuleController {
         return "/module/index";
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String create(
+            ModelMap model,
+            @RequestParam(value = "proId", required = false, defaultValue = "0") Long proId) {
+        Project project = projectService.selectById(proId);
+        model.addAttribute("project", project);
+        return "/module/detail";
+    }
+
+
     @RequestMapping(value = "/view", method = {RequestMethod.POST,
             RequestMethod.GET})
     public String view(
@@ -75,9 +85,7 @@ public class ModuleController {
             RequestMethod.GET})
     public String remove(
             @RequestParam(value = "id", required = false, defaultValue = "0") int id) {
-
         Integer status = moduleService.deleteById(id) ? 1 : 0;
-
         return JsonUtils.getInstance().setStatus(status).result();
     }
 

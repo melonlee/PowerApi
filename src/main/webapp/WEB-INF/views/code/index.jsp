@@ -12,22 +12,9 @@
         <jsp:include page="../common/menu.jsp" flush="true">
             <jsp:param name="nav" value="2"/>
         </jsp:include>
-        <div class="pageheader">
-            <div class="row">
-                <div class="col-md-11">
-                    <h2>
-                        <i class="fa fa-file-code-o"></i>${project.title }<span>项目业务代码</span>
-                    </h2>
-                </div>
-                <div class="col-md-1">
-                    <p>
-                        <a class="btn btn-primary btn-block" href="create?proId=${project.id}">添加业务码
-                        </a>
-                    </p>
-                </div>
-            </div>
-
-        </div>
+        <jsp:include page="../common/pageheader.jsp">
+            <jsp:param name="entity" value="业务码"/>
+        </jsp:include>
 
         <div class="contentpanel">
             <div class="row">

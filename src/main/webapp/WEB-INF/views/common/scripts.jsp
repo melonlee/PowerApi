@@ -29,6 +29,7 @@
 <script src="${host}/static/js/basic/jquery.validate.min.js"></script>
 <script src="${host}/static/js/basic/md5.js"></script>
 <script src="${host}/static/js/basic/custom.js"></script>
+<script src="${host}/static/js/basic/prism.js"></script>
 
 <script type="text/javascript">
     (function () {
