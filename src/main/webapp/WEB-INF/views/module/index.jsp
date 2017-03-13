@@ -61,11 +61,12 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <div class="pull-left">
-                                        <button class="btn btn-sm btn-white tooltips" type="button"
+                                    <div class="pull-right">
+                                        <button class="btn btn-sm btn-primary tooltips" type="button"
                                                 id="create_function" data-toggle="tooltip" title="新增接口">
                                             <i class="glyphicon glyphicon-edit"></i>
                                         </button>
+                                        <br/> <br/>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table table-hover mb30">

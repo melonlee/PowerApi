@@ -535,3 +535,7 @@ target/powerapi/static/css/prism.css
 target/powerapi/static/js/basic/prism.js
 target/powerapi/static/js/service/module.js
 target/powerapi/WEB-INF/views/common/pageheader.jsp
+target/classes/mapper/BugCommentMapper.xml
+target/powerapi/WEB-INF/classes/mapper/BugCommentMapper.xml
+target/powerapi/WEB-INF/views/bug/index2.jsp
+target/powerapi/WEB-INF/views/bug/view.jsp

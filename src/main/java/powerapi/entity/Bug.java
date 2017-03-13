@@ -12,14 +12,11 @@ public class Bug extends BaseEntity {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    private String sign;
+    private String title;
 
     private String description;
 
     private Integer status;
-
-    @TableField(value = "is_update")
-    private Integer isUpdate;
 
     @TableField(value = "p_id")
     private Long pId;
@@ -27,12 +24,12 @@ public class Bug extends BaseEntity {
     @TableField(value = "user_id")
     private Long userId;
 
-    public String getSign() {
-        return sign;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSign(String sign) {
-        this.sign = sign;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -49,14 +46,6 @@ public class Bug extends BaseEntity {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public Integer getIsUpdate() {
-        return isUpdate;
-    }
-
-    public void setIsUpdate(Integer isUpdate) {
-        this.isUpdate = isUpdate;
     }
 
     public Long getpId() {

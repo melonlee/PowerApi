@@ -12,12 +12,10 @@
         <jsp:include page="../common/menu.jsp" flush="true">
             <jsp:param name="nav" value="4"/>
         </jsp:include>
-        <div class="pageheader">
-            <h2>
-                <i class="fa  fa-send"></i>快速测试<span>录入接口地址以及接口所需参数进行快速测试</span>
-            </h2>
-        </div>
 
+        <jsp:include page="../common/pageheader.jsp">
+            <jsp:param name="entity" value="Bug"/>
+        </jsp:include>
         <div class="contentpanel">
 
             <div class="row">
@@ -71,13 +69,12 @@
                                         <div class="alert alert-info">
                                             <button type="button" class="close" data-dismiss="alert"
                                                     aria-hidden="true">&times;</button>
-                                            点击+参数按钮，在列表中直接输入所需参数!
+                                            点击[+参数]按钮在列表中直接输入所需参数
                                         </div>
                                     </div>
 
                                     <div style="visibility: hidden;" id="div_params"
                                          data-params='${function.params}'></div>
-
                                     <div class="col-sm-12">
                                         <div class="table-responsive">
                                             <table class="table mb30 table-primary">
@@ -92,7 +89,6 @@
                                                 <tbody id="params">
                                                 </tbody>
                                             </table>
-                                            <!-- table-responsive -->
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -104,33 +100,23 @@
                             </div>
 
                         </div>
-                        <!-- panel-body -->
                         <div class="panel-footer">
                             <button id="submit" class="btn btn-primary">发送</button>
                             <button id="loading" class="btn btn-primary" data-toggle="modal"
                                     style="display: none;" data-target=".bs-example-modal-sm">loading
                             </button>
                         </div>
-                        <!-- panel-footer -->
                     </div>
-                    <!-- panel-default -->
-
                 </div>
-                <!-- col-md-6 -->
-
             </div>
-
             <div class="col-md-12 mb20">
-                <!-- Nav tabs -->
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#returns" data-toggle="tab"><strong>返回结果</strong></a></li>
                     <li><a href="#historys" data-toggle="tab"><strong>历史记录</strong></a></li>
                 </ul>
 
-                <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="returns">
-
                         <div class="col-md-12">
                             <div class="panel-group panel-group-dark" id="accordion2">
                                 <div class="panel panel-default">

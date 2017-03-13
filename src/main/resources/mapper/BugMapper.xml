@@ -3,17 +3,16 @@
 <mapper namespace="powerapi.mapper.BugMapper">
     <resultMap id="BaseResultMap" type="powerapi.entity.Bug">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="sign" property="sign" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="BIGINT"/>
-        <result column="is_update" property="isUpdate" jdbcType="INTEGER"/>
         <result column="createdate" property="createdate" jdbcType="VARCHAR"/>
         <result column="p_id" property="pId" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id, sign, description, status, is_update, createdate, p_id,
+		id, title, description, status, is_update, createdate, p_id,
 		user_id
 	</sql>
 

@@ -184,7 +184,7 @@
                                                                             <button type="button" class="close"
                                                                                     data-dismiss="alert"
                                                                                     aria-hidden="true">&times;</button>
-                                                                            点击+参数按钮，在列表中直接输入所需参数!
+                                                                            点击[+参数]按钮在列表中直接输入所需参数
                                                                         </div>
                                                                     </div>
                                                                     <div style="visibility: hidden;" id="div_params"

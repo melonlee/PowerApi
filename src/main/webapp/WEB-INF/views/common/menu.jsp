@@ -22,14 +22,15 @@
                 <li ${param.nav==3 ? "class='active'" : "" }><a
                         href="../project/all"><i class="fa fa-briefcase"></i> <span>
 							成员管理</span> </a></li>
-                <li ${param.nav==4 ? "class='active'" : "" }><a
-                        href="../quick/view.do"><i class="fa fa-send"></i> <span>
-                            单元测试</span></a></li>
-                <li ${param.nav==5 ? "class='active'" : "" }><a
-                        href="../auto/list.do"><i class="fa fa-truck"></i> <span>
-                            自动测试</span><span
-                        class="pull-right badge badge-danger">Beta</span></a></li>
-
+                <li class="nav-parent ${param.nav==4 ? "'active'" : "" }"><a class="dropdown-toggle"
+                                                                             data-toggle="dropdown" href="#"><i
+                        class="fa fa-send"></i> 测试管理 <span class="caret"></span></a>
+                    <ul class="dropdown-menu children">
+                        <li><a href="../quick/view.do"><i class="fa fa-send"></i>单元测试</a></li>
+                        <li><a href="../auto/list.do"><i class="fa fa-truck"></i> 自动化测试<span
+                                class="pull-right badge badge-danger">Beta</span></a></li>
+                    </ul>
+                </li>
                 <li ${param.nav==6 ? "class='active'" : "" }><a
                         href="../monitor/list.do"> <i class="fa fa-rocket"></i> <span>
                             自动监控</span><span
