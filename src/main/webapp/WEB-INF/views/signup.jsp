@@ -57,7 +57,7 @@
                     <div class="error"></div>
                     <h3 class="nomargin">免费注册</h3>
                     <p class="mt5 mb20">
-                        已经是会员? <a href="signin_view.do"><strong>登录</strong></a>
+                        已经是会员? <a href="signin"><strong>登录</strong></a>
                     </p>
                     <div class="mb10">
                         <label class="control-label">邮箱地址</label>
@@ -94,37 +94,11 @@
         </div>
     </div>
 </section>
-
-
 <jsp:include page="common/scripts.jsp"></jsp:include>
 <script>
     jQuery("#basicForm2").validate({
         errorLabelContainer: jQuery("#basicForm2 div.error")
     });
-
-    jQuery(".select2").select2({
-        width: '100%',
-        minimumResultsForSearch: -1
-    });
-
-    jQuery(".select2-2").select2({
-        width: '100%'
-    });
-
-    // Please do not use the code below
-    // This is for demo purposes only
-    var c = jQuery.cookie('change-skin');
-    if (c && c == 'greyjoy') {
-        jQuery('.btn-success').addClass('btn-orange').removeClass(
-                'btn-success');
-    } else if (c && c == 'dodgerblue') {
-        jQuery('.btn-success').addClass('btn-primary').removeClass(
-                'btn-success');
-    } else if (c && c == 'katniss') {
-        jQuery('.btn-success').addClass('btn-primary').removeClass(
-                'btn-success');
-    }
 </script>
-
 </body>
 </html>

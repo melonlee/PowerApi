@@ -68,4 +68,16 @@ public class User extends BaseEntity {
     public String getCredentialsSalt() {
         return username + salt;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + id + '\'' +
+                "username='" + username + '\'' +
+                ", passwd='" + passwd + '\'' +
+                ", salt='" + salt + '\'' +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

@@ -36,11 +36,14 @@
                 </div>
             </div>
             <div class="col-md-5">
-                <div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert"
-                            aria-hidden="true">&times;</button>
-                    ${error}
-                </div>
+
+                <c:if test="${error!=null}">
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert"
+                                aria-hidden="true">&times;</button>
+                            ${error}
+                    </div>
+                </c:if>
                 <form method="post" action="signin">
                     <h4 class="nomargin">登录</h4>
                     <input type="text" name="username" class="form-control uname"

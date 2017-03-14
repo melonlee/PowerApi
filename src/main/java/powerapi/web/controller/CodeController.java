@@ -46,8 +46,7 @@ public class CodeController {
         return "code/detail";
     }
 
-    @RequestMapping(value = "/modify", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/modify", method = RequestMethod.GET)
     public String submit(ModelMap model, Code code) {
         code.setUserId(1L);
         model.addAttribute("status", codeService.insertOrUpdate(code));

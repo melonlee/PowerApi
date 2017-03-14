@@ -1,7 +1,6 @@
 package powerapi.web.controller;
 
 
-import org.apache.ibatis.type.JdbcType;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -14,6 +13,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import powerapi.entity.User;
+import powerapi.service.UserService;
+
+import javax.annotation.Resource;
 
 /**
  * Created by Melon on 17/2/23.
@@ -21,6 +23,9 @@ import powerapi.entity.User;
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
+
+    @Resource
+    private UserService userService;
 
 
     @RequestMapping(value = "/signin", method = {
@@ -38,15 +43,15 @@ public class AuthController {
 
     @RequestMapping(value = "/signin", method = {
             RequestMethod.POST})
-    public String dashboard(ModelMap map, User admin) {
+    public String dashboard(ModelMap map, User user) {
         String error = null;
-        UsernamePasswordToken token = new UsernamePasswordToken(admin.getUsername(), admin.getPasswd());
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPasswd());
         token.setRememberMe(false);
         try {
             SecurityUtils.getSubject().login(token);
-            Subject currentUser = SecurityUtils.getSubject();
-            Session session = currentUser.getSession();
-            session.setAttribute("curUser", currentUser);
+            Subject subject = SecurityUtils.getSubject();
+            Session session = subject.getSession();
+            session.setAttribute("curUser", userService.findByUsername((String) subject.getPrincipal()));
             return "redirect:/project/all";
         } catch (UnknownAccountException uae) {
             error = "用户名错误!";

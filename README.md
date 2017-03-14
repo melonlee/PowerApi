@@ -1,37 +1,41 @@
-## Welcome to GitHub Pages
+# PowerApi
 
-You can use the [editor on GitHub](https://github.com/melonlee/powerapi/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+PowerApi是一个非常适合IT团队在线管理API项目的工具，它可以进行数据接口的内容管理、单元测试、文档生成、接口使用状态标记以及自动化测试、自动化监控等功能。
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## 技术选型
+* Spring 4.2.6
+* Mybatis Plus 2.0
+* Shiro 1.2.2
+* Hibernate Validator 5.1.3
+* Druid 1.0.19
+* Redis 2.3.1
+* Bootstrap 3
+* JDK 1.7
+* Tomcat8
+* Maven
 
-### Markdown
+## 项目截图
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+* 登录:![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfjniygj211y0j575y.jpg)
+* 项目管理首页:![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfs2137j213g0lwac3.jpg)
+* 接口内容管理:![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfp10xxj213x0mctd6.jpg)
+* 接口单元测试:![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfmf8uqj213d0ldjtg.jpg)
 
-```markdown
-Syntax highlighted code block
+## 架构
+![](http://wx2.sinaimg.cn/mw690/775c483fly1fdmtcnk115j20sg0lc7ln.jpg)
 
-# Header 1
-## Header 2
-### Header 3
+## To Do
 
-- Bulleted
-- List
+* Redis集成并实现业务缓存
+* 前端页面JS优化
+* AOP日志记录功能
+* 集成Quartz实现定时任务
+* 自动化测试功能(UI+逻辑)
+* 自动化监控功能
+* 报表功能(测试+监控)
+* 文档预览静态化、可导出、页面优化
+* 成员管理(成员邀请，权限，email通知机制)
+* etc...
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/melonlee/powerapi/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.

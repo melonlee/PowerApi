@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import powerapi.common.utils.FontImageUtils;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
+import powerapi.entity.User;
 import powerapi.service.ModuleService;
 import powerapi.service.ProjectService;
 
 @Controller
 @RequestMapping("/project")
-public class ProjectController {
+public class ProjectController extends BaseController<Project> {
 
     @Resource
     private ProjectService projectService;
@@ -42,7 +45,7 @@ public class ProjectController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(ModelMap model, @RequestParam(defaultValue = "1") int page) {
         List<Project> projects = projectService.selectPage(new Page<Project>(page, 10),
-                new EntityWrapper<Project>().orderBy("createdate", false)).getRecords();
+                new EntityWrapper<Project>().eq("user_id", getCurrentUser().getId()).orderBy("createdate", false)).getRecords();
         model.addAttribute("projects", projects);
         return "/project/index";
     }
@@ -67,26 +70,12 @@ public class ProjectController {
      * @return
      */
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    public String submit(ModelMap model, HttpServletRequest request, Project project) {
+    public String submit(ModelMap model, Project project) {
+
         boolean status;
 
-        try {
-            String filePath = request.getSession().getServletContext()
-                    .getRealPath("/userdata/");
-            String fileName = UUID.randomUUID().toString();
-            if (FontImageUtils.generateImage
-                    (project.getTitle().substring(0, 1),
-                            project.getIcon() + fileName + ".png")) {
-                project.setIcon(fileName + ".png");
-            } else {
-                project.setIcon("default.png");
-            }
-        } catch (Exception e) {
-            project.setIcon("default.png");
-        }
-
         if (null != project.getId()) {
-            project.setUserId(1L);
+            project.setUserId(getCurrentUser().getId());
             status = projectService.updateById(project);
         } else {
             status = projectService.insert(project);
@@ -117,8 +106,7 @@ public class ProjectController {
      * @return
      */
 
-    @RequestMapping(value = "/delete", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String remove(ModelMap model, @RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
         model.addAttribute("status", projectService.deleteById(id));
         return "redirect:/project/all";
@@ -131,8 +119,7 @@ public class ProjectController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/doc", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/doc", method = RequestMethod.GET)
     public String preview(ModelMap model, @RequestParam(value = "id", required = true) Long id) {
         Project project = projectService.selectById(id);
         List<Module> modules = moduleService.selectByProjectId(id);
