@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="powerapi.mapper.RequesterMapper">
+<mapper namespace="powerapi.mapper.UnitTestMapper">
 
-    <resultMap id="BaseResultMap" type="powerapi.entity.Requester">
+    <resultMap id="BaseResultMap" type="powerapi.entity.UnitTest">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="method" property="method" jdbcType="VARCHAR"/>
@@ -29,13 +29,13 @@
     <select id="history" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from t_requester
+        from t_unit_test
         where user_id = #{userId,jdbcType=INTEGER}
     </select>
 
     <select id="count" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 
-		select count(t_requester.id) from t_requester where user_id =
+		select count(t_unit_test.id) from t_unit_test where user_id =
 		#{userId,jdbcType=INTEGER}
 
 	</select>

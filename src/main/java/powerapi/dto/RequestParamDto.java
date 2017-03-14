@@ -1,17 +1,17 @@
-package powerapi.entity;
+package powerapi.dto;
 
-
-public class Param extends BaseEntity {
-
-    private static final long serialVersionUID = 1L;
+/**
+ * 前端进行接口请求访问的参数内容DTO模型
+ * <p/>
+ * Created by Melon on 17/3/2.
+ */
+public class RequestParamDto {
 
     private String name;
 
     private String type;
 
     private String value;
-    
-    private Integer quickId;
 
     public String getName() {
         return name;
@@ -36,14 +36,5 @@ public class Param extends BaseEntity {
     public void setValue(String value) {
         this.value = value;
     }
-
-    public Integer getQuickId() {
-        return quickId;
-    }
-
-    public void setQuickId(Integer quickId) {
-        this.quickId = quickId;
-    }
-
 
 }

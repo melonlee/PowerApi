@@ -16,7 +16,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.EntityUtils;
-import powerapi.entity.Requester;
+import powerapi.entity.UnitTest;
 
 /**
  * Created by Melon on 17/3/6.
@@ -38,7 +38,7 @@ public class HttpUtils {
         return doGet(url, params, CHARSET);
     }
 
-    public static Requester doPost(String url, Map<String, String> params) {
+    public static UnitTest doPost(String url, Map<String, String> params) {
         return doPost(url, params, CHARSET);
     }
 
@@ -96,10 +96,10 @@ public class HttpUtils {
      * @param charset 编码格式
      * @return 页面内容
      */
-    public static Requester doPost(String url, Map<String, String> params,
-                                   String charset) {
+    public static UnitTest doPost(String url, Map<String, String> params,
+                                  String charset) {
 
-        Requester requester = new Requester();
+        UnitTest requester = new UnitTest();
         requester.setCreatedate(DateFormatUtils.generateNow());
         requester.setMethod("POST");
         requester.setUrl(url);

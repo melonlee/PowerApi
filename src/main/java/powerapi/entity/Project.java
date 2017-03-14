@@ -8,10 +8,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+/**
+ * Created by Melon on 17/3/2.
+ */
 @TableName("t_project")
 public class Project extends BaseEntity {
-    
+
     @TableField(exist = false)
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:m:s");
 

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import powerapi.common.utils.HttpUtils;
 import powerapi.common.utils.JsonUtils;
+import powerapi.dto.RequestParamDto;
+import powerapi.dto.RequestDto;
 import powerapi.entity.*;
 import powerapi.service.FunctionService;
 import powerapi.service.ModuleService;
@@ -114,7 +116,7 @@ public class FunctionController {
 
     @ResponseBody
     @RequestMapping(value = "/test", method = RequestMethod.POST)
-    public String test(ModelMap modelMap, Quicktest quicktest,
+    public String test(ModelMap modelMap, RequestDto quicktest,
                        HttpSession session) throws IllegalAccessException,
             InvocationTargetException {
 
@@ -122,14 +124,14 @@ public class FunctionController {
 
         JSONArray params = paramObject.getJSONArray("params");
 
-        Param param;
+        RequestParamDto param;
 
         HashMap<String, String> paramsMap = new HashMap();
         for (int loop = 0; loop < params.size(); loop++) {
 
             JSONObject paramJson = params.getJSONObject(loop);
 
-            param = new Param();
+            param = new RequestParamDto();
             param.setName(paramJson.getString("name"));
             param.setType(paramJson.getString("type"));
             param.setValue(paramJson.getString("value"));
@@ -137,7 +139,7 @@ public class FunctionController {
             paramsMap.put(param.getName(), param.getValue());
         }
 
-        Requester requester = HttpUtils.doPost(quicktest.getUrl(), paramsMap);
+        UnitTest requester = HttpUtils.doPost(quicktest.getUrl(), paramsMap);
         requester.setUserId(1);
         requester.setParams(quicktest.getParams());
 //		quicktestService.saveTest(requester);

@@ -1,13 +1,11 @@
-package powerapi.entity;
+package powerapi.dto;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-
-public class Quicktest extends BaseEntity {
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
-
-    private Integer userId;
+/**
+ * 前端进行接口请求访问的DTO模型
+ * <p/>
+ * Created by Melon on 17/3/2.
+ */
+public class RequestDto {
 
     private String method;
 
@@ -20,15 +18,6 @@ public class Quicktest extends BaseEntity {
     private String responseHeader;
 
     private String responseBody;
-
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public String getMethod() {
         return method;

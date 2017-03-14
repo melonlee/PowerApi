@@ -3,8 +3,12 @@ package powerapi.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 
-@TableName("t_requester")
-public class Requester extends BaseEntity {
+/**
+ * Created by Melon on 17/3/2.
+ */
+
+@TableName("t_unit_test")
+public class UnitTest extends BaseEntity {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -17,14 +21,19 @@ public class Requester extends BaseEntity {
     private String url;
 
     private String params;
+
     @TableField(value = "response_code")
     private Integer responseCode;
+
     @TableField(value = "response_header")
     private String responseHeader;
+
     @TableField(value = "response_body")
     private String responseBody;
+
     @TableField(value = "request_time")
     private Integer requestTime;// 请求耗时
+
     @TableField(value = "response_size")
     private Integer responseSize;// 请求返回内容大小
 
@@ -100,12 +109,4 @@ public class Requester extends BaseEntity {
         this.responseSize = responseSize;
     }
 
-    @Override
-    public String toString() {
-        return "Quicktest [id=" + id + ", userId=" + userId + ", method="
-                + method + ", url=" + url + ", params=" + params
-                + ", responseCode=" + responseCode + ", responseHeader="
-                + responseHeader + ", responseBody=" + responseBody
-                + ", createdate=" + createdate + "]";
-    }
 }

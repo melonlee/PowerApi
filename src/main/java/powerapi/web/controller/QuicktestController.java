@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import powerapi.entity.Quicktest;
+import powerapi.dto.RequestDto;
 import powerapi.entity.User;
 
 
@@ -28,11 +28,11 @@ public class QuicktestController {
         // 加载历史记录
 
         user = (User) session.getAttribute("curUser");
-//		ArrayList<Requester> list = quicktestService.history(user.getId());
+//		ArrayList<UnitTest> list = quicktestService.history(user.getId());
 //
 //		modelMap.addAttribute("list", list);
 
-        return "test/quicktest";
+        return "test/unit";
     }
 
     @ResponseBody
@@ -52,7 +52,7 @@ public class QuicktestController {
     public String info(
             @RequestParam(value = "id", required = false, defaultValue = "0") int id) {
 
-//		Requester requester = quicktestService.info(id);
+//		UnitTest requester = quicktestService.info(id);
 //
 //		return JsonUtils.getInstance().setBean(requester, requester.getId())
 //				.result();
@@ -62,7 +62,7 @@ public class QuicktestController {
     @ResponseBody
     @RequestMapping(value = "test", method = {RequestMethod.POST,
             RequestMethod.GET})
-    public String test(ModelMap modelMap, Quicktest quicktest,
+    public String test(ModelMap modelMap, RequestDto quicktest,
                        HttpSession session) throws IllegalAccessException,
             InvocationTargetException {
 
@@ -70,14 +70,14 @@ public class QuicktestController {
 //
 //		JSONArray params = paramObject.getJSONArray("params");
 //
-//		Param param;
+//		RequestParamDto param;
 //
 //		HashMap<String, String> paramsMap = new HashMap<>();
 //		for (int loop = 0; loop < params.length(); loop++) {
 //
 //			JSONObject paramJson = params.getJSONObject(loop);
 //
-//			param = new Param();
+//			param = new RequestParamDto();
 //			param.setName(paramJson.getString("name"));
 //			param.setType(paramJson.getString("type"));
 //			param.setValue(paramJson.getString("value"));
@@ -85,7 +85,7 @@ public class QuicktestController {
 //			paramsMap.put(param.getName(), param.getValue());
 //		}
 //
-//		Requester requester = MHttpUtils.doPost(quicktest.getUrl(), paramsMap);
+//		UnitTest requester = MHttpUtils.doPost(quicktest.getUrl(), paramsMap);
 //		user = (User) session.getAttribute("curUser");
 //		requester.setUserId(user.getId());
 //		requester.setParams(quicktest.getParams());

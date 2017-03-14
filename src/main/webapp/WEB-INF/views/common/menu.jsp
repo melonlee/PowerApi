@@ -22,12 +22,12 @@
                 <li ${param.nav==3 ? "class='active'" : "" }><a
                         href="../project/all"><i class="fa fa-briefcase"></i> <span>
 							成员管理</span> </a></li>
-                <li class="nav-parent ${param.nav==4 ? "'active'" : "" }"><a class="dropdown-toggle"
+                <li class="nav-parent ${param.nav==4 ? "active" : "" }"><a class="dropdown-toggle"
                                                                              data-toggle="dropdown" href="#"><i
                         class="fa fa-send"></i> 测试管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu children">
-                        <li><a href="../quick/view.do"><i class="fa fa-send"></i>单元测试</a></li>
-                        <li><a href="../auto/list.do"><i class="fa fa-truck"></i> 自动化测试<span
+                        <li><a href="../unit/view"><i class="fa fa-send"></i>单元测试</a></li>
+                        <li><a href="../auto/view"><i class="fa fa-truck"></i> 自动化测试<span
                                 class="pull-right badge badge-danger">Beta</span></a></li>
                     </ul>
                 </li>
