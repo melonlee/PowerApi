@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +28,10 @@ import powerapi.service.ProjectService;
 @RequestMapping("/project")
 public class ProjectController extends BaseController<Project> {
 
-    @Resource
+    @Autowired
     private ProjectService projectService;
 
-    @Resource
+    @Autowired
     private ModuleService moduleService;
 
 
@@ -65,22 +66,13 @@ public class ProjectController extends BaseController<Project> {
     /**
      * 编辑项目
      *
-     * @param model
      * @param project
      * @return
      */
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    public String submit(ModelMap model, Project project) {
-
-        boolean status;
-
-        if (null != project.getId()) {
-            project.setUserId(getCurrentUser().getId());
-            status = projectService.updateById(project);
-        } else {
-            status = projectService.insert(project);
-        }
-        model.addAttribute("status", status);
+    public String submit(Project project) {
+        project.setUserId(getCurrentUser().getId());
+        projectService.insertOrUpdate(project);
         return "redirect:/project/all";
     }
 
@@ -91,8 +83,8 @@ public class ProjectController extends BaseController<Project> {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String info(ModelMap model, @PathVariable("id") Long id) {
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String info(ModelMap model, @RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
         Project project = projectService.selectById(id);
         model.addAttribute("project", project);
         return "project/detail";
@@ -101,14 +93,13 @@ public class ProjectController extends BaseController<Project> {
     /**
      * 删除
      *
-     * @param model
      * @param id
      * @return
      */
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String remove(ModelMap model, @RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
-        model.addAttribute("status", projectService.deleteById(id));
+    public String delete(@RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
+        projectService.deleteById(id);
         return "redirect:/project/all";
     }
 

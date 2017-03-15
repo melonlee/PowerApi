@@ -2,8 +2,7 @@ package powerapi.web.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,6 @@ import powerapi.common.utils.JsonUtils;
 import powerapi.entity.Bug;
 import powerapi.entity.BugComment;
 import powerapi.entity.Project;
-import powerapi.entity.User;
 import powerapi.service.BugCommentService;
 import powerapi.service.BugService;
 import powerapi.service.ProjectService;
@@ -22,15 +20,15 @@ import powerapi.service.ProjectService;
 
 @Controller
 @RequestMapping("/bug")
-public class BugController {
+public class BugController extends BaseController<Bug> {
 
-    @Resource
+    @Autowired
     private BugService bugService;
 
-    @Resource
+    @Autowired
     private BugCommentService bugCommentService;
 
-    @Resource
+    @Autowired
     private ProjectService projectService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -55,11 +53,11 @@ public class BugController {
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    public String modify(ModelMap model, Bug bug) {
+    public String modify(Bug bug) {
 
-        bug.setUserId(1l);
+        bug.setUserId(getCurrentUser().getId());
 
-        model.addAttribute("status", bugService.insertOrUpdate(bug));
+        bugService.insertOrUpdate(bug);
 
         return "redirect:/bug/all?proId=" + bug.getpId();
     }
@@ -100,6 +98,7 @@ public class BugController {
     @ResponseBody
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public String comment(ModelMap model, BugComment comment) {
+        comment.setUserId(getCurrentUser().getId());
         Integer status = bugCommentService.insert(comment) ? 1 : 0;
         return JsonUtils.getInstance().setStatus(status).result();
     }

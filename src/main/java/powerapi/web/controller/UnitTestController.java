@@ -2,6 +2,7 @@ package powerapi.web.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,9 +25,9 @@ import java.util.HashMap;
 
 @Controller
 @RequestMapping("/unit")
-public class UnitTestController {
+public class UnitTestController extends BaseController<UnitTest> {
 
-    @Resource
+    @Autowired
     private UnitTestService unitTestService;
 
     @RequestMapping("/view")
@@ -35,8 +36,7 @@ public class UnitTestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/test", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String test(RequestDto requestDto) throws IllegalAccessException,
             InvocationTargetException {
 
@@ -55,12 +55,10 @@ public class UnitTestController {
             loop++;
         }
         UnitTest unitTest = HttpUtils.doPost(requestDto.getUrl(), paramsMap);
-//        user = (User) session.getAttribute("curUser");
-//        requester.setUserId(user.getId());
-//        requester.setParams(quicktest.getParams());
-        // dto--->bean
-//        unitTestService.insert(requestDto);
-        return JsonUtils.getInstance().setBean(unitTest, 1)
+        unitTest.setUserId(getCurrentUser().getId());
+        unitTest.setParams(requestDto.getParams());
+        unitTestService.insert(unitTest);
+        return JsonUtils.getInstance().setBean(unitTest, null != unitTest.getId() ? 1 : 0)
                 .result();
     }
 }

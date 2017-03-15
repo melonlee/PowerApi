@@ -53,7 +53,7 @@
                             <div class="col-md-6">
                                 <div class="people-item">
                                     <div class="media">
-                                        <a target="_blank" href="../preview/${project.id}.do"
+                                        <a target="_blank" href="../preview/${project.id}"
                                            class="pull-left"> <img alt=""
                                                                    src="<%=request.getScheme() + "://" + request.getServerName()
 						+ ":" + request.getServerPort()
@@ -62,7 +62,7 @@
                                         </a>
                                         <div class="media-body">
                                             <h4 class="person-name">
-                                                <a href="${project.id}">${project.title}</a><span
+                                                <a href="view?id=${project.id}">${project.title}</a><span
                                                     class="pull-right badge badge-danger">${project.version}</span>
                                             </h4>
                                             <div class="text-muted">
@@ -72,7 +72,7 @@
                                                 <i class="fa fa-briefcase"></i> ${project.description}
                                             </div>
                                             <ul class="social-list">
-                                                <li><a href="${project.id}"
+                                                <li><a href="view?id=${project.id}"
                                                        class="tooltips" data-toggle="tooltip"
                                                        data-placement="top" title="基础管理"><i
                                                         class="fa fa-gear"></i></a></li>

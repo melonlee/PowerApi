@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +18,12 @@ import powerapi.service.ProjectService;
 
 @Controller
 @RequestMapping("/code")
-public class CodeController {
+public class CodeController extends BaseController<Code> {
 
-    @Resource
+    @Autowired
     private CodeService codeService;
 
-    @Resource
+    @Autowired
     private ProjectService projectService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -47,14 +48,13 @@ public class CodeController {
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
-    public String submit(ModelMap model, Code code) {
-        code.setUserId(1L);
-        model.addAttribute("status", codeService.insertOrUpdate(code));
+    public String submit(Code code) {
+        code.setUserId(getCurrentUser().getId());
+        codeService.insertOrUpdate(code);
         return "redirect:/code/all?proId=" + code.getpId();
     }
 
-    @RequestMapping(value = "/view", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String basic(
             ModelMap model,
             @RequestParam(value = "proId", required = true) Long proId,
@@ -67,13 +67,10 @@ public class CodeController {
         return "code/detail";
     }
 
-    @RequestMapping(value = "/delete", method = {RequestMethod.POST,
-            RequestMethod.GET})
-    public String remove(
-            ModelMap model,
-            @RequestParam(value = "id", required = true) Long id) {
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String remove(@RequestParam(value = "id", required = true) Long id) {
         Code code = codeService.selectById(id);
-        model.addAttribute("status", codeService.deleteById(id));
+        codeService.deleteById(id);
         return "redirect:/code/all?proId=" + code.getpId();
     }
 

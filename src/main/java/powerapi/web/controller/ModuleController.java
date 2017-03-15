@@ -1,7 +1,7 @@
 package powerapi.web.controller;
 
-import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,16 +19,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/module")
-public class ModuleController {
+public class ModuleController extends BaseController<Module> {
 
-    @Resource
+    @Autowired
     private ModuleService moduleService;
 
-    @Resource
+    @Autowired
     private ProjectService projectService;
 
-    @RequestMapping(value = "/all", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String all(ModelMap model, @RequestParam(value = "proId", required = true) Long proId) {
 
         Project project = projectService.selectById(proId);
@@ -41,19 +40,18 @@ public class ModuleController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(
             ModelMap model,
-            @RequestParam(value = "proId", required = false, defaultValue = "0") Long proId) {
+            @RequestParam(value = "proId", required = true) Long proId) {
         Project project = projectService.selectById(proId);
         model.addAttribute("project", project);
         return "/module/detail";
     }
 
 
-    @RequestMapping(value = "/view", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String view(
             ModelMap model,
-            @RequestParam(value = "id", required = false, defaultValue = "0") Long id,
-            @RequestParam(value = "proId", required = false, defaultValue = "0") Long proId) {
+            @RequestParam(value = "id", required = true) Long id,
+            @RequestParam(value = "proId", required = true) Long proId) {
 
         Project project = projectService.selectById(proId);
         model.addAttribute("project", project);
@@ -65,26 +63,17 @@ public class ModuleController {
         return "/module/detail";
     }
 
-    @RequestMapping(value = "/modify", method = {RequestMethod.POST,
-            RequestMethod.GET})
-    public String submit(ModelMap model, Module module) {
-
-        module.setUserId(1L);
-        boolean status;
-        if (null != module.getId()) {
-            status = moduleService.updateById(module);
-        } else {
-            status = moduleService.insert(module);
-        }
-        model.addAttribute("status", status);
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    public String modify(ModelMap model, Module module) {
+        module.setUserId(getCurrentUser().getId());
+        model.addAttribute("status", moduleService.insertOrUpdate(module));
         return "redirect:/module/all?proId=" + module.getpId();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/remove", method = {RequestMethod.POST,
-            RequestMethod.GET})
-    public String remove(
-            @RequestParam(value = "id", required = false, defaultValue = "0") int id) {
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(
+            @RequestParam(value = "id", required = true) Long id) {
         Integer status = moduleService.deleteById(id) ? 1 : 0;
         return JsonUtils.getInstance().setStatus(status).result();
     }

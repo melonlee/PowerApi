@@ -16,10 +16,10 @@ PowerApi是一个非常适合IT团队在线管理API项目的工具，它可以�
 
 ## 项目截图
 
-* 登录:![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfjniygj211y0j575y.jpg)
-* 项目管理首页:![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfs2137j213g0lwac3.jpg)
-* 接口内容管理:![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfp10xxj213x0mctd6.jpg)
-* 接口单元测试:![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfmf8uqj213d0ldjtg.jpg)
+![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfjniygj211y0j575y.jpg)
+![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfs2137j213g0lwac3.jpg)
+![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfp10xxj213x0mctd6.jpg)
+![](http://wx4.sinaimg.cn/mw690/775c483fly1fdmtfmf8uqj213d0ldjtg.jpg)
 
 ## 架构
 ![](http://wx2.sinaimg.cn/mw690/775c483fly1fdmtcnk115j20sg0lc7ln.jpg)

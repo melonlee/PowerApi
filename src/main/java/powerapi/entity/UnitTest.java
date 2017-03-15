@@ -14,7 +14,7 @@ public class UnitTest extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @TableField(value = "user_id")
-    private Integer userId;
+    private Long userId;
 
     private String method;
 
@@ -37,11 +37,11 @@ public class UnitTest extends BaseEntity {
     @TableField(value = "response_size")
     private Integer responseSize;// 请求返回内容大小
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
