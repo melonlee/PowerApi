@@ -23,7 +23,7 @@
                         href="../project/all"><i class="fa fa-briefcase"></i> <span>
 							成员管理</span> </a></li>
                 <li class="nav-parent ${param.nav==4 ? "active" : "" }"><a class="dropdown-toggle"
-                                                                             data-toggle="dropdown" href="#"><i
+                                                                           data-toggle="dropdown" href="#"><i
                         class="fa fa-send"></i> 测试管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu children">
                         <li><a href="../unit/view"><i class="fa fa-send"></i>单元测试</a></li>
@@ -31,7 +31,7 @@
                                 class="pull-right badge badge-danger">Beta</span></a></li>
                     </ul>
                 </li>
-                <li ${param.nav==6 ? "class='active'" : "" }><a
+                <li ${param.nav==5 ? "class='active'" : "" }><a
                         href="../monitor/list.do"> <i class="fa fa-rocket"></i> <span>
                             自动监控</span><span
                         class="pull-right badge badge-danger">Beta</span></a></li>

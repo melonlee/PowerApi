@@ -54,13 +54,11 @@ public class ProjectController extends BaseController<Project> {
     /**
      * 新增项目
      *
-     * @param model
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create(ModelMap model) {
-        model.addAttribute("project", new Project());
-        return "/project/detail";
+    public String create() {
+        return "/project/create";
     }
 
     /**

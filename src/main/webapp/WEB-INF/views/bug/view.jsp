@@ -14,54 +14,55 @@
         </jsp:include>
         <jsp:include page="../common/pageheader.jsp">
             <jsp:param name="entity" value="Bug"/>
+            <jsp:param name="index" value="3"/>
         </jsp:include>
-
-        <div class="contentpanel">
-
-            <div class="panel">
-                <div class="panel-heading">
-                    <h5 class="bug-key-title">#${bug.id}</h5>
-                    <div class="panel-title">${bug.title}</div>
-                </div>
-                <div class="panel-body">
-                    <div class="btn-group mr10 pull-right">
-                        <a class="btn btn-default" type="button"><i class="fa fa-pencil mr5"></i> 编辑</a>
-                        <a class="btn btn-danger" type="button"><i class="fa fa-trash-o mr5"></i> 删除</a>
-                        <a class="btn btn-success" type="button"><i class="fa fa-trash-o mr5"></i> 解决</a>
-                        <a class="btn btn-warning" type="button"><i class="fa fa-trash-o mr5"></i> 关闭</a>
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h5 class="bug-key-title">#${bug.id}</h5>
+                        <div class="panel-title">${bug.title}</div>
                     </div>
-                    <br/><br/>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h5 class="subtitle subtitle-lined">描述</h5>
-                            <p>${bug.description}</p>
-                            <br/><br/>
-                            <h5 class="subtitle subtitle-lined">讨论</h5>
-                            <div class="tab-content noshadow">
-                                <div>
-                                    <ul class="media-list comment-list">
-                                        <c:forEach var="comment" items="${comments}">
-                                            <li class="media">
-                                                <a href="#" class="pull-left">
-                                                    <img alt=""
-                                                         src="http://wx3.sinaimg.cn/large/61e3f9b7ly1fdgwkwiwnvj20zk0mlq57.jpg"
-                                                         class="media-object">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4>老夏</h4>
-                                                    <small class="text-muted">${comment.createdate}</small>
-                                                    <p>${comment.content}</p>
-                                                </div>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-                                    <br/>
-                                    <h5 class="subtitle subtitle-lined">留言</h5>
-                                    <div class="mb20"></div>
+                    <div class="panel-body">
+                        <div class="btn-group mr10 pull-right">
+                            <a class="btn btn-default" type="button"><i class="fa fa-pencil mr5"></i> 编辑</a>
+                            <a class="btn btn-danger" type="button"><i class="fa fa-trash-o mr5"></i> 删除</a>
+                            <a class="btn btn-success" type="button"><i class="fa fa-trash-o mr5"></i> 解决</a>
+                            <a class="btn btn-warning" type="button"><i class="fa fa-trash-o mr5"></i> 关闭</a>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5 class="subtitle subtitle-lined">描述</h5>
+                                <p>${bug.description}</p>
+                                <br/><br/>
+                                <h5 class="subtitle subtitle-lined">讨论</h5>
+                                <div class="tab-content noshadow">
+                                    <div>
+                                        <ul class="media-list comment-list">
+                                            <c:forEach var="comment" items="${comments}">
+                                                <li class="media">
+                                                    <a href="#" class="pull-left">
+                                                        <img alt=""
+                                                             src="http://wx3.sinaimg.cn/large/61e3f9b7ly1fdgwkwiwnvj20zk0mlq57.jpg"
+                                                             class="media-object">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <h4>老夏</h4>
+                                                        <small class="text-muted">${comment.createdate}</small>
+                                                        <p>${comment.content}</p>
+                                                    </div>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                        <br/>
+                                        <h5 class="subtitle subtitle-lined">留言</h5>
+                                        <div class="mb20"></div>
                                     <textarea placeholder="..." rows="5" class="form-control"
                                               id="bug_content"></textarea>
-                                    <div class="mb10"></div>
-                                    <button class="btn btn-primary" id="comment_submit">提交评论</button>
+                                        <div class="mb10"></div>
+                                        <button class="btn btn-primary" id="comment_submit">提交评论</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -69,6 +70,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>

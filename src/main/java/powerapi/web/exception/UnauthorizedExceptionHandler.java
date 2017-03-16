@@ -1,6 +1,7 @@
 package powerapi.web.exception;
 
 import org.apache.shiro.authz.UnauthorizedException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -21,4 +22,13 @@ public class UnauthorizedExceptionHandler {
         mv.setViewName("/common/error.ftl");
         return mv;
     }
+
+    @ExceptionHandler({MissingServletRequestParameterException.class})
+    public ModelAndView processMissingServletRequestParameterException(NativeWebRequest request, MissingServletRequestParameterException e) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("exception", e.getMessage());
+        mv.setViewName("/common/error.ftl");
+        return mv;
+    }
+
 }

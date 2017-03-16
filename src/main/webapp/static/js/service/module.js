@@ -12,7 +12,6 @@
 //渲染导航条第一个
 var $curModule = $("#module_nav").find("li:first");
 var proId = $curModule.data("pro");
-console.log("proId-->" + proId);
 $curModule.addClass("active");
 $("#panel_module_url").text($curModule.data("url"));
 $("#panel_module_desc").text($curModule.data("desc"));
@@ -33,9 +32,9 @@ function loadInterfaceByModule(moduleId) {
             dataType: 'json',
             success: function (data) {
                 console.log(data);
+                $("#datas").show();
                 $("#function_row").empty();
-                if (data.code != 1000) {
-                } else {
+                if (data.code == 1000) {
                     for (loop = 0; loop < data.result.length; loop++) {
                         functionObj = data.result[loop];
                         var flag = "";
@@ -72,7 +71,7 @@ function loadInterfaceByModule(moduleId) {
                 }
             },
             error: function () {
-                alert("获取数据异常，请重试!");
+                $("#data_alert").show();
             }
         });
 }

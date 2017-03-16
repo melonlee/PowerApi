@@ -13,87 +13,89 @@
         <jsp:include page="../common/menu.jsp" flush="true">
             <jsp:param name="nav" value="2"/>
         </jsp:include>
-        <div class="pageheader">
-            <h2>
-                <i class="fa fa-edit"></i>${project.title}<span>项目信息 </span>
-            </h2>
-        </div>
-        <div class="contentpanel">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <form id="form1" class="form-horizontal" method="post"
-                          action="modify">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <c:if test="${not empty project}">
-                                    <input type="hidden" name="id" value="${project.id}"/>
-                                </c:if>
-                            </div>
-                            <div class="panel-body">
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">项目名称</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="title" class="form-control"
-                                               value="${project.title}" placeholder="项目名称"/>
-                                    </div>
+        <jsp:include page="../common/pageheader.jsp">
+            <jsp:param name="entity" value="项目"/>
+            <jsp:param name="index" value="1"/>
+        </jsp:include>
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="form1" class="form-horizontal" method="post"
+                              action="modify">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <c:if test="${not empty project}">
+                                        <input type="hidden" name="id" value="${project.id}"/>
+                                    </c:if>
                                 </div>
+                                <div class="panel-body">
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">项目版本</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="version" class="form-control"
-                                               value="${project.version}" placeholder="默认1.0"/>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">项目名称</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="title" class="form-control"
+                                                   value="${project.title}" placeholder="项目名称"/>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">接口后缀</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="pattern" class="form-control"
-                                               value="${project.pattern}" placeholder="例如:.do .action 默认/"/>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">项目版本</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="version" class="form-control"
+                                                   value="${project.version}" placeholder="默认1.0"/>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">接口根地址</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="hostUrl" class="form-control"
-                                               value="${project.hostUrl}" placeholder="http://api.xxx.com"/>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">接口后缀</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="pattern" class="form-control"
+                                                   value="${project.pattern}" placeholder="例如:.do .action 默认/"/>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">项目描述</label>
-                                    <div class="col-sm-10">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">接口根地址</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="hostUrl" class="form-control"
+                                                   value="${project.hostUrl}" placeholder="http://api.xxx.com"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">项目描述</label>
+                                        <div class="col-sm-10">
                                         <textarea class="form-control" rows="5"
                                                   name="description">${project.description} </textarea>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
+                                <div class="panel-footer">
+                                    <button class="btn btn-primary" type="submit">提交</button>
+                                    <button class="btn btn-default" type="button"
+                                            onclick="javascript:window.history.back()">取消
+                                    </button>
+                                </div>
                             </div>
-                            <div class="panel-footer">
-                                <button class="btn btn-primary" type="submit">提交</button>
-                                <button class="btn btn-default" type="button"
-                                        onclick="javascript:window.history.back()">取消
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <c:if test="${not empty project}">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p>
-                                <button class="btn btn-danger btn-block" id="remove_pro" data-id="${project.id}">删除该项目
-                                </button>
-                            </p>
-                        </div>
+                        </form>
                     </div>
-                </c:if>
+                    <c:if test="${not empty project}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    <button class="btn btn-danger btn-block" id="remove_pro" data-id="${project.id}">
+                                        删除该项目
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </c:if>
+                </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>

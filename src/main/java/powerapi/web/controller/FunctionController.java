@@ -48,11 +48,22 @@ public class FunctionController extends BaseController<Function> {
         return JsonUtils.getInstance().setList(list).result();
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String create(
+            ModelMap model,
+            @RequestParam(value = "proId", required = true) Long proId) {
+        Project project = projectService.selectById(proId);
+        List<Module> modules = moduleService.selectByProjectId(proId);
+        model.addAttribute("modules", modules);
+        model.addAttribute("project", project);
+        return "interface/detail";
+    }
+
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String view(
             ModelMap model,
             @RequestParam(value = "proId", required = true) Long proId,
-            @RequestParam(value = "id", required = true) Long id) {
+            @RequestParam(value = "id", required = false, defaultValue = "0") Long id) {
 
         Project project = projectService.selectById(proId);
         List<Module> modules = moduleService.selectByProjectId(proId);
