@@ -73,25 +73,24 @@
 
                                 </div>
                                 <div class="panel-footer">
-                                    <button class="btn btn-primary" type="submit">提交</button>
-                                    <button class="btn btn-default" type="button"
-                                            onclick="javascript:window.history.back()">取消
-                                    </button>
+                                    <div class="pull-left">
+                                        <button class="btn btn-primary" type="submit">保存更改</button>
+                                        <button class="btn btn-default" type="button"
+                                                onclick="javascript:window.history.back()">返回
+                                        </button>
+                                    </div>
+                                    <c:if test="${not empty project}">
+                                        <div class="pull-right">
+                                            <button class="btn btn-danger btn-block" id="module_remove"
+                                                    data-id="${project.id}">
+                                                删除该项目
+                                            </button>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <c:if test="${not empty project}">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>
-                                    <button class="btn btn-danger btn-block" id="remove_pro" data-id="${project.id}">
-                                        删除该项目
-                                    </button>
-                                </p>
-                            </div>
-                        </div>
-                    </c:if>
                 </div>
             </div>
         </div>

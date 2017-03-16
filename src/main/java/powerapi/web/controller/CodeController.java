@@ -47,7 +47,7 @@ public class CodeController extends BaseController<Code> {
         return "code/detail";
     }
 
-    @RequestMapping(value = "/modify", method = RequestMethod.GET)
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String submit(Code code) {
         code.setUserId(getCurrentUser().getId());
         codeService.insertOrUpdate(code);

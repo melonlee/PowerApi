@@ -42,7 +42,7 @@
                         <c:if test="${bugs.size()>0}">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table table-danger table-buglist">
+                                    <table class="table table-success table-buglist">
                                         <thead>
                                         <tr>
                                             <th></th>

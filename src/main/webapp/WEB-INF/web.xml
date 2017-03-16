@@ -9,6 +9,7 @@
             classpath:/spring/spring-dao.xml;
             classpath:/spring/spring-mvc.xml;
             classpath:/spring/spring-shiro.xml;
+            classpath:/spring/spring-redis.xml;
         </param-value>
     </context-param>
 

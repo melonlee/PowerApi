@@ -1,6 +1,7 @@
 package powerapi.plugin.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -10,7 +11,7 @@ import java.util.Set;
 /**
  * Created by Melon on 17/3/16.
  */
-@Service
+@Component
 public class RedisClientImpl implements RedisClient {
 
     @Autowired

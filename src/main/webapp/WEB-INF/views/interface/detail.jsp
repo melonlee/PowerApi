@@ -30,22 +30,9 @@
                                     </div>
                                 </c:if>
                             </div>
-                            <div class="col-sm-3 col-lg-2">
-                                <ul class="nav nav-pills nav-stacked nav-email mb20"
-                                    id="module_nav">
 
-                                    <c:forEach var="module" items="${modules}">
-                                        <li id="${module.id}" title="${module.title}"
-                                            data-url="${module.url}" data-desc="${module.description}"
-                                            class="module_nav_row"><a href="#"> <i
-                                                class="glyphicon glyphicon-folder-open"></i> ${module.title }
-                                        </a></li>
-                                    </c:forEach>
-                                </ul>
+                            <div class="col-sm-12 col-lg-12">
 
-                            </div>
-
-                            <div class="col-sm-9 col-lg-10">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
 
@@ -68,22 +55,17 @@
                                         </div>
                                         <div class="pull-right">
                                             <div class="btn-group mr10">
-                                                <a class="btn btn-sm btn-white tooltips" type="button"
+                                                <a class="btn btn-sm btn-primary tooltips" type="button"
                                                    href="test?proId=${project.id}&id=${function.id}"
                                                    target="_blank" data-toggle="tooltip" title="测试接口"> <i
                                                         class="fa fa-paper-plane"></i>
                                                 </a>
-
-                                                <button class="btn btn-sm btn-white tooltips" type="button"
-                                                        data-toggle="tooltip" title="删除接口">
-                                                    <i class="glyphicon glyphicon-trash"></i>
-                                                </button>
                                             </div>
 
                                             <div class="btn-group mr10">
                                                 <div class="btn-group nomargin">
                                                     <button data-toggle="dropdown"
-                                                            class="btn btn-sm btn-white dropdown-toggle tooltips"
+                                                            class="btn btn-sm btn-warning dropdown-toggle tooltips"
                                                             type="button" title="标记接口">
                                                         <i class="glyphicon glyphicon-tag mr5"></i> <span
                                                             class="caret"></span>
@@ -105,156 +87,143 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- pull-right -->
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        <div class="form-group">
+                                                <div class="form-group">
 
-                                                            <input type="hidden" id="id" value="${function.id}"/>
+                                                    <input type="hidden" id="id" value="${function.id}"/>
 
-                                                            <div class="col-sm-3">
-                                                                <input type="text" id="title" class="form-control"
-                                                                       placeholder="名称" value="${function.title}"/>
-                                                            </div>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" id="title" class="form-control"
+                                                               placeholder="名称" value="${function.title}"/>
+                                                    </div>
 
-                                                            <div class="col-sm-3">
-                                                                <input type="text" id="url" class="form-control"
-                                                                       placeholder="地址:submit.do"
-                                                                       value="${function.url}"/>
-                                                            </div>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" id="url" class="form-control"
+                                                               placeholder="地址:submit.do"
+                                                               value="${function.url}"/>
+                                                    </div>
 
 
-                                                            <div class="col-sm-3">
-                                                                <select class="select2" id="method">
-                                                                    <option value="GET"
-                                                                    ${function.method=='GET' ? "selected" :""}>GET
-                                                                    </option>
-                                                                    <option value="POST"
-                                                                    ${function.method=='POST' ? "selected" :""}>POST
-                                                                    </option>
-                                                                    <option value="PUT"
-                                                                    ${function.method=='PUT' ? "selected" :""}>PUT
-                                                                    </option>
-                                                                    <option value="DELETE"
-                                                                    ${function.method=='PUT' ? "selected" :""}>DELETE
-                                                                    </option>
-                                                                </select>
-                                                            </div>
+                                                    <div class="col-sm-3">
+                                                        <select class="select2" id="method">
+                                                            <option value="GET"
+                                                            ${function.method=='GET' ? "selected" :""}>GET
+                                                            </option>
+                                                            <option value="POST"
+                                                            ${function.method=='POST' ? "selected" :""}>POST
+                                                            </option>
+                                                            <option value="PUT"
+                                                            ${function.method=='PUT' ? "selected" :""}>PUT
+                                                            </option>
+                                                            <option value="DELETE"
+                                                            ${function.method=='PUT' ? "selected" :""}>DELETE
+                                                            </option>
+                                                        </select>
+                                                    </div>
 
-                                                            <div class="col-sm-3">
-                                                                <select class="select2" id="response_type">
-                                                                    <option value="JSON"
-                                                                    ${function.method=='JSON' ? "selected" :""}>JSON
-                                                                    </option>
-                                                                    <option value="XML"
-                                                                    ${function.method=='XML' ? "selected" :""}>XML
-                                                                    </option>
-                                                                    <option value="HTML"
-                                                                    ${function.method=='HTML' ? "selected" :""}>HTML
-                                                                    </option>
-                                                                    <option value="TEXT"
-                                                                    ${function.method=='TEXT' ? "selected" :""}>TEXT
-                                                                    </option>
-                                                                </select>
-                                                            </div>
+                                                    <div class="col-sm-3">
+                                                        <select class="select2" id="response_type">
+                                                            <option value="JSON"
+                                                            ${function.method=='JSON' ? "selected" :""}>JSON
+                                                            </option>
+                                                            <option value="XML"
+                                                            ${function.method=='XML' ? "selected" :""}>XML
+                                                            </option>
+                                                            <option value="HTML"
+                                                            ${function.method=='HTML' ? "selected" :""}>HTML
+                                                            </option>
+                                                            <option value="TEXT"
+                                                            ${function.method=='TEXT' ? "selected" :""}>TEXT
+                                                            </option>
+                                                        </select>
+                                                    </div>
 
-                                                        </div>
+                                                </div>
 
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
 																<textarea class="form-control" id="description" rows="2"
                                                                           placeholder="特别说明">${function.description}</textarea>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="table-responsive">
+
+                                                                <div class="col-md-12">
+                                                                    <div class="alert alert-info">
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="alert"
+                                                                                aria-hidden="true">&times;</button>
+                                                                        点击[+参数]按钮在列表中直接输入所需参数
+                                                                    </div>
+                                                                </div>
+                                                                <div style="visibility: hidden;" id="div_params"
+                                                                     data-params='${function.params}'></div>
+                                                                <table class="table mb30 table-primary">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>名称</th>
+                                                                        <th>类型</th>
+                                                                        <th>说明</th>
+                                                                        <th>是否必填</th>
+                                                                        <th>示例</th>
+                                                                        <th>默认值</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody id="params">
+
+
+                                                                    </tbody>
+                                                                </table>
+                                                                <!-- table-responsive -->
                                                             </div>
-                                                        </div>
-
-
-                                                        <div class="form-group">
 
                                                             <div class="row">
                                                                 <div class="col-sm-12">
-                                                                    <div class="table-responsive">
-
-                                                                        <div class="col-md-12">
-                                                                            <div class="alert alert-info">
-                                                                                <button type="button" class="close"
-                                                                                        data-dismiss="alert"
-                                                                                        aria-hidden="true">&times;</button>
-                                                                                点击[+参数]按钮在列表中直接输入所需参数
-                                                                            </div>
-                                                                        </div>
-                                                                        <div style="visibility: hidden;" id="div_params"
-                                                                             data-params='${function.params}'></div>
-                                                                        <table class="table mb30 table-primary">
-                                                                            <thead>
-                                                                            <tr>
-                                                                                <th>名称</th>
-                                                                                <th>类型</th>
-                                                                                <th>说明</th>
-                                                                                <th>是否必填</th>
-                                                                                <th>示例</th>
-                                                                                <th>默认值</th>
-                                                                                <th></th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody id="params">
-
-
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <!-- table-responsive -->
-                                                                    </div>
-
-                                                                    <div class="row">
-                                                                        <div class="col-sm-12">
-                                                                            <button id="addParam"
-                                                                                    class="btn btn-success">
-                                                                                +参数
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
+                                                                    <button id="addParam"
+                                                                            class="btn btn-success">
+                                                                        +参数
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
+                                                </div>
+                                            </div>
 
-                                                    <div class="col-md-12 mb20">
-                                                        <!-- Nav tabs -->
-                                                        <ul class="nav nav-tabs">
-                                                            <li class="active"><a href="#returns"
-                                                                                  data-toggle="tab"><strong>返回示例</strong></a>
-                                                            </li>
-                                                        </ul>
-
-                                                        <!-- Tab panes -->
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane active" id="returns">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
 																			<textarea class="form-control"
                                                                                       id="response_body"
                                                                                       placeholder="示例内容"
                                                                                       rows="5">${function.responseBody}</textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                </div>
+                                            </div>
 
-                                                        </div>
+                                            <div class="panel-footer">
+                                                <div class="pull-left">
+                                                    <button id="submit" class="btn btn-primary">保存更改</button>
+                                                    <button class="btn btn-default" type="button"
+                                                            onclick="javascript:window.history.back()">返回
+                                                    </button>
+                                                </div>
 
-                                                    </div>
-
-                                                    <!-- panel-body -->
-                                                    <div class="panel-footer">
-                                                        <button id="submit" class="btn btn-primary">提交</button>
-                                                        <button class="btn btn-default" type="button"
-                                                                onclick="javascript:window.history.back()">返回
+                                                <c:if test="${not empty function}">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-danger btn-block" id="remove_interface"
+                                                                data-id="${function.id}">
+                                                            删除该接口
                                                         </button>
                                                     </div>
-                                                </div>
+                                                </c:if>
+
                                             </div>
                                         </div>
                                     </div>

@@ -36,8 +36,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">代号</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="sign" class="form-control"
-                                                   value="${bug.sign}" placeholder="200"/>
+                                            <input type="text" name="title" class="form-control"
+                                                   value="${bug.title}" placeholder="200"/>
                                         </div>
                                     </div>
 

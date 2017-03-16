@@ -38,7 +38,6 @@
                         </div>
                     </div>
 
-
                     <div class="col-md-12" id="datas" style="display: none">
                         <div class="row">
                             <div class="col-sm-3 col-lg-2">
@@ -58,12 +57,15 @@
                             <div class="col-sm-9 col-lg-10">
                                 <div class="row">
                                     <div class="col-sm-12">
+
                                         <div class="panel panel-success">
                                             <div class="panel-heading">
-                                                <div class="panel-btns">
-                                                    <a id="panel_module_modify" href="#" title="编辑"><i
-                                                            class="fa  fa-cog mr5"></i> </a> <a href=""
-                                                                                                class="minimize">&minus;</a>
+                                                <div class="pull-right">
+                                                    <a class="btn btn-sm btn-primary tooltips" type="button"
+                                                       id="panel_module_modify" data-toggle="tooltip"
+                                                       title="编辑模块信息">
+                                                        <i class="glyphicon glyphicon-edit"></i>
+                                                    </a>
                                                 </div>
                                                 <h4 class="panel-title" id="panel_module_url"></h4>
                                             </div>
@@ -73,15 +75,20 @@
                                 </div>
                                 <div class="panel panel-default">
                                     <div class="panel-body">
+                                        <div class="pull-left">
+                                            <h4>
+                                                接口信息:
+                                            </h4>
+                                        </div>
                                         <div class="pull-right">
                                             <button class="btn btn-sm btn-primary tooltips" type="button"
                                                     id="create_function" data-toggle="tooltip" title="新增接口">
-                                                <i class="glyphicon glyphicon-edit"></i>
+                                                <i class="glyphicon glyphicon-plus"></i>
                                             </button>
                                             <br/> <br/>
                                         </div>
                                         <div class="table-responsive">
-                                            <table class="table table-hover mb30">
+                                            <table class="table table-success table-hover mb30">
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -93,13 +100,6 @@
                                                 <tbody id="function_row"></tbody>
                                             </table>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p>
-                                            <button class="btn btn-danger btn-block" id="module_remove">删除该模块</button>
-                                        </p>
                                     </div>
                                 </div>
                             </div>

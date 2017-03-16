@@ -143,36 +143,4 @@ $(document).on("click", ".interface_delete_row", function () {
 
 });
 
-function removeModule() {
-
-    if (window.confirm('确定删除该模块吗？')) {
-
-        $.ajax({
-            type: 'GET',
-            url: 'remove',
-            data: {
-                id: $curModule.attr("id")
-            },
-            cache: false,
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-                if (data.code == 1000) {
-                    $curModule.remove();
-                    $("#module_nav").find("li:last").addClass("active")
-                        .click();
-                } else {
-                    alert('删除失败请重试!');
-                }
-            },
-            error: function () {
-                alert("获取数据异常，请重试!");
-            }
-        });
-        return true;
-
-    } else {
-        return false;
-    }
-}
 

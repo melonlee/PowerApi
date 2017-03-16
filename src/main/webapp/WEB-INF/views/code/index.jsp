@@ -39,10 +39,10 @@
                         </div>
                     </c:if>
 
-                    <c:when test="${codes.size()>0}">
+                    <c:if test="${codes.size()>0}">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table table-primary table-buglist">
+                                <table class="table table-success table-buglist">
                                     <thead>
                                     <tr>
                                         <th></th>
@@ -54,9 +54,9 @@
                                     <tbody>
                                     <c:forEach var="code" items="${codes}">
                                         <tr>
-                                            <td><c:if test="${code.isUpdate==1}">
+                                            <td>
                                                 <span class="pull-right badge badge-danger">更新</span>
-                                            </c:if></td>
+                                            </td>
                                             <td>${code.code}</td>
                                             <td>${code.description}</td>
                                             <td class="table-action"><a
@@ -75,7 +75,7 @@
                                 <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                             </ul>
                         </div>
-                    </c:when>
+                    </c:if>
 
                 </div>
             </div>

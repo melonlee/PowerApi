@@ -91,7 +91,7 @@
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <button id="submit" class="btn btn-primary">发送</button>
+                            <button id="submit" class="btn btn-primary">提交测试</button>
                             <button id="loading" class="btn btn-primary" data-toggle="modal"
                                     style="display: none;" data-target=".bs-example-modal-sm">loading
                             </button>
