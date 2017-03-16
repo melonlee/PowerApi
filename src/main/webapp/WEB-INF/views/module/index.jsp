@@ -15,8 +15,9 @@
         </jsp:include>
         <jsp:include page="../common/pageheader.jsp">
             <jsp:param name="entity" value="模块"/>
+            <jsp:param name="index" value="2"/>
         </jsp:include>
-        <div class="contentpanel">
+        <div class="tab-content">
             <div class="row">
                 <c:if test="${status>0}">
                     <div class="col-md-12" id="action_alert">
@@ -95,6 +96,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>

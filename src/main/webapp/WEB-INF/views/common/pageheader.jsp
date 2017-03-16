@@ -11,13 +11,16 @@
         <i class="fa fa-book"></i>${project.title }
         <span>${project.relativedate }</span>
         <span>${project.description }</span>
-        <%--<span>--%>
-        <%--<a href="../project/${project.id}" title="基础管理"><i class="fa fa-gear"--%>
-        <%--style="border: 0px !important;"></i></a>--%>
-        <%--<a href="" title="接口管理"><i class="fa fa-code-fork" style="border: 0px !important;"></i></a>--%>
-        <%--<a href="" title="Bug管理"><i class="fa fa-bug" style="border: 0px !important;"></i></a>--%>
-        <%--<a href="" title="业务码管理"><i class="fa fa-file-code-o" style="border: 0px !important;"></i></a></span>--%>
         <a href="create?proId=${project.id}" class="pull-right btn btn-primary">新增${param.entity}</a>
-
     </h2>
 </div>
+
+<div class="contentpanel">
+
+    <ul class="nav nav-tabs nav-dark">
+        <li ${param.index==1 ? "class='active'" : "" }><a href="../project/view?id=${project.id}"><strong>基础管理</strong></a></li>
+        <li ${param.index==2 ? "class='active'" : "" }><a href="../module/all?proId=${project.id}"><strong>接口管理</strong></a></li>
+        <li ${param.index==3 ? "class='active'" : "" }><a href="../bug/all?proId=${project.id}"><strong>Bug管理</strong></a></li>
+        <li ${param.index==4 ? "class='active'" : "" }><a href="../code/all?proId=${project.id}"><strong>业务码管理</strong></a></li>
+        <li ${param.index==5 ? "class='active'" : "" }><a href="../project/doc?id=${project.id}"><strong>文档预览</strong></a></li>
+    </ul>

@@ -14,64 +14,65 @@
         </jsp:include>
         <jsp:include page="../common/pageheader.jsp">
             <jsp:param name="entity" value="业务码"/>
+            <jsp:param name="index" value="4"/>
         </jsp:include>
-
-        <div class="contentpanel">
-            <div class="row">
-                <c:if test="${status>0}">
-                    <div class="col-md-12" id="action_alert">
-                        <div class="alert alert-success">
-                            <button type="button" class="close" data-dismiss="alert"
-                                    aria-hidden="true">&times;</button>
-                            操作成功!
+            <div class="tab-content">
+                <div class="row">
+                    <c:if test="${status>0}">
+                        <div class="col-md-12" id="action_alert">
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                操作成功!
+                            </div>
                         </div>
-                    </div>
-                </c:if>
+                    </c:if>
 
-                <c:if test="${codes.size()==0}">
+                    <c:if test="${codes.size()==0}">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                您目前还没有创建业务代码!
+                            </div>
+                        </div>
+                    </c:if>
+
                     <div class="col-md-12">
-                        <div class="alert alert-danger">
-                            <button type="button" class="close" data-dismiss="alert"
-                                    aria-hidden="true">&times;</button>
-                            您目前还没有创建业务代码!
-                        </div>
-                    </div>
-                </c:if>
-
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table class="table table-primary table-buglist">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>代&nbsp;码&nbsp;</th>
-                                <th>说&nbsp;明&nbsp;</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="code" items="${codes}">
+                        <div class="table-responsive">
+                            <table class="table table-primary table-buglist">
+                                <thead>
                                 <tr>
-                                    <td><c:if test="${code.isUpdate==1}">
-                                        <span class="pull-right badge badge-danger">更新</span>
-                                    </c:if></td>
-                                    <td>${code.code}</td>
-                                    <td>${code.description}</td>
-                                    <td class="table-action"><a
-                                            href="view?id=${code.id }&proId=${project.id}"
-                                            class="edit-row"><i class="fa fa-pencil"></i></a>&nbsp;<a
-                                            href="delete?id=${code.id }" class="delete-row"><i
-                                            class="fa fa-trash-o"></i></a></td>
+                                    <th></th>
+                                    <th>代&nbsp;码&nbsp;</th>
+                                    <th>说&nbsp;明&nbsp;</th>
+                                    <th></th>
                                 </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="code" items="${codes}">
+                                    <tr>
+                                        <td><c:if test="${code.isUpdate==1}">
+                                            <span class="pull-right badge badge-danger">更新</span>
+                                        </c:if></td>
+                                        <td>${code.code}</td>
+                                        <td>${code.description}</td>
+                                        <td class="table-action"><a
+                                                href="view?id=${code.id }&proId=${project.id}"
+                                                class="edit-row"><i class="fa fa-pencil"></i></a>&nbsp;<a
+                                                href="delete?id=${code.id }" class="delete-row"><i
+                                                class="fa fa-trash-o"></i></a></td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul class="pagination pagination-split nomargin">
+                            <li class="disabled"><a href="#"><i
+                                    class="fa fa-angle-left"></i></a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
                     </div>
-                    <ul class="pagination pagination-split nomargin">
-                        <li class="disabled"><a href="#"><i
-                                class="fa fa-angle-left"></i></a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                    </ul>
                 </div>
             </div>
         </div>

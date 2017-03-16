@@ -12,12 +12,10 @@
         <jsp:include page="../common/menu.jsp" flush="true">
             <jsp:param name="nav" value="4"/>
         </jsp:include>
-
         <jsp:include page="../common/pageheader.jsp">
-            <jsp:param name="entity" value="Bug"/>
+            <jsp:param name="entity" value="接口"/>
         </jsp:include>
         <div class="contentpanel">
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
@@ -212,12 +210,8 @@
                 </div>
 
             </div>
-            <!-- col-md-6 -->
-            <!-- row -->
         </div>
-        <!-- contentpanel -->
     </div>
-    <!-- mainpanel -->
 </section>
 
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"

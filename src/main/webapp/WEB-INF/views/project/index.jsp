@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-11">
                     <h2>
-                        <i class="fa fa-briefcase"></i>项目<span>对创建的项目进行管理</span>
+                        <i class="fa fa-briefcase"></i>项目管理<span>包括:接口;Bug;状态码;文档;成员信息</span>
                     </h2>
                 </div>
                 <div class="col-md-1">
@@ -53,13 +53,6 @@
                             <div class="col-md-6">
                                 <div class="people-item">
                                     <div class="media">
-                                        <a target="_blank" href="../preview/${project.id}"
-                                           class="pull-left"> <img alt=""
-                                                                   src="<%=request.getScheme() + "://" + request.getServerName()
-						+ ":" + request.getServerPort()
-						+ request.getContextPath() + "/"%>userdata/${project.icon}"
-                                                                   class="thumbnail media-object">
-                                        </a>
                                         <div class="media-body">
                                             <h4 class="person-name">
                                                 <a href="view?id=${project.id}">${project.title}</a><span
@@ -95,7 +88,7 @@
                                                         class="fa fa-eye"></i></a></li>
 
                                                 <li><a target="_blank"
-                                                       href="../preview/${project.id}.do" class="tooltips"
+                                                       href="../doc/${project.id}" class="tooltips"
                                                        data-toggle="tooltip" data-placement="top" title="成员管理"><i
                                                         class="fa fa-users"></i></a></li>
                                             </ul>

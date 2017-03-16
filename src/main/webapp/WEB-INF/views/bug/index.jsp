@@ -12,21 +12,14 @@
         <jsp:include page="../common/menu.jsp" flush="true">
             <jsp:param name="nav" value="2"/>
         </jsp:include>
+
         <jsp:include page="../common/pageheader.jsp">
             <jsp:param name="entity" value="Bug"/>
+            <jsp:param name="index" value="3"/>
         </jsp:include>
 
-        <div class="contentpanel">
-
-            <ul class="nav nav-tabs nav-dark">
-                <li class="active"><a data-toggle="tab" href="#all"><strong>基础管理</strong></a></li>
-                <li><a data-toggle="tab" href="#added"><strong>接口管理</strong></a></li>
-                <li><a data-toggle="tab" href="#assigned"><strong>Bug管理</strong></a></li>
-                <li><a data-toggle="tab" href="#unresolved"><strong>业务码管理</strong></a></li>
-                <li><a data-toggle="tab" href="#resolved"><strong>文档预览</strong></a></li>
-            </ul>
             <div class="tab-content">
-                <div id="all" class="tab-pane active">
+                <div class="tab-pane active">
                     <div class="row">
                         <c:if test="${status>0}">
                             <div class="col-md-12" id="action_alert">
@@ -85,37 +78,9 @@
                             </div>
                         </c:if>
                     </div>
-                    <ul class="pagination pagination-split nomargin">
-                        <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                    </ul>
                 </div>
-
-                <div id="added" class="tab-pane">
-                    <p><strong>Note:</strong> Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                        ad minim veniam, quis nostrud exercitatio.</p>
-                </div><!-- tab-pane -->
-
-                <div id="assigned" class="tab-pane">
-                    Assigned To Me
-                </div><!-- tab-pane -->
-
-                <div id="unresolved" class="tab-pane">
-                    Unresolved
-                </div><!-- tab-pane -->
-
-                <div id="resolved" class="tab-pane">
-                    Resolved Recently
-                </div><!-- tab-pane -->
-
-            </div><!-- tab-content -->
-
-        </div><!-- contentpanel -->
+            </div>
+        </div>
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
