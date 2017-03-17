@@ -25,7 +25,7 @@ import java.util.HashMap;
 
 @Controller
 @RequestMapping("/unit")
-public class UnitTestController extends BaseController<UnitTest> {
+public class UnitTestController extends BaseController {
 
     @Autowired
     private UnitTestService unitTestService;

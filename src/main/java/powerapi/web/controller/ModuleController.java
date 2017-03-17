@@ -19,18 +19,16 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/module")
-public class ModuleController extends BaseController<Module> {
+public class ModuleController extends BaseController {
 
     @Autowired
     private ModuleService moduleService;
 
-    @Autowired
-    private ProjectService projectService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String all(ModelMap model, @RequestParam(value = "proId", required = true) Long proId) {
 
-        Project project = projectService.selectById(proId);
+        Project project = getProject(proId);
         List<Module> modules = moduleService.selectByProjectId(proId);
         model.addAttribute("modules", modules);
         model.addAttribute("project", project);
@@ -41,8 +39,7 @@ public class ModuleController extends BaseController<Module> {
     public String create(
             ModelMap model,
             @RequestParam(value = "proId", required = true) Long proId) {
-        Project project = projectService.selectById(proId);
-        model.addAttribute("project", project);
+        model.addAttribute("project", getProject(proId));
         return "/module/detail";
     }
 
@@ -53,20 +50,18 @@ public class ModuleController extends BaseController<Module> {
             @RequestParam(value = "id", required = true) Long id,
             @RequestParam(value = "proId", required = true) Long proId) {
 
-        Project project = projectService.selectById(proId);
-        model.addAttribute("project", project);
-
         if (id != 0) {
             Module module = moduleService.selectById(id);
             model.addAttribute("module", module);
         }
+        model.addAttribute("project", getProject(proId));
         return "/module/detail";
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    public String modify(ModelMap model, Module module) {
+    public String modify(Module module) {
         module.setUserId(getCurrentUser().getId());
-        model.addAttribute("status", moduleService.insertOrUpdate(module));
+        moduleService.insertOrUpdate(module);
         return "redirect:/module/all?proId=" + module.getpId();
     }
 

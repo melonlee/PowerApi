@@ -18,13 +18,10 @@ import powerapi.service.ProjectService;
 
 @Controller
 @RequestMapping("/code")
-public class CodeController extends BaseController<Code> {
+public class CodeController extends BaseController {
 
     @Autowired
     private CodeService codeService;
-
-    @Autowired
-    private ProjectService projectService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(

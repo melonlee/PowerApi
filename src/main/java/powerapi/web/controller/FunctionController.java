@@ -26,16 +26,13 @@ import powerapi.service.UnitTestService;
 
 @Controller
 @RequestMapping("/function")
-public class FunctionController extends BaseController<Function> {
+public class FunctionController extends BaseController {
 
     @Autowired
     private FunctionService functionService;
 
     @Autowired
     private ModuleService moduleService;
-
-    @Autowired
-    private ProjectService projectService;
 
     @Autowired
     private UnitTestService unitTestService;

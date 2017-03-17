@@ -19,9 +19,14 @@
                 <li ${param.nav==2 ? "class='active'" : "" }><a
                         href="../project/all"><i class="fa fa-briefcase"></i> <span>
 							项目管理</span> </a></li>
-                <li ${param.nav==3 ? "class='active'" : "" }><a
-                        href="../project/all"><i class="fa fa-briefcase"></i> <span>
-							成员管理</span> </a></li>
+                <li class="nav-parent ${param.nav==3 ? "active" : "" }">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-briefcase"></i> 成员管理 <span class="caret"></span></a>
+                    <ul class="dropdown-menu children">
+                        <li><a href="../unit/view"><i class="fa fa-send"></i>小组成员</a></li>
+                        <li><a href="../auto/view"><i class="fa fa-truck"></i>角色管理 </a></li>
+                        <li><a href="../auto/view"><i class="fa fa-truck"></i>权限管理 </a></li>
+                    </ul>
                 <li class="nav-parent ${param.nav==4 ? "active" : "" }"><a class="dropdown-toggle"
                                                                            data-toggle="dropdown" href="#"><i
                         class="fa fa-send"></i> 测试管理 <span class="caret"></span></a>

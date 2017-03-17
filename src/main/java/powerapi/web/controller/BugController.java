@@ -20,7 +20,7 @@ import powerapi.service.ProjectService;
 
 @Controller
 @RequestMapping("/bug")
-public class BugController extends BaseController<Bug> {
+public class BugController extends BaseController {
 
     @Autowired
     private BugService bugService;
@@ -28,15 +28,12 @@ public class BugController extends BaseController<Bug> {
     @Autowired
     private BugCommentService bugCommentService;
 
-    @Autowired
-    private ProjectService projectService;
-
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(
             ModelMap model,
             @RequestParam(value = "proId", required = true) Long proId) {
 
-        Project project = projectService.selectById(proId);
+        Project project = getProject(proId);
         List<Bug> list = bugService.selectByProjectId(proId);
         model.addAttribute("bugs", list);
         model.addAttribute("project", project);
@@ -47,8 +44,7 @@ public class BugController extends BaseController<Bug> {
     public String create(
             ModelMap model,
             @RequestParam(value = "proId", required = true) Long proId) {
-        Project project = projectService.selectById(proId);
-        model.addAttribute("project", project);
+        model.addAttribute("project", getProject(proId));
         return "bug/detail";
     }
 
@@ -75,8 +71,8 @@ public class BugController extends BaseController<Bug> {
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String basic(ModelMap model,
-                        @RequestParam(value = "id", required = true) Long id) {
+    public String view(ModelMap model,
+                       @RequestParam(value = "id", required = true) Long id) {
         Bug bug = bugService.selectById(id);
         model.addAttribute("bug", bug);
         //获取评论
@@ -87,7 +83,7 @@ public class BugController extends BaseController<Bug> {
 
     @RequestMapping(value = "/delete", method = {RequestMethod.POST,
             RequestMethod.GET})
-    public String remove(
+    public String delete(
             ModelMap model,
             @RequestParam(value = "id", required = false, defaultValue = "0") Long id) {
         Bug bug = bugService.selectById(id);

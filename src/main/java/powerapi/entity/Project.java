@@ -14,12 +14,6 @@ import java.util.Date;
 @TableName("t_project")
 public class Project extends BaseEntity {
 
-    @TableField(exist = false)
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:m:s");
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
-
     private String title;
 
     @TableField(value = "host_url")
@@ -106,11 +100,7 @@ public class Project extends BaseEntity {
     }
 
     public String getRelativedate() {
-        try {
-            Date date = format.parse(createdate);
-            return DateFormatUtils.format(date);
-        } catch (ParseException e) {
-            return "时间异常";
-        }
+        Date date = DateFormatUtils.formatString(createdate);
+        return DateFormatUtils.format(date);
     }
 }

@@ -1,39 +1,22 @@
 package powerapi.web.controller;
 
 import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import powerapi.common.utils.FontImageUtils;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
-import powerapi.entity.User;
 import powerapi.service.ModuleService;
-import powerapi.service.ProjectService;
 
 @Controller
 @RequestMapping("/project")
-public class ProjectController extends BaseController<Project> {
-
-    @Autowired
-    private ProjectService projectService;
+public class ProjectController extends BaseController {
 
     @Autowired
     private ModuleService moduleService;
-
 
     /**
      * 根据页码获取项目列表
@@ -45,8 +28,7 @@ public class ProjectController extends BaseController<Project> {
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String list(ModelMap model, @RequestParam(defaultValue = "1") int page) {
-        List<Project> projects = projectService.selectPage(new Page<Project>(page, 10),
-                new EntityWrapper<Project>().eq("user_id", getCurrentUser().getId()).orderBy("createdate", false)).getRecords();
+        List<Project> projects = projectService.getProjectList(getCurrentUser().getId(), page);
         model.addAttribute("projects", projects);
         return "/project/index";
     }
@@ -68,9 +50,9 @@ public class ProjectController extends BaseController<Project> {
      * @return
      */
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    public String submit(Project project) {
+    public String modify(Project project) {
         project.setUserId(getCurrentUser().getId());
-        projectService.insertOrUpdate(project);
+        projectService.modifyProject(project);
         return "redirect:/project/all";
     }
 
@@ -82,9 +64,8 @@ public class ProjectController extends BaseController<Project> {
      * @return
      */
     @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String info(ModelMap model, @RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
-        Project project = projectService.selectById(id);
-        model.addAttribute("project", project);
+    public String view(ModelMap model, @RequestParam(value = "id", required = true) Long id) {
+        model.addAttribute("project", getProject(id));
         return "project/detail";
     }
 
@@ -96,8 +77,8 @@ public class ProjectController extends BaseController<Project> {
      */
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
-        projectService.deleteById(id);
+    public String delete(@RequestParam(value = "id", required = true) Long id) {
+        projectService.deleteProject(id);
         return "redirect:/project/all";
     }
 
@@ -110,10 +91,9 @@ public class ProjectController extends BaseController<Project> {
      */
     @RequestMapping(value = "/doc", method = RequestMethod.GET)
     public String preview(ModelMap model, @RequestParam(value = "id", required = true) Long id) {
-        Project project = projectService.selectById(id);
         List<Module> modules = moduleService.selectByProjectId(id);
         model.addAttribute("modules", modules);
-        model.addAttribute("project", project);
+        model.addAttribute("project", getProject(id));
         return "project/doc";
     }
 
