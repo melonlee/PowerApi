@@ -9,7 +9,7 @@ import java.util.Date;
  * <p/>
  * Created by Melon on 16/12/1.
  */
-public class DateFormatUtils {
+public class DateFormatUtil {
 
     public static SimpleDateFormat timestamp = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss");

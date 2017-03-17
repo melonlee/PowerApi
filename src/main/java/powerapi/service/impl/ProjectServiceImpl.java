@@ -12,6 +12,7 @@ import powerapi.plugin.redis.RedisCache;
 import powerapi.service.ProjectService;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Melon on 17/2/22.
@@ -66,6 +67,10 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         if (status) {
             deleteProject(project.getId());
             redisCache.putCache(redisCache.CAHCENAME + "|project|" + project.getId(), project);
+            List<Project> projects = getProjectList(project.getUserId(), 0);
+            projects.add(project);
+            redisCache.deleteCache(redisCache.CAHCENAME + "|projects|" + 0);
+            redisCache.putListCacheWithExpireTime(redisCache.CAHCENAME + "|projects|" + 0, projects, RedisCache.CAHCETIME);
         }
     }
 }

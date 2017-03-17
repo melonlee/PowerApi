@@ -2,10 +2,8 @@ package powerapi.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
-import powerapi.common.utils.DateFormatUtils;
+import powerapi.common.utils.DateFormatUtil;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -100,7 +98,23 @@ public class Project extends BaseEntity {
     }
 
     public String getRelativedate() {
-        Date date = DateFormatUtils.formatString(createdate);
-        return DateFormatUtils.format(date);
+        Date date = DateFormatUtil.formatString(createdate);
+        return DateFormatUtil.format(date);
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "ID='" + id + '\'' +
+                "title='" + title + '\'' +
+                ", hostUrl='" + hostUrl + '\'' +
+                ", description='" + description + '\'' +
+                ", version='" + version + '\'' +
+                ", userId=" + userId +
+                ", icon='" + icon + '\'' +
+                ", isupdate=" + isupdate +
+                ", pattern='" + pattern + '\'' +
+                ", relativedate='" + relativedate + '\'' +
+                '}';
     }
 }

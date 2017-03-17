@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import powerapi.common.utils.JsonUtils;
+import powerapi.common.utils.JsonUtil;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
 import powerapi.service.ModuleService;
-import powerapi.service.ProjectService;
 
 import java.util.List;
 
@@ -70,7 +69,7 @@ public class ModuleController extends BaseController {
     public String delete(
             @RequestParam(value = "id", required = true) Long id) {
         Integer status = moduleService.deleteById(id) ? 1 : 0;
-        return JsonUtils.getInstance().setStatus(status).result();
+        return JsonUtil.getInstance().setStatus(status).result();
     }
 
 }

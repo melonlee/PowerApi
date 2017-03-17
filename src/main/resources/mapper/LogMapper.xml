@@ -3,27 +3,14 @@
 <mapper namespace="powerapi.mapper.LogMapper">
     <resultMap id="BaseResultMap" type="powerapi.entity.Log">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="u_id" property="uId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="createdate" property="createdate" jdbcType="TIMESTAMP"/>
         <result column="action" property="action" jdbcType="VARCHAR"/>
         <result column="resource" property="resource" jdbcType="VARCHAR"/>
         <result column="resource_id" property="resourceId" jdbcType="INTEGER"/>
-        <result column="show_title" property="showTitle" jdbcType="VARCHAR"/>
-        <result column="show_action" property="showAction" jdbcType="VARCHAR"/>
-        <result column="show_resource" property="showResource"
-                jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-		id, u_id, createdate, action, resource, resource_id,
-		show_title,
-		show_action, show_resource
+		id, user_id, createdate, action, resource, resource_id
 	</sql>
-
-    <select id="logs" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from t_log
-        where u_id = #{uId,jdbcType=INTEGER}
-    </select>
 
 </mapper>

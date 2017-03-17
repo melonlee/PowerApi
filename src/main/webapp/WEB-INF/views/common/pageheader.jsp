@@ -11,7 +11,7 @@
 <div class="pageheader">
     <h2>
         <i class="fa fa-book"></i>${project.title }
-        <span>${project.relativedate }</span>
+        <%--<span>${project.relativedate }</span>--%>
 
         <span>
             <c:choose>

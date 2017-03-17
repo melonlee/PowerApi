@@ -21,7 +21,7 @@ import powerapi.entity.UnitTest;
 /**
  * Created by Melon on 17/3/6.
  */
-public class HttpUtils {
+public class HttpUtil {
 
     private static final CloseableHttpClient httpClient;
 
@@ -100,7 +100,7 @@ public class HttpUtils {
                                   String charset) {
 
         UnitTest requester = new UnitTest();
-        requester.setCreatedate(DateFormatUtils.generateNow());
+        requester.setCreatedate(DateFormatUtil.generateNow());
         requester.setMethod("POST");
         requester.setUrl(url);
 

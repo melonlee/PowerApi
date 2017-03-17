@@ -38,7 +38,7 @@ public class DashboardController {
             RequestMethod.GET})
     public String list(ModelMap modelMap, HttpSession session) {
         user = (User) session.getAttribute("curUser");
-//		ArrayList<Log> list = logService.logs(user.getId());
+//		ArrayList<LogAnno> list = logService.logs(user.getId());
 //		modelMap.addAttribute("list", list);
 
         // 获取各项数据

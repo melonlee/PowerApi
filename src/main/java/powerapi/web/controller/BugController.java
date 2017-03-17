@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import powerapi.common.utils.JsonUtils;
+import powerapi.common.utils.JsonUtil;
 import powerapi.entity.Bug;
 import powerapi.entity.BugComment;
 import powerapi.entity.Project;
 import powerapi.service.BugCommentService;
 import powerapi.service.BugService;
-import powerapi.service.ProjectService;
 
 
 @Controller
@@ -96,7 +95,7 @@ public class BugController extends BaseController {
     public String comment(ModelMap model, BugComment comment) {
         comment.setUserId(getCurrentUser().getId());
         Integer status = bugCommentService.insert(comment) ? 1 : 0;
-        return JsonUtils.getInstance().setStatus(status).result();
+        return JsonUtil.getInstance().setStatus(status).result();
     }
 
 }

@@ -7,14 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import powerapi.common.utils.HttpUtils;
-import powerapi.common.utils.JsonUtils;
+import powerapi.common.utils.HttpUtil;
+import powerapi.common.utils.JsonUtil;
 import powerapi.dto.RequestDto;
 import powerapi.dto.RequestParamDto;
 import powerapi.entity.UnitTest;
 import powerapi.service.UnitTestService;
 
-import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
@@ -54,11 +53,11 @@ public class UnitTestController extends BaseController {
             paramsMap.put(paramDto.getName(), paramDto.getValue());
             loop++;
         }
-        UnitTest unitTest = HttpUtils.doPost(requestDto.getUrl(), paramsMap);
+        UnitTest unitTest = HttpUtil.doPost(requestDto.getUrl(), paramsMap);
         unitTest.setUserId(getCurrentUser().getId());
         unitTest.setParams(requestDto.getParams());
         unitTestService.insert(unitTest);
-        return JsonUtils.getInstance().setBean(unitTest, null != unitTest.getId() ? 1 : 0)
+        return JsonUtil.getInstance().setBean(unitTest, null != unitTest.getId() ? 1 : 0)
                 .result();
     }
 }

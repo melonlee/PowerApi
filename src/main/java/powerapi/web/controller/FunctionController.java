@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import powerapi.common.utils.HttpUtils;
-import powerapi.common.utils.JsonUtils;
+import powerapi.common.utils.HttpUtil;
+import powerapi.common.utils.JsonUtil;
 import powerapi.dto.RequestParamDto;
 import powerapi.dto.RequestDto;
 import powerapi.entity.*;
 import powerapi.service.FunctionService;
 import powerapi.service.ModuleService;
-import powerapi.service.ProjectService;
 import powerapi.service.UnitTestService;
 
 
@@ -42,7 +41,7 @@ public class FunctionController extends BaseController {
     public String list(
             @RequestParam(value = "mId", required = true) Long mId) {
         List<Function> list = functionService.selectByModuleId(mId);
-        return JsonUtils.getInstance().setList(list).result();
+        return JsonUtil.getInstance().setList(list).result();
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -77,7 +76,7 @@ public class FunctionController extends BaseController {
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify(Function function) {
         Integer status = functionService.insertOrUpdate(function) ? 1 : 0;
-        return JsonUtils.getInstance().setStatus(status).result();
+        return JsonUtil.getInstance().setStatus(status).result();
     }
 
     @ResponseBody
@@ -85,7 +84,7 @@ public class FunctionController extends BaseController {
     public String remove(
             @RequestParam(value = "id", required = true) int id) {
         Integer status = functionService.deleteById(id) ? 1 : 0;
-        return JsonUtils.getInstance().setStatus(status).result();
+        return JsonUtil.getInstance().setStatus(status).result();
     }
 
     /**
@@ -103,7 +102,7 @@ public class FunctionController extends BaseController {
         function.setId(id);
         function.setStatus(status);
         Integer rs = functionService.updateById(function) ? 1 : 0;
-        return JsonUtils.getInstance().setStatus(rs).result();
+        return JsonUtil.getInstance().setStatus(rs).result();
     }
 
 
@@ -139,11 +138,11 @@ public class FunctionController extends BaseController {
             param.setValue(paramJson.getString("value"));
             paramsMap.put(param.getName(), param.getValue());
         }
-        UnitTest unitTest = HttpUtils.doPost(requestDto.getUrl(), paramsMap);
+        UnitTest unitTest = HttpUtil.doPost(requestDto.getUrl(), paramsMap);
         unitTest.setUserId(getCurrentUser().getId());
         unitTest.setParams(requestDto.getParams());
         unitTestService.insert(unitTest);
-        return JsonUtils.getInstance().setBean(unitTest, null != unitTest ? 1 : 0)
+        return JsonUtil.getInstance().setBean(unitTest, null != unitTest ? 1 : 0)
                 .result();
     }
 

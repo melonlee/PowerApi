@@ -8,7 +8,7 @@ package powerapi.common.utils;
  * @author Melon
  * 
  */
-public class CodeUtils {
+public class CodeUtil {
 
 	public static final Integer CODE_SUCCESS = 1000;
 

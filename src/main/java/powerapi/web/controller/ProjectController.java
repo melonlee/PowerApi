@@ -1,12 +1,15 @@
 package powerapi.web.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import powerapi.common.Constants;
+import powerapi.common.anno.LogAnno;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
 import powerapi.service.ModuleService;
@@ -49,6 +52,7 @@ public class ProjectController extends BaseController {
      * @param project
      * @return
      */
+    @LogAnno(resource = Constants.LOG_RESOURCE_PROJECT, action = Constants.LOG_ACTION_MODIFY)
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify(Project project) {
         project.setUserId(getCurrentUser().getId());
@@ -75,7 +79,7 @@ public class ProjectController extends BaseController {
      * @param id
      * @return
      */
-
+    @LogAnno(resource = Constants.LOG_RESOURCE_PROJECT, action = Constants.LOG_ACTION_DELETE)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(@RequestParam(value = "id", required = true) Long id) {
         projectService.deleteProject(id);
