@@ -22,35 +22,41 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title">添加参数以进行测试</h4>
+                                <h4 class="panel-title">接口可用性测试</h4>
                             </div>
                             <div class="panel-body">
 
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <select class="select2" id="method">
-                                            <option
-                                            ${function.method=='GET' ?'selected="selected"' :''  }
-                                                    value="GET">GET
-                                            </option>
-                                            <option
-                                            ${function.method=='POST' ?'selected="selected"' :''  }
-                                                    value="POST">POST
-                                            </option>
-                                            <option
-                                            ${function.method=='PUT' ?'selected="selected"' :''  }
-                                                    value="PUT">PUT
-                                            </option>
-                                            <option
-                                            ${function.method=='DELETE' ?'selected="selected"' :''  }
-                                                    value="DELETE">DELETE
-                                            </option>
-                                        </select>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">请求方式:</label>
+                                            <div class="col-sm-8">
+                                                <select class="select2" id="method">
+                                                    <option
+                                                    ${function.method=='GET' ?'selected="selected"' :''  }
+                                                            value="GET">GET
+                                                    </option>
+                                                    <option
+                                                    ${function.method=='POST' ?'selected="selected"' :''  }
+                                                            value="POST">POST
+                                                    </option>
+                                                    <option
+                                                    ${function.method=='PUT' ?'selected="selected"' :''  }
+                                                            value="PUT">PUT
+                                                    </option>
+                                                    <option
+                                                    ${function.method=='DELETE' ?'selected="selected"' :''  }
+                                                            value="DELETE">DELETE
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-sm-9">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">接口地址</label>
+                                            <label class="col-sm-2 control-label">接口地址:</label>
                                             <div class="col-sm-10">
                                                 <input type="text" id="url" class="form-control"
                                                        value="${function.url}"
@@ -101,7 +107,10 @@
 
                             </div>
                             <div class="panel-footer">
-                                <button id="submit" class="btn btn-primary">发送</button>
+                                <button id="submit" class="btn btn-primary">提交测试</button>
+                                <button type="button" onclick="javascript:window.history.back()"
+                                        class="btn btn-default">返回
+                                </button>
                                 <button id="loading" class="btn btn-primary" data-toggle="modal"
                                         style="display: none;" data-target=".bs-example-modal-sm">loading
                                 </button>
@@ -109,108 +118,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 mb20">
+                <div class="col-md-12 mb20" id="returns">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#returns" data-toggle="tab"><strong>返回结果</strong></a></li>
-                        <li><a href="#historys" data-toggle="tab"><strong>历史记录</strong></a></li>
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane active" id="returns">
+                        <div class="tab-pane active">
                             <div class="col-md-12">
                                 <div class="panel-group panel-group-dark" id="accordion2">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion2"
-                                                   class="collapsed" href="#collapseOne2"> Response Header
-                                                </a>
-                                            </h4>
-                                        </div>
-
-                                        <!--collapse in -->
-                                        <div id="collapseOne2"
-                                             class="panel-collapse collapse collapse in">
+                                        <div id="collapseOne2">
                                             <div class="panel-body">
 
                                                 <div id="responsecode"></div>
 
                                                 <div id="responseheader"></div>
+
+                                                <div id="responsebody"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" class="collapsed"
-                                                   data-parent="#accordion2" href="#collapseTwo2">
-                                                    Response Body </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTwo2"
-                                             class="panel-collapse collapse collapse in">
-                                            <div class="panel-body" id="responsebody"></div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="historys">
-                            <div class="row">
-
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-primary">
-                                            <thead>
-                                            <tr>
-                                                <th>接口地址</th>
-                                                <th>请求方式</th>
-                                                <th>返回码</th>
-                                                <th>请求时间</th>
-                                                <th>请求耗时</th>
-                                                <th>返回内容大小</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="history_row">
-
-                                            <c:forEach var="requester" items="${list}">
-                                                <tr class="history_row_tr">
-                                                    <td>${requester.url}</td>
-                                                    <td>${requester.method}</td>
-                                                    <td>${requester.responseCode}</td>
-                                                    <td>${requester.createdate}</td>
-                                                    <td>${requester.requestTime}毫秒</td>
-                                                    <td>${requester.responseSize}B</td>
-                                                    <td class="table-action"><a href="#"
-                                                                                data-id="${requester.id}"
-                                                                                class="history_modify edit-row"><i
-                                                            class="fa fa-pencil"></i></a> &nbsp;<a
-                                                            class="history_delete" data-id="${requester.id}" href="#"><i
-                                                            class="fa fa-trash-o"></i> </a></td>
-                                                </tr>
-                                            </c:forEach>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- table-responsive -->
-
-                                    <ul class="pagination pagination-split nomargin">
-                                        <li class="disabled"><a href="#"><i
-                                                class="fa fa-angle-left"></i></a></li>
-
-                                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                    </ul>
-
-
-                                </div>
-
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -240,6 +172,8 @@
     jQuery(".select2").select2({
         width: '100%'
     });
+
+    $("#returns").hide();
 
     //解析div_params中的数据
 
@@ -299,14 +233,6 @@
                                         + '<td><select class="select2 m_param_type">'
                                         + '<option value="String">String</option>'
                                         + '<option value="Int">Int</option>'
-                                        + '<option value="Byte">Byte</option>'
-                                        + '<option value="Short">Short</option>'
-                                        + '<option value="Boolean">Boolean</option>'
-                                        + '<option value="Flat">Flat</option>'
-                                        + '<option value="Double">Double</option>'
-                                        + '<option value="Long">Long</option>'
-                                        + '<option value="JSON">JSON</option>'
-                                        + '<option value="File">File</option>'
                                         + '</select></td>'
                                         + '<td class="m_param_value" contenteditable style="outline: none; overflow:hidden;"></td>'
                                         + '<td class="table-action">'
@@ -376,32 +302,7 @@
                                                             + data.result.responseHeader);
                                             //对返回结果进行格式化
                                             format(data.result.responseBody);
-
-                                            $("#history_row")
-                                                    .append(
-                                                            ' <tr class="history_row_tr">'
-                                                            + '<td>'
-                                                            + data.result.url
-                                                            + '</td>'
-                                                            + '<td>'
-                                                            + data.result.method
-                                                            + '</td>'
-                                                            + '<td>'
-                                                            + data.result.responseCode
-                                                            + '</td>'
-                                                            + '<td>'
-                                                            + data.result.createdate
-                                                            + '</td>'
-                                                            + '<td>'
-                                                            + data.result.requestTime
-                                                            + '毫秒</td>'
-                                                            + '<td>'
-                                                            + data.result.responseSize
-                                                            + '</td>'
-                                                            + '<td class="table-action"><a href="#" data-id="' + data.result.id + '" class="history_modify edit-row"><i'
-                                                            + '	class="fa fa-pencil"></i></a> &nbsp;<a href="#" data-id="' + data.result.id + '" class="history_delete"><i class="fa fa-trash-o"></i>'
-                                                            + '</a></td>'
-                                                            + '</tr> ');
+                                            $("#returns").show();
                                         } else {
                                             alert('数据提交失败，请重试!');
                                         }
@@ -418,152 +319,18 @@
         $(this).parents(".m_param_row").remove();
     });
 
-    //删除历史记录
-    $(document).on("click", ".history_delete", function () {
-        var $this = $(this);
-        $.ajax({
-            type: 'POST',
-            url: '../quick/remove.do',
-            data: {
-                id: $this.data("id")
-            },
-            cache: false,
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-                if (data.code == 1000) {
-                    console.log('ok');
-                    var $parent = $this.parents(".history_row_tr");
-                    $parent.find("td").stop().animate({
-                        height: "0px",
-                        "padding-top": "0px",
-                        "padding-bottom": "0px"
-                    }, 200, function () {
-                        $parent.remove();
-                    });
-
-                } else {
-                    alert('数据提交失败，请重试!');
-                }
-            },
-            error: function () {
-                alert("获取数据异常，请重试!");
-            }
-        });
-    });
-
-    //点击编辑按钮
-    $(document)
-            .on(
-                    "click",
-                    ".history_modify",
-                    function () {
-
-                        $("#loading").click();
-                        $("#params").empty();
-                        var $this = $(this);
-                        console.log($this.data("id"));
-
-                        $
-                                .ajax({
-                                    type: 'POST',
-                                    url: '../quick/info.do',
-                                    data: {
-                                        id: $this.data("id")
-                                    },
-                                    cache: false,
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        /* 	data = JSON.parse(data); */
-                                        console.log(data);
-                                        if (data.code == 1000) {
-                                            var curObj = data.result;
-                                            $("#url").val(curObj.url);
-                                            //解析参数数组然后加入到table中
-                                            var paramsAry = JSON
-                                                    .parse(curObj.params);
-                                            var typeAry = ["Byte", "Short",
-                                                "Int", "Boolean", "Flot",
-                                                "Double", "Long", "JSON",
-                                                "String", "File"];
-                                            var str = "";
-                                            for (var loop = 0; loop < paramsAry.params.length; loop++) {
-                                                var functionDetailObj = paramsAry.params[loop];
-
-                                                str += '<tr class="m_param_row">'
-                                                        + '<td class="m_param_name" contenteditable style="outline: none;">'
-                                                        + functionDetailObj.name
-                                                        + '</td>'
-                                                        + '<td><select class="select2 m_param_type">';
-                                                for (var j = 0, len = typeAry.length; j < len; j++) {
-                                                    var typeNow = typeAry[j];
-                                                    if (functionDetailObj.type == typeNow) {
-                                                        str += '<option value="' + typeNow + '" selected>'
-                                                                + typeNow
-                                                                + '</option>';
-                                                    } else {
-                                                        str += '<option value="' + typeNow + '">'
-                                                                + typeNow
-                                                                + '</option>';
-                                                    }
-                                                }
-                                                str += '</select></td>'
-                                                        + '<td class="m_param_value" contenteditable style="outline: none; overflow:hidden;">'
-                                                        + functionDetailObj.value
-                                                        + '</td>'
-                                                        + '<td class="table-action">'
-                                                        + '<a href="#" class="m_param_delete delete-row"><i class="fa fa-trash-o"></i></a></td> </tr>';
-                                            }
-
-                                            $("#params").append(str);
-
-                                            $("#select2-chosen-1").text(
-                                                    curObj.method);
-
-                                            $("#responsecode")
-                                                    .html(
-                                                            "返回码:"
-                                                            + curObj.responseCode
-                                                            + "<br/>请求时间:"
-                                                            + curObj.createdate
-                                                            + "<br/>请求耗时:"
-                                                            + curObj.requestTime
-                                                            + "毫秒"
-                                                            + "<br/>返回内容大小:"
-                                                            + curObj.responseSize
-                                                            + "B");
-                                            $("#responseheader")
-                                                    .html(
-                                                            "头信息:"
-                                                            + curObj.responseHeader);
-                                            $("#responsebody").html(
-                                                    curObj.responseBody);
-
-                                        } else {
-                                            alert('数据提交失败，请重试!');
-                                        }
-                                    },
-                                    error: function () {
-                                        alert("获取数据异常，请重试!");
-                                    }
-                                });
-
-                        $("#loading").click();
-                    });
-
     /* 格式化JSON源码(对象转换为JSON文本) */
+
     function format(txt, compress/*是否为压缩模式*/) {
         var indentChar = '    ';
         if (/^\s*$/.test(txt)) {
-            $("#responsebody").html("<pre>数据为空,无法格式化! </pre>");
-            return;
+            return "无返回示例";
         }
         try {
             var data = eval('(' + txt + ')');
         }
         catch (e) {
-            $("#responsebody").html("<pre>数据源语法错误,格式化失败! 错误信息: " + e.description + "</pre>");
-            return;
+            return "无返回示例";
         }
         ;
         var draw = [], last = false, This = this, line = compress ? '' : '\n', nodeCount = 0, maxDepth = 0;
@@ -601,8 +368,10 @@
         var isLast = true, indent = 0;
 
         notify('', data, isLast, indent, false);
-        $("#responsebody").html("<pre>" + draw.join('') + "</pre>");
+        $("#responsebody").html("<pre><code class='language-json'>" + draw.join('') + "</code></pre>");
+        Prism.highlightAll();
     }
+
 </script>
 </body>
 </html>

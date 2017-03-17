@@ -120,6 +120,7 @@ public class FunctionController extends BaseController<Function> {
         Module module = moduleService.selectById(function.getmId());
         function.setUrl(project.getHostUrl() + module.getUrl()
                 + function.getUrl() + project.getPattern());
+        model.addAttribute("project", project);
         model.addAttribute("function", function);
         return "interface/test";
     }
