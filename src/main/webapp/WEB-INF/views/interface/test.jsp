@@ -108,7 +108,7 @@
                             </div>
                             <div class="panel-footer">
                                 <button id="submit" class="btn btn-primary">提交测试</button>
-                                <button type="button" onclick="javascript:window.history.back()"
+                                <button type="button" onclick="javascript:window.location.href='../module/all?proId='+${project.id}"
                                         class="btn btn-default">返回
                                 </button>
                                 <button id="loading" class="btn btn-primary" data-toggle="modal"
