@@ -80,8 +80,7 @@ public class BugController extends BaseController {
         return "/bug/view";
     }
 
-    @RequestMapping(value = "/delete", method = {RequestMethod.POST,
-            RequestMethod.GET})
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(
             ModelMap model,
             @RequestParam(value = "id", required = false, defaultValue = "0") Long id) {

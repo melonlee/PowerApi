@@ -11,6 +11,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import powerapi.common.Constants;
+import powerapi.common.anno.LogDelete;
 import powerapi.common.anno.LogModify;
 import powerapi.entity.BaseEntity;
 import powerapi.entity.Log;
@@ -24,18 +25,14 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Component
-public class LogModifyAdvice {
+public class LogDeleteAdvice {
 
-    public static final Logger logger = Logger.getLogger(LogModifyAdvice.class);
+    public static final Logger logger = Logger.getLogger(LogDeleteAdvice.class);
 
     @Autowired
     private LogService logService;
 
-    public BaseEntity aspectEntity;
-
-    public static String ACTION;
-
-    @Pointcut("@annotation(powerapi.common.anno.LogModify)")
+    @Pointcut("@annotation(powerapi.common.anno.LogDelete)")
     public void logAnnoAspect() {
 
     }
@@ -48,29 +45,13 @@ public class LogModifyAdvice {
     public void afterReturn(JoinPoint joinPoint) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        LogModify log = method.getAnnotation(LogModify.class);
+        LogDelete log = method.getAnnotation(LogDelete.class);
         if (null != log) {
-
-            BaseEntity entity = (BaseEntity) joinPoint.getArgs()[0];
-            logService.insert(new Log(ACTION,
-                    entity.getLogResource(),
-                    entity.getId(),
+            Object curobj = joinPoint.getArgs()[0];
+            logService.insert(new Log(Constants.LOG_ACTION_DELETE,
+                    ((BaseEntity) curobj).getLogResource(),
+                    ((BaseEntity) curobj).getId(),
                     ((User) SecurityUtils.getSubject().getSession().getAttribute("curUser")).getId()));
-        }
-    }
-
-    @Before("logAnnoAspect()")
-    public void before(JoinPoint joinPoint) {
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        Method method = methodSignature.getMethod();
-        LogModify log = method.getAnnotation(LogModify.class);
-        if (null != log) {
-            aspectEntity = (BaseEntity) joinPoint.getArgs()[0];
-            if (null == aspectEntity.getId()) {
-                ACTION = Constants.LOG_ACTION_CREATE;
-            } else {
-                ACTION = Constants.LOG_ACTION_MODIFY;
-            }
         }
     }
 }

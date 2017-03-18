@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import powerapi.common.Constants;
 import powerapi.common.anno.LogAnno;
+import powerapi.common.anno.LogDelete;
 import powerapi.common.anno.LogModify;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
@@ -78,13 +79,13 @@ public class ProjectController extends BaseController {
     /**
      * 删除
      *
-     * @param id
      * @return
      */
-    @LogAnno(resource = Constants.LOG_RESOURCE_PROJECT, action = Constants.LOG_ACTION_DELETE)
+    @LogDelete(resource = Constants.LOG_RESOURCE_PROJECT)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "id", required = true) Long id) {
-        projectService.deleteProject(id);
+    public String delete(Project project) {
+        project.setTitle(projectService.findProjectById(project.getId()).getTitle());
+        projectService.deleteProject(project.getId());
         return "redirect:/project/all";
     }
 

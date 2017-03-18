@@ -133,16 +133,14 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default panel-alt">
                         <div class="panel-heading">
-                            <h4 class="panel-title">动态</h4>
+                            <h3 class="panel-title">动态</h3>
                         </div>
                         <div class="panel-body">
                             <ul>
-                                <c:forEach var="log" items="${list}">
-                                    <li><p class="text-danger">
-                                        您在${log.createdate }&nbsp;${log.showAction }了名为<a
-                                            href="#">${log.showTitle}</a>的${log.showResource}
-                                    </p></li>
-                                </c:forEach>
+                                <li><p class="text-danger">
+                                    您在1212&nbsp;121212了名为<a
+                                        href="#">12312</a>的23434
+                                </p></li>
                             </ul>
                         </div>
                     </div>
