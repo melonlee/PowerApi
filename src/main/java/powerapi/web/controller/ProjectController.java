@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import powerapi.common.Constants;
 import powerapi.common.anno.LogAnno;
+import powerapi.common.anno.LogModify;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
 import powerapi.service.ModuleService;
@@ -52,7 +53,7 @@ public class ProjectController extends BaseController {
      * @param project
      * @return
      */
-    @LogAnno(resource = Constants.LOG_RESOURCE_PROJECT, action = Constants.LOG_ACTION_MODIFY)
+    @LogModify(resource = Constants.LOG_RESOURCE_PROJECT)
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify(Project project) {
         project.setUserId(getCurrentUser().getId());
@@ -67,6 +68,7 @@ public class ProjectController extends BaseController {
      * @param id
      * @return
      */
+
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String view(ModelMap model, @RequestParam(value = "id", required = true) Long id) {
         model.addAttribute("project", getProject(id));

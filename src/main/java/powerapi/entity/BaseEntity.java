@@ -1,5 +1,6 @@
 package powerapi.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
@@ -12,6 +13,9 @@ public class BaseEntity {
     @TableId(type = IdType.AUTO)
     protected Long id;
     protected String createdate;
+
+    @TableField(exist = false)
+    protected String logResource;
 
     public Long getId() {
         return id;
@@ -27,5 +31,13 @@ public class BaseEntity {
 
     public void setCreatedate(String createdate) {
         this.createdate = createdate;
+    }
+
+    public String getLogResource() {
+        return logResource;
+    }
+
+    public void setLogResource(String logResource) {
+        this.logResource = logResource;
     }
 }

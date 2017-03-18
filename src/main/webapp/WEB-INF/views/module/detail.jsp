@@ -67,10 +67,10 @@
                                                     </div>
                                                     <c:if test="${not empty module}">
                                                         <div class="pull-right">
-                                                            <button class="btn btn-danger btn-block" id="remove_module"
+                                                            <a class="btn btn-danger btn-block" id="remove_module"
                                                                     data-id="${module.id}">
                                                                 删除该模块
-                                                            </button>
+                                                            </a>
                                                         </div>
                                                     </c:if>
                                                 </div>

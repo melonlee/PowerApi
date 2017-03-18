@@ -39,6 +39,7 @@ public class Project extends BaseEntity {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+        setLogResource(this.title);
     }
 
     public String getHostUrl() {

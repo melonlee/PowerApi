@@ -65,11 +65,10 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
 
         boolean status = this.insertOrUpdate(project);
         if (status) {
-            deleteProject(project.getId());
+            redisCache.clearCache();
             redisCache.putCache(redisCache.CAHCENAME + "|project|" + project.getId(), project);
             List<Project> projects = getProjectList(project.getUserId(), 0);
             projects.add(project);
-            redisCache.deleteCache(redisCache.CAHCENAME + "|projects|" + 0);
             redisCache.putListCacheWithExpireTime(redisCache.CAHCENAME + "|projects|" + 0, projects, RedisCache.CAHCETIME);
         }
     }

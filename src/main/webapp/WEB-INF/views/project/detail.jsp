@@ -81,10 +81,10 @@
                                     </div>
                                     <c:if test="${not empty project}">
                                         <div class="pull-right">
-                                            <button class="btn btn-danger btn-block" id="module_remove"
+                                            <a class="btn btn-danger btn-block" id="remove_pro"
                                                     data-id="${project.id}">
                                                 删除该项目
-                                            </button>
+                                            </a>
                                         </div>
                                     </c:if>
                                 </div>
@@ -108,7 +108,6 @@
         var $this = $(this);
         if (window.confirm('确定删除该项目吗? 删除后该项目下的所有内容将被删除!')) {
             window.location.href = 'delete?id=' + $this.data("id");
-            return true;
         } else {
             return false;
         }
