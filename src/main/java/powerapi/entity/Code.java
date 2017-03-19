@@ -31,6 +31,7 @@ public class Code extends BaseEntity {
 
     public void setCode(String code) {
         this.code = code;
+        setLogResource(this.code);
     }
 
     public String getDescription() {

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import powerapi.common.Constants;
+import powerapi.common.anno.LogDelete;
+import powerapi.common.anno.LogModify;
 import powerapi.common.utils.JsonUtil;
 import powerapi.entity.Bug;
 import powerapi.entity.BugComment;
@@ -47,6 +50,7 @@ public class BugController extends BaseController {
         return "bug/detail";
     }
 
+    @LogModify(resource = Constants.LOG_RESOURCE_BUG)
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify(Bug bug) {
 
@@ -80,6 +84,7 @@ public class BugController extends BaseController {
         return "/bug/view";
     }
 
+    @LogDelete(resource = Constants.LOG_RESOURCE_BUG)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(
             ModelMap model,

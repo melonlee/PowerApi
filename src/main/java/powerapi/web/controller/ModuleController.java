@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import powerapi.common.Constants;
+import powerapi.common.anno.LogDelete;
+import powerapi.common.anno.LogModify;
 import powerapi.common.utils.JsonUtil;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
@@ -57,6 +60,7 @@ public class ModuleController extends BaseController {
         return "/module/detail";
     }
 
+    @LogModify(resource = Constants.LOG_RESOURCE_MODULE)
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify(Module module) {
         module.setUserId(getCurrentUser().getId());
@@ -65,6 +69,7 @@ public class ModuleController extends BaseController {
     }
 
     @ResponseBody
+    @LogDelete(resource = Constants.LOG_RESOURCE_MODULE)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(
             @RequestParam(value = "id", required = true) Long id) {

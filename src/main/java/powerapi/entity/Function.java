@@ -22,7 +22,7 @@ public class Function extends BaseEntity {
     private Integer isLogin;
 
     private String params;
-    
+
     @TableField(value = "response_body")
     private String responseBody;
 
@@ -50,6 +50,7 @@ public class Function extends BaseEntity {
 
     public void setTitle(String title) {
         this.title = title;
+        setLogResource(this.title);
     }
 
     public String getUrl() {

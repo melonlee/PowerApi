@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import powerapi.common.Constants;
+import powerapi.common.anno.LogDelete;
+import powerapi.common.anno.LogModify;
 import powerapi.common.utils.HttpUtil;
 import powerapi.common.utils.JsonUtil;
 import powerapi.dto.RequestParamDto;
@@ -72,6 +75,7 @@ public class FunctionController extends BaseController {
         return "interface/detail";
     }
 
+    @LogModify(resource = Constants.LOG_RESOURCE_INTERFACE)
     @ResponseBody
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify(Function function) {
@@ -80,6 +84,7 @@ public class FunctionController extends BaseController {
     }
 
     @ResponseBody
+    @LogDelete(resource = Constants.LOG_RESOURCE_INTERFACE)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String remove(
             @RequestParam(value = "id", required = true) int id) {

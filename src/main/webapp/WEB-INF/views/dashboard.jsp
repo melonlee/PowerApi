@@ -32,32 +32,13 @@
                 </c:if>
 
                 <div class="col-sm-6 col-md-3">
-                    <div class="panel panel-success panel-stat">
-                        <div class="panel-heading">
-
-                            <div class="stat">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <img src=${host}/images/is-user.png" alt=""/>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <h4>测试记录</h4>
-
-                                        <h1>${testCount }</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
                     <div class="panel panel-danger panel-stat">
                         <div class="panel-heading">
 
                             <div class="stat">
                                 <div class="row">
                                     <div class="col-xs-4">
-                                        <img src="${host}/images/is-document.png" alt=""/>
+                                        <i class="fa fa-briefcase"></i>
                                     </div>
                                     <div class="col-xs-8">
                                         <h4>项目</h4>
@@ -70,13 +51,33 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
+                    <div class="panel panel-success panel-stat">
+                        <div class="panel-heading">
+
+                            <div class="stat">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <i class="fa fa-rocket"></i>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <h4>测试记录</h4>
+
+                                        <h1>${testCount }</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
                     <div class="panel panel-primary panel-stat">
                         <div class="panel-heading">
 
                             <div class="stat">
                                 <div class="row">
                                     <div class="col-xs-4">
-                                        <img src="${host}/images/is-document.png" alt=""/>
+                                        <i class="fa  fa-dashboard"></i>
                                     </div>
                                     <div class="col-xs-8">
                                         <h4>接口</h4>
@@ -95,7 +96,7 @@
                             <div class="stat">
                                 <div class="row">
                                     <div class="col-xs-4">
-                                        <img src="${host}/images/is-money.png" alt=""/>
+                                        <i class="fa fa-bug"></i>
                                     </div>
                                     <div class="col-xs-8">
                                         <h4>BUG</h4>
@@ -131,6 +132,7 @@
                                     </div>
                                 </c:forEach>
                             </div>
+                            <button class="btn btn-white btn-block">查看更多</button>
                         </div>
                     </div>
                 </div>

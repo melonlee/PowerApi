@@ -30,6 +30,7 @@ public class Bug extends BaseEntity {
 
     public void setTitle(String title) {
         this.title = title;
+        setLogResource(this.title);
     }
 
     public String getDescription() {

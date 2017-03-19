@@ -10,6 +10,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import powerapi.common.Constants;
+import powerapi.common.anno.LogDelete;
+import powerapi.common.anno.LogModify;
 import powerapi.entity.Code;
 import powerapi.entity.Project;
 import powerapi.service.CodeService;
@@ -44,6 +47,7 @@ public class CodeController extends BaseController {
         return "code/detail";
     }
 
+    @LogModify(resource = Constants.LOG_RESOURCE_CODE)
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String submit(Code code) {
         code.setUserId(getCurrentUser().getId());
@@ -64,6 +68,7 @@ public class CodeController extends BaseController {
         return "code/detail";
     }
 
+    @LogDelete(resource = Constants.LOG_RESOURCE_CODE)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String remove(@RequestParam(value = "id", required = true) Long id) {
         Code code = codeService.selectById(id);

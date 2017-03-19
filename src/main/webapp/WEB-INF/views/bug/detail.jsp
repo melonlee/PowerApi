@@ -34,7 +34,7 @@
                                 <div class="panel-body">
 
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">代号</label>
+                                        <label class="col-sm-2 control-label">标题</label>
                                         <div class="col-sm-10">
                                             <input type="text" name="title" class="form-control"
                                                    value="${bug.title}" placeholder="200"/>
@@ -44,40 +44,16 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Bug描述</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="description" class="form-control"
-                                                   value="${bug.description}" placeholder="主要描述在什么状态下出现该Bug"/>
+                                             <textarea rows="5" class="form-control"
+                                                       placeholder="主要描述在什么状态下出现该Bug"
+                                                       name="description">${bug.description}</textarea>
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">标记变更</label>
-                                        <div class="col-sm-10">
-                                            <div class="ckbox ckbox-danger">
-                                                <input type="checkbox" id="checkbox1" name="isUpdate"
-                                                ${bug.isUpdate==1 ? "checked='checked'" : '' } value=1>
-                                                <label for="checkbox1" class="m_checkbox_top"></label>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">标记解决</label>
-                                        <div class="col-sm-10">
-                                            <div class="ckbox ckbox-success">
-                                                <input type="checkbox" id="checkbox2" name="status"
-                                                ${bug.status==1 ? "checked='checked'" : '' }> <label for="checkbox2"
-                                                                                                     class="m_checkbox_top"></label>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary" type="submit">提交</button>
                                     <a class="btn btn-default" type="button"
-                                            onclick="javascript:window.history.back()">取消
+                                       onclick="javascript:window.history.back()">取消
                                     </a>
                                 </div>
                             </div>
@@ -92,14 +68,4 @@
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
 </body>
-<script type="text/javascript">
-    $('#checkbox2').click(function () {
-        if ($(this).attr('checked')) {
-            $('#checkbox2').val(1);
-            $(this).atttr('checked', false);
-        } else {
-            $('#checkbox2').val(0);
-        }
-    });
-</script>
 </html>

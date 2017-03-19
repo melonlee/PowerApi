@@ -83,6 +83,12 @@
         <property name="filterChainDefinitions">
             <value>
                 /project/**= authc
+                /module/**= authc
+                /function/**= authc
+                /bug/**= authc
+                /code/**= authc
+                /dashboard/**= authc
+                /unit/**= authc
                 /signout= logout
                 /** = anon
             </value>
