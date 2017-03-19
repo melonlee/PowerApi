@@ -52,7 +52,7 @@ public class AuthController {
             Subject subject = SecurityUtils.getSubject();
             Session session = subject.getSession();
             session.setAttribute("curUser", userService.findByUsername((String) subject.getPrincipal()));
-            return "redirect:/project/all";
+            return "redirect:/dashboard/console";
         } catch (UnknownAccountException uae) {
             error = "用户名错误!";
         } catch (IncorrectCredentialsException ice) {

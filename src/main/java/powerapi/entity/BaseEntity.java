@@ -3,6 +3,9 @@ package powerapi.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
+import powerapi.common.utils.DateFormatUtil;
+
+import java.util.Date;
 
 
 /**
@@ -39,5 +42,9 @@ public class BaseEntity {
 
     public void setLogResource(String logResource) {
         this.logResource = logResource;
+    }
+
+    public String getRelativedate() {
+        return DateFormatUtil.getRelativeDate(createdate);
     }
 }

@@ -9,14 +9,6 @@ import com.baomidou.mybatisplus.annotations.TableName;
 @TableName("t_log")
 public class Log extends BaseEntity {
 
-
-    public Log(String action, String resource, Long resourceId, Long userId) {
-        this.action = action;
-        this.resource = resource;
-        this.resourceId = resourceId;
-        this.userId = userId;
-    }
-
     private String action;
     private String resource;
 

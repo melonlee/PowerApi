@@ -29,10 +29,11 @@ public class DateFormatUtil {
     /**
      * 计算时间间隔
      *
-     * @param date
+     * @param dateStr
      * @return
      */
-    public static String format(Date date) {
+    public static String getRelativeDate(String dateStr) {
+        Date date = formatString(dateStr);
         long delta = new Date().getTime() - date.getTime();
         if (delta < 1L * ONE_MINUTE) {
             long seconds = toSeconds(delta);

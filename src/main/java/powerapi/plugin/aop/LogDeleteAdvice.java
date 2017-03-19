@@ -45,13 +45,15 @@ public class LogDeleteAdvice {
     public void afterReturn(JoinPoint joinPoint) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        LogDelete log = method.getAnnotation(LogDelete.class);
-        if (null != log) {
-            Object curobj = joinPoint.getArgs()[0];
-            logService.insert(new Log(Constants.LOG_ACTION_DELETE,
-                    ((BaseEntity) curobj).getLogResource(),
-                    ((BaseEntity) curobj).getId(),
-                    ((User) SecurityUtils.getSubject().getSession().getAttribute("curUser")).getId()));
+        LogDelete logDelete = method.getAnnotation(LogDelete.class);
+        if (null != logDelete) {
+            BaseEntity entity = (BaseEntity) joinPoint.getArgs()[0];
+            Log log = new Log();
+            log.setUserId(((User) SecurityUtils.getSubject().getSession().getAttribute("curUser")).getId());
+            log.setAction(Constants.LOG_ACTION_DELETE + logDelete.resource());
+            log.setResource(entity.getLogResource());
+            log.setResourceId(entity.getId());
+            logService.insert(log);
         }
     }
 }

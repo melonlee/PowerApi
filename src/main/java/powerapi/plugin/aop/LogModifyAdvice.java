@@ -48,14 +48,16 @@ public class LogModifyAdvice {
     public void afterReturn(JoinPoint joinPoint) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        LogModify log = method.getAnnotation(LogModify.class);
-        if (null != log) {
+        LogModify logModifyAnno = method.getAnnotation(LogModify.class);
+        if (null != logModifyAnno) {
 
             BaseEntity entity = (BaseEntity) joinPoint.getArgs()[0];
-            logService.insert(new Log(ACTION,
-                    entity.getLogResource(),
-                    entity.getId(),
-                    ((User) SecurityUtils.getSubject().getSession().getAttribute("curUser")).getId()));
+            Log log = new Log();
+            log.setUserId(((User) SecurityUtils.getSubject().getSession().getAttribute("curUser")).getId());
+            log.setAction(ACTION + logModifyAnno.resource());
+            log.setResource(entity.getLogResource());
+            log.setResourceId(entity.getId());
+            logService.insert(log);
         }
     }
 

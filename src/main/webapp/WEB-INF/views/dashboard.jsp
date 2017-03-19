@@ -1,6 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="host" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
         </jsp:include>
         <div class="pageheader">
             <h2>
-                <i class="fa fa-home"></i>总览<span>专注API接口服务管理，让您的API接口更稳定，管理更快捷</span>
+                <i class="fa fa-home"></i>控制台<span>专注API接口服务管理，让您的API接口更稳定，管理更快捷</span>
             </h2>
         </div>
         <div class="contentpanel">
@@ -45,17 +46,10 @@
                                         <h1>${testCount }</h1>
                                     </div>
                                 </div>
-                                <!-- row -->
                             </div>
-                            <!-- stat -->
-
                         </div>
-                        <!-- panel-heading -->
                     </div>
-                    <!-- panel -->
                 </div>
-                <!-- col-sm-6 -->
-
                 <div class="col-sm-6 col-md-3">
                     <div class="panel panel-danger panel-stat">
                         <div class="panel-heading">
@@ -71,19 +65,10 @@
                                         <h1>${proCount }</h1>
                                     </div>
                                 </div>
-                                <!-- row -->
-
-
                             </div>
-                            <!-- stat -->
-
                         </div>
-                        <!-- panel-heading -->
                     </div>
-                    <!-- panel -->
                 </div>
-                <!-- col-sm-6 -->
-
                 <div class="col-sm-6 col-md-3">
                     <div class="panel panel-primary panel-stat">
                         <div class="panel-heading">
@@ -100,15 +85,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- stat -->
-
                         </div>
-                        <!-- panel-heading -->
                     </div>
-                    <!-- panel -->
                 </div>
-                <!-- col-sm-6 -->
-
                 <div class="col-sm-6 col-md-3">
                     <div class="panel panel-dark panel-stat">
                         <div class="panel-heading">
@@ -136,12 +115,22 @@
                             <h3 class="panel-title">动态</h3>
                         </div>
                         <div class="panel-body">
-                            <ul>
-                                <li><p class="text-danger">
-                                    您在1212&nbsp;121212了名为<a
-                                        href="#">12312</a>的23434
-                                </p></li>
-                            </ul>
+                            <div class="activity-list">
+                                <c:forEach var="log" items="${logs}">
+                                    <div class="media act-media">
+                                        <a class="pull-left" href="#">
+                                            <img class="media-object act-thumb" src="${host}/static/images/logo.jpg"
+                                                 alt=""/>
+                                        </a>
+                                        <div class="media-body act-media-body">
+                                            <strong>Melon</strong> ${log.action} <strong><a
+                                                href="#">${log.resource}</a></strong>.
+                                            <br/>
+                                            <small class="text-muted">${log.relativedate}</small>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -98,10 +98,6 @@ public class Project extends BaseEntity {
         this.pattern = pattern;
     }
 
-    public String getRelativedate() {
-        Date date = DateFormatUtil.formatString(createdate);
-        return DateFormatUtil.format(date);
-    }
 
     @Override
     public String toString() {

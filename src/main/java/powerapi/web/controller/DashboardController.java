@@ -3,62 +3,45 @@ package powerapi.web.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import powerapi.entity.Log;
 import powerapi.entity.User;
 import powerapi.service.*;
 
+import java.util.List;
+
 
 @Controller
-@RequestMapping("dashboard")
-public class DashboardController {
+@RequestMapping("/dashboard")
+public class DashboardController extends BaseController {
 
-    @Resource
+    @Autowired
     private LogService logService;
 
-    @Resource
-    private UserService userService;
-
-
-    @Resource
-    private ProjectService projectService;
-
-    @Resource
-    private FunctionService functionService;
-
-    @Resource
-    private BugService bugService;
-
-    private User user;
-
-    @RequestMapping(value = "console", method = {RequestMethod.POST,
-            RequestMethod.GET})
-    public String list(ModelMap modelMap, HttpSession session) {
-        user = (User) session.getAttribute("curUser");
+    @RequestMapping(value = "/console", method = RequestMethod.GET)
+    public String list(ModelMap modelMap) {
 //		ArrayList<LogAnno> list = logService.logs(user.getId());
 //		modelMap.addAttribute("list", list);
-
         // 获取各项数据
-
         //	Integer testCount = quicktestService.count(user.getId());
         modelMap.addAttribute("testCount", 1);
-
         //	Integer proCount = projectService.count(user.getId());
         modelMap.addAttribute("proCount", 2);
-
         //	Integer bugCount = bugService.count(user.getId());
         modelMap.addAttribute("bugCount", 3);
+        List<Log> logs = logService.findLogByUser(getCurrentUser().getId());
+        modelMap.addAttribute("logs", logs);
         return "dashboard";
     }
 
     @RequestMapping(value = "changepwd", method = {RequestMethod.POST,
             RequestMethod.GET})
     public String changepwd(ModelMap modelMap, HttpSession session) {
-        user = (User) session.getAttribute("curUser");
-        modelMap.addAttribute("user", user);
         return "account/account";
     }
 
@@ -72,12 +55,6 @@ public class DashboardController {
 //        passwdnew = MStringUtils.MD5(passwdnew);
 //
 //        Integer status = userService.changePwd(user, passwdnew);
-        Integer status = 1;
-        if (status > 0) {
-            user.setPasswd(passwdnew);
-            session.setAttribute("curUser", user);
-        }
-        modelMap.addAttribute("status", status);
         return "dashboard";
     }
 }
