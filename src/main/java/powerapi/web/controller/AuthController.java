@@ -22,7 +22,7 @@ import powerapi.service.UserService;
  */
 @Controller
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -40,11 +40,10 @@ public class AuthController {
         return "signup";
     }
 
-
     @RequestMapping(value = "/signin", method = {
             RequestMethod.POST})
-    public String dashboard(ModelMap map, User user) {
-        String error = null;
+    public String signin(ModelMap map, User user) {
+        String error;
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPasswd());
         token.setRememberMe(false);
         try {

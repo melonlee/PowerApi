@@ -12,7 +12,6 @@ import powerapi.plugin.redis.RedisCache;
 import powerapi.service.ProjectService;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Melon on 17/2/22.
@@ -26,7 +25,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
 
     public List<Project> getProjectList(Long userId, int page) {
 
-        String cache_key = redisCache.CAHCENAME + "|projects|" + page;
+        String cache_key = redisCache.CAHCENAME + "|" + userId + "|projects|" + page;
         List<Project> result_cache = redisCache.getListCache(cache_key, Project.class);
         if (result_cache == null) {
             result_cache = this.selectPage(new Page<Project>(page, 10),
@@ -69,7 +68,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
             redisCache.putCache(redisCache.CAHCENAME + "|project|" + project.getId(), project);
             List<Project> projects = getProjectList(project.getUserId(), 0);
             projects.add(project);
-            redisCache.putListCacheWithExpireTime(redisCache.CAHCENAME + "|projects|" + 0, projects, RedisCache.CAHCETIME);
+            redisCache.putListCacheWithExpireTime(redisCache.CAHCENAME + "|" + project.getUserId() + "|projects|" + 0, projects, RedisCache.CAHCETIME);
         }
     }
 }

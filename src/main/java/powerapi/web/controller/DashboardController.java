@@ -1,8 +1,7 @@
 package powerapi.web.controller;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,8 +24,6 @@ public class DashboardController extends BaseController {
 
     @RequestMapping(value = "/console", method = RequestMethod.GET)
     public String list(ModelMap modelMap) {
-//		ArrayList<LogAnno> list = logService.logs(user.getId());
-//		modelMap.addAttribute("list", list);
         // 获取各项数据
         //	Integer testCount = quicktestService.count(user.getId());
         modelMap.addAttribute("testCount", 1);
@@ -39,18 +36,28 @@ public class DashboardController extends BaseController {
         return "dashboard";
     }
 
-    @RequestMapping(value = "changepwd", method = {RequestMethod.POST,
+    /**
+     * 退出登录,清除缓存之类
+     *
+     * @return
+     */
+    @RequestMapping(value = "/signout", method = {
             RequestMethod.GET})
-    public String changepwd(ModelMap modelMap, HttpSession session) {
-        return "account/account";
+    public String signout() {
+        SecurityUtils.getSubject().logout();
+        return "signin";
     }
 
-    @RequestMapping(value = "change", method = {RequestMethod.POST,
+    @RequestMapping(value = "/changepwd", method = {
             RequestMethod.GET})
-    public String change(
-            ModelMap modelMap,
-            HttpSession session,
-            @RequestParam(value = "passwdnew", required = false, defaultValue = "") String passwdnew) {
+    public String changepwd(ModelMap map) {
+        map.addAttribute("user", getCurrentUser());
+        return "account/changepwd";
+    }
+
+    @RequestMapping(value = "changepwd", method = RequestMethod.POST)
+    public String change(User user,
+                         @RequestParam(value = "passwdnew", required = true) String passwdnew) {
 
 //        passwdnew = MStringUtils.MD5(passwdnew);
 //
