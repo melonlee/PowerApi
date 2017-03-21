@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<c:set var="host" value="${pageContext.request.contextPath}"></c:set>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -24,9 +26,10 @@
                         <div class="panel-title">${bug.title}</div>
                     </div>
                     <div class="panel-body">
-                        <div class="btn-group mr10 pull-right">
-                            <a class="btn btn-default" type="button"><i class="fa fa-pencil mr5"></i> 编辑</a>
-                            <a class="btn btn-danger" type="button"><i class="fa fa-trash-o mr5"></i> 删除</a>
+                        <div class="mr10 pull-right">
+                            <a class="btn btn-default" type="button"><i class="fa fa-pencil mr5"></i> 编辑</a> &nbsp;&nbsp;
+                            <a href="delete?id=${bug.id }" class="btn btn-danger" type="button"><i
+                                    class="fa fa-trash-o mr5"></i> 删除</a>
                             <a class="btn btn-success" type="button"><i class="fa fa-trash-o mr5"></i> 解决</a>
                             <a class="btn btn-warning" type="button"><i class="fa fa-trash-o mr5"></i> 关闭</a>
                         </div>
@@ -44,11 +47,11 @@
                                                 <li class="media">
                                                     <a href="#" class="pull-left">
                                                         <img alt=""
-                                                             src="http://wx3.sinaimg.cn/large/61e3f9b7ly1fdgwkwiwnvj20zk0mlq57.jpg"
+                                                             src="${host}/static/images/logo.jpg"
                                                              class="media-object">
                                                     </a>
                                                     <div class="media-body">
-                                                        <h4>老夏</h4>
+                                                        <h4><shiro:principal/></h4>
                                                         <small class="text-muted">${comment.createdate}</small>
                                                         <p>${comment.content}</p>
                                                     </div>
@@ -77,6 +80,7 @@
 
 <script type="text/javascript">
 
+    var username = "<shiro:principal/>";
     //评论提交事件
     $(document).on("click", "#comment_submit", function () {
         $.ajax({
@@ -93,9 +97,9 @@
                     //拼接评论结果
                     $(".comment-list").append('<li class="media">' +
                             '<a href="#" class="pull-left">' +
-                            '<img alt="" src="http://wx3.sinaimg.cn/large/61e3f9b7ly1fdgwkwiwnvj20zk0mlq57.jpg"class="media-object"></a>' +
+                            '<img alt="" src= "${host}/static/images/logo.jpg" class="media-object"></a>' +
                             '<div class="media-body">' +
-                            '<h4>老夏</h4>' +
+                            '<h4>' + username + '</h4>' +
                             '<small class="text-muted">' + generateNow() + '</small>' +
                             '<p>' + $("#bug_content").val() + '</p>' +
                             '</div>' +

@@ -2,9 +2,6 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="host" value="${pageContext.request.contextPath}"></c:set>
-<script>
-    var path = "${host}";
-</script>
 <title>Power.API</title>
 <meta charset="utf-8">
 <meta name="viewport"

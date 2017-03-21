@@ -34,11 +34,9 @@ public class BugController extends BaseController {
     public String list(
             ModelMap model,
             @RequestParam(value = "proId", required = true) Long proId) {
-
-        Project project = getProject(proId);
         List<Bug> list = bugService.selectByProjectId(proId);
         model.addAttribute("bugs", list);
-        model.addAttribute("project", project);
+        model.addAttribute("project", getProject(proId));
         return "/bug/index";
     }
 
@@ -66,8 +64,7 @@ public class BugController extends BaseController {
             ModelMap model,
             @RequestParam(value = "proId", required = true) Long proId,
             @RequestParam(value = "id", required = true) Long id) {
-        Project project = projectService.selectById(proId);
-        model.addAttribute("project", project);
+        model.addAttribute("project", getProject(proId));
         Bug bug = bugService.selectById(id);
         model.addAttribute("bug", bug);
         return "/bug/detail";
@@ -78,6 +75,7 @@ public class BugController extends BaseController {
                        @RequestParam(value = "id", required = true) Long id) {
         Bug bug = bugService.selectById(id);
         model.addAttribute("bug", bug);
+        model.addAttribute("project", getProject(bug.getpId()));
         //获取评论
         List<BugComment> comments = bugCommentService.findByBugId(id);
         model.addAttribute("comments", comments);
@@ -96,7 +94,7 @@ public class BugController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
-    public String comment(ModelMap model, BugComment comment) {
+    public String comment(BugComment comment) {
         comment.setUserId(getCurrentUser().getId());
         Integer status = bugCommentService.insert(comment) ? 1 : 0;
         return JsonUtil.getInstance().setStatus(status).result();
