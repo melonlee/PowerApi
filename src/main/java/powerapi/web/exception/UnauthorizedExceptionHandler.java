@@ -19,7 +19,7 @@ public class UnauthorizedExceptionHandler {
     public ModelAndView processUnauthenticatedException(NativeWebRequest request, UnauthorizedException e) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("exception", e.getMessage());
-        mv.setViewName("/common/error.ftl");
+        mv.setViewName("/common/error");
         return mv;
     }
 
@@ -27,7 +27,7 @@ public class UnauthorizedExceptionHandler {
     public ModelAndView processMissingServletRequestParameterException(NativeWebRequest request, MissingServletRequestParameterException e) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("exception", e.getMessage());
-        mv.setViewName("/common/error.ftl");
+        mv.setViewName("/common/error");
         return mv;
     }
 

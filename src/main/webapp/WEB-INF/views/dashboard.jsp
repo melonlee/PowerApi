@@ -8,7 +8,9 @@
 <head>
     <jsp:include page="common/style.jsp"></jsp:include>
 </head>
+
 <body class="horizontal-menu">
+
 <section>
     <div class="mainpanel">
         <jsp:include page="common/menu.jsp" flush="true">

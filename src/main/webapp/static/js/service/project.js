@@ -104,7 +104,7 @@ function loadInterfaceByModule(moduleId) {
  */
 function loaddetail(curfunction) {
 
-    $("#detail_title").text(curfunction.title);
+    $("#detail_title").html(curfunction.title + "&nbsp;&nbsp;&nbsp;&nbsp;" + curfunction.url);
     $("#detail_url").text(host + $curModule.data("url") + curfunction.url);
     $("#method").text(curfunction.method);
     $("#response_type").text(curfunction.responseType);

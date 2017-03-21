@@ -52,29 +52,20 @@
                         </c:forEach>
                     </ul>
                 </div>
-                <div class="col-sm-4 col-lg-4">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <div class="panel-btns">
-                                        <a href="" class="minimize">&minus;</a>
-                                    </div>
-                                    <h4 class="panel-title" id="panel_module_url"></h4>
-                                </div>
-                                <div class="panel-body" id="panel_module_desc"></div>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="col-sm-3 col-lg-3">
                     <div class="panel panel-default">
                         <div class="panel-body">
+                            <div class="panel">
+                                <h4 class="panel-title" id="panel_module_url"></h4>
+                                <div class="panel-body" id="panel_module_desc"></div>
+                            </div>
+
                             <div class="table-responsive">
-                                <table class="table table-hover mb30">
+                                <table class="table table-hover mb30 table-success">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>地址</th>
+                                        <th>名称</th>
+                                        <th>URL</th>
                                     </tr>
                                     </thead>
                                     <tbody id="function_row">
@@ -84,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-6">
+                <div class="col-sm-7 col-lg-7">
                     <div class="panel panel-default">
                         <div class="panel-body" id="function_detail">
                             <div class="pull-right">
