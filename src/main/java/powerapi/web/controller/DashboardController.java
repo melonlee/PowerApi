@@ -8,6 +8,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import powerapi.common.utils.JsonUtil;
 import powerapi.entity.Log;
 import powerapi.entity.User;
 import powerapi.service.*;
@@ -31,13 +33,18 @@ public class DashboardController extends BaseController {
         modelMap.addAttribute("proCount", 2);
         //	Integer bugCount = bugService.count(user.getId());
         modelMap.addAttribute("bugCount", 3);
-        List<Log> logs = logService.findLogByUser(getCurrentUser().getId());
-        modelMap.addAttribute("logs", logs);
         return "dashboard";
     }
 
+    @RequestMapping(value = "/logs", method = RequestMethod.GET)
+    @ResponseBody
+    public String logs(@RequestParam(value = "page", required = true, defaultValue = "0") int page) {
+        List<Log> logs = logService.findLogByUser(getCurrentUser().getId(), page);
+        return JsonUtil.getInstance().setList(logs).result();
+    }
+
     /**
-     * 退出登录,清除缓存之类
+     * 退出登录,清除缓存
      *
      * @return
      */
@@ -53,15 +60,5 @@ public class DashboardController extends BaseController {
     public String changepwd(ModelMap map) {
         map.addAttribute("user", getCurrentUser());
         return "account/changepwd";
-    }
-
-    @RequestMapping(value = "changepwd", method = RequestMethod.POST)
-    public String change(User user,
-                         @RequestParam(value = "passwdnew", required = true) String passwdnew) {
-
-//        passwdnew = MStringUtils.MD5(passwdnew);
-//
-//        Integer status = userService.changePwd(user, passwdnew);
-        return "dashboard";
     }
 }

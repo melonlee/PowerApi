@@ -20,27 +20,28 @@
                 <li ${param.nav==2 ? "class='active'" : "" }><a
                         href="../project/all"><i class="fa fa-briefcase"></i> <span>
 							项目管理</span> </a></li>
-                <li class="nav-parent ${param.nav==3 ? "active" : "" }">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-briefcase"></i> 成员管理 <span class="caret"></span></a>
-                    <ul class="dropdown-menu children">
-                        <li><a href="../unit/view"><i class="fa fa-send"></i>小组成员</a></li>
-                        <li><a href="../auto/view"><i class="fa fa-truck"></i>角色管理 </a></li>
-                        <li><a href="../auto/view"><i class="fa fa-truck"></i>权限管理 </a></li>
-                    </ul>
+                <%--<li class="nav-parent ${param.nav==3 ? "active" : "" }">--%>
+                <%--<a class="dropdown-toggle" data-toggle="dropdown" href="#">--%>
+                <%--<i class="fa fa-briefcase"></i> 成员管理 <span class="caret"></span></a>--%>
+                <%--<ul class="dropdown-menu children">--%>
+                <%--<li><a href="../unit/view"><i class="fa fa-send"></i>小组成员</a></li>--%>
+                <%--<li><a href="../auto/view"><i class="fa fa-truck"></i>角色管理 </a></li>--%>
+                <%--<li><a href="../auto/view"><i class="fa fa-truck"></i>权限管理 </a></li>--%>
+                <%--</ul>--%>
+                <%--</li>--%>
                 <li class="nav-parent ${param.nav==4 ? "active" : "" }"><a class="dropdown-toggle"
                                                                            data-toggle="dropdown" href="#"><i
                         class="fa fa-send"></i> 测试管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu children">
                         <li><a href="../unit/view"><i class="fa fa-send"></i>单元测试</a></li>
-                        <li><a href="../auto/view"><i class="fa fa-truck"></i> 自动化测试<span
+                        <li><a href="#"><i class="fa fa-truck"></i> 自动化测试<span
                                 class="pull-right badge badge-danger">Beta</span></a></li>
                     </ul>
                 </li>
-                <li ${param.nav==5 ? "class='active'" : "" }><a
-                        href="../monitor/list.do"> <i class="fa fa-rocket"></i> <span>
-                            自动监控</span><span
-                        class="pull-right badge badge-danger">Beta</span></a></li>
+                <%--<li ${param.nav==5 ? "class='active'" : "" }><a--%>
+                <%--href="../monitor/list.do"> <i class="fa fa-rocket"></i> <span>--%>
+                <%--自动监控</span><span--%>
+                <%--class="pull-right badge badge-danger">Beta</span></a></li>--%>
             </ul>
         </div>
     </div>

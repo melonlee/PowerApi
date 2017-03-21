@@ -86,11 +86,10 @@
                                                        href="doc?id=${project.id}" class="tooltips"
                                                        data-toggle="tooltip" data-placement="top" title="文档预览"><i
                                                         class="fa fa-eye"></i></a></li>
-
-                                                <li><a target="_blank"
-                                                       href="../doc/${project.id}" class="tooltips"
-                                                       data-toggle="tooltip" data-placement="top" title="成员管理"><i
-                                                        class="fa fa-users"></i></a></li>
+                                                    <%--<li><a target="_blank"--%>
+                                                    <%--href="../doc/${project.id}" class="tooltips"--%>
+                                                    <%--data-toggle="tooltip" data-placement="top" title="成员管理"><i--%>
+                                                    <%--class="fa fa-users"></i></a></li>--%>
                                             </ul>
                                         </div>
                                     </div>

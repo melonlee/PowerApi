@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="host" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
@@ -117,22 +118,8 @@
                         </div>
                         <div class="panel-body">
                             <div class="activity-list">
-                                <c:forEach var="log" items="${logs}">
-                                    <div class="media act-media">
-                                        <a class="pull-left" href="#">
-                                            <img class="media-object act-thumb" src="${host}/static/images/logo.jpg"
-                                                 alt=""/>
-                                        </a>
-                                        <div class="media-body act-media-body">
-                                            <strong>Melon</strong> ${log.action} <strong><a
-                                                href="#">${log.resource}</a></strong>.
-                                            <br/>
-                                            <small class="text-muted">${log.relativedate}</small>
-                                        </div>
-                                    </div>
-                                </c:forEach>
                             </div>
-                            <button class="btn btn-white btn-block">查看更多</button>
+                            <button class="btn btn-white btn-block" id="more_log">查看更多</button>
                         </div>
                     </div>
                 </div>
@@ -141,5 +128,56 @@
     </div>
 </section>
 <jsp:include page="common/scripts.jsp"></jsp:include>
+<script type="text/javascript">
+
+    var page = 0;
+    var username = "<shiro:principal/>";
+
+    $(document).ready(function () {
+        loadLogs();
+    });
+
+    function loadLogs() {
+        $.ajax({
+            type: 'GET',
+            url: '../dashboard/logs',
+            data: {
+                page: page
+            },
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 1000) {
+                    page++;
+
+                    for (loop = 0; loop < data.result.length; loop++) {
+                        var logObj = data.result[loop];
+
+                        $(".activity-list").append('' +
+                                '<div class="media act-media">' +
+                                '<a class="pull-left" href="#"> ' +
+                                '<img class="media-object act-thumb" src="${host}/static/images/logo.jpg" alt=""/>' +
+                                '</a>' +
+                                '<div class="media-body act-media-body">' +
+                                ' <strong>' + username + '</strong>' + logObj.action + '<strong> ' +
+                                '<a href="#">' + logObj.resource + '</a></strong>. <br/> <small class="text-muted">' + logObj.relativedate + '</small> </div> </div>'
+                        );
+                    }
+
+                } else {
+                    $("#more_log").text("暂无更多数据")
+                }
+            },
+            error: function () {
+                alert("获取数据异常，请重试!");
+            }
+        });
+    }
+
+    $(document).on("click", "#more_log", function () {
+        loadLogs();
+    });
+
+</script>
 </body>
 </html>

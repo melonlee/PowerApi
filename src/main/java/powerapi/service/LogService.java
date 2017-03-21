@@ -12,5 +12,5 @@ import java.util.List;
 public interface LogService extends IService<Log> {
 
 
-    List<Log> findLogByUser(Long id);
+    List<Log> findLogByUser(Long id, int page);
 }
