@@ -21,25 +21,24 @@
                     <h5>
                         <strong>欢迎来到Power.API!</strong>
                     </h5>
-                    <p>移动互联网时代，Power.API是一个为您提供API协同管理、API测试、API文档生成的综合性服务平台。
-                        你还在用Word管理接口文档吗？你还在使用拼接URL测试吗？你OUT了！</p>
+                    <p>Power.API是一个为您提供API协同管理、API测试、API性能监控、API文档生成的综合性服务平台</p>
                     <div class="mb20"></div>
 
                     <div class="feat-list">
                         <i class="fa fa-wrench"></i>
-                        <h4 class="text-success">在线管理，接口实时更新</h4>
-                        <p>在线添加，编辑接口，接口内容实时更新， 保证团队成员始终浏览到文档的最新状态， 告别Word文档传阅版本混乱</p>
+                        <h4 class="text-success">项目管理，不同维度的项目把控</h4>
+                        <p>在线编辑接口,保证团队成员始终浏览到文档的最新状态,告别Word文档传阅版本混乱</p>
                     </div>
 
                     <div class="feat-list">
                         <i class="fa fa-compress"></i>
-                        <h4 class="text-success">测试工具，告别拼接URL参数</h4>
+                        <h4 class="text-success">测试管理，接口一键测试及自动化</h4>
                         <p>接口测试一键生成，通过测试记录可分析接口的可用性</p>
                     </div>
 
                     <div class="feat-list mb20">
                         <i class="fa fa-search-plus"></i>
-                        <h4 class="text-success">细分权限，保障接口数据安全</h4>
+                        <h4 class="text-success"> 成员管理，细分权限保障接口数据安全</h4>
                         <p>对不同项目内容和人员分配具体权限，确保您的数据操作安全</p>
                     </div>
 
@@ -53,9 +52,9 @@
                         注册失败!请检查您输入的信息!
                     </div>
                 </c:if>
-                <form method="post" action="signup.do" id="basicForm2">
+                <form method="post" action="signup" id="basicForm2">
                     <div class="error"></div>
-                    <h3 class="nomargin">免费注册</h3>
+                    <h3 class="nomargin">快速注册</h3>
                     <p class="mt5 mb20">
                         已经是会员? <a href="signin"><strong>登录</strong></a>
                     </p>

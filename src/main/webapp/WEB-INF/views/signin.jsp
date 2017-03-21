@@ -22,17 +22,13 @@
                         <strong>欢迎来到Power.API</strong>
                     </h5>
                     <ul>
-                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 在线管理，接口实时更新</li>
-                        <li><i class="fa fa-arrow-circle-o-right mr5"></i>
-                            测试工具，告别拼接URL参数
-                        </li>
-                        <li><i class="fa fa-arrow-circle-o-right mr5"></i>
-                            细分权限，保障接口数据安全
-                        </li>
+                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 项目管理，不同维度的项目把控</li>
+                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 测试管理，接口一键测试及自动化</li>
+                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 成员管理，细分权限保障接口数据安全</li>
                     </ul>
                     <div class="mb20"></div>
                     <strong>还没开始使用Power.API?&nbsp;&nbsp;<a
-                            href="signup">免费注册</a></strong>
+                            href="signup">快速注册</a></strong>
                 </div>
             </div>
             <div class="col-md-5">

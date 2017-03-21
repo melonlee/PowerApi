@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -16,13 +17,12 @@
     <div class="container">
         <h1>Power.Api</h1>
         <br/> <br/> <br/>
-        <h2>Make your document more powerful</h2>
+        <h2>Make Your Document Powerful</h2>
+        <br/>
         <div class="header_arrow">
             <div class="contact">
                 <div class="col-sm-12 grid_2">
-                    <form action="signin_view.do">
-                        <input type="submit" value="快速登录">
-                    </form>
+                    <a href="auth/signin" class="btn btn-lg btn-primary">Get Started</a>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -31,7 +31,7 @@
 </div>
 <div class="content_middle_bottom">
     <div class="container">
-        <h3 class="tz-title-3">What Power.Api Do</h3>
+        <h3 class="tz-title-3">Simple&Powerful</h3>
         <h4>Power.API帮助你和你团队的成员协作进行接口文档的内容管理以及功能性测试</h4>
         <div class="grid_2 text-center">
             <div class="col-md-4 box_1">
@@ -54,54 +54,15 @@
     </div>
     <br/> <br/>
 </div>
-<div class="content_middle">
-    <div class="container">
-        <h3 class="tz-title-3">How Power.Api do</h3>
-        <p>Power.API使用清晰简单结构来操作项目内容以及团队成员信息</p>
-        <div class="grid_1">
-            <div class="col-md-4 team-grid">
-                <div class="view view-first">
-                    <div class="index_img">
-                        <img src="static/images/welcome/pic1.jpg" class="img-responsive" alt=""/>
-                    </div>
-                </div>
-                <h3>控制台</h3>
-            </div>
-            <div class="col-md-4 team-grid">
-                <div class="view view-first">
-                    <div class="index_img">
-                        <img src="static/images/welcome/pic3.jpg" class="img-responsive" alt=""/>
-                    </div>
-                </div>
-                <h3>接口测试</h3>
-            </div>
-            <div class="col-md-4 team-grid">
-                <div class="view view-first">
-                    <div class="index_img">
-                        <img src="static/images/welcome/pic4.jpg" class="img-responsive" alt=""/>
-                    </div>
-                </div>
-                <h3>项目管理</h3>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="contact">
-    <div class="content_middle_bottom">
-        <h3 class="tz-title-3">
-            <a href="./signin_view.do">Quick Start</a>
-        </h3>
-        <h4>一键注册，无项目数量限制，无团队成员数量限制，快来使用吧!</h4>
-    </div>
-</div>
 <div class="footer">
     <div class="copy">
         <p>
-            &copy;2016 <a href="http://www.melonlee.com">Melon</a>@www.powerapi.cn
+            &copy;2016 <a href="http://www.melonlee.com">Melon </a>@www.powerapi.cn
             All Rights Reserved.京ICP备:15006746
         </p>
     </div>
 </div>
 </body>
 </html>
+
 
