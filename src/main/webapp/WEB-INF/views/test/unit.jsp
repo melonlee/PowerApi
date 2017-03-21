@@ -6,12 +6,12 @@
 <head>
     <jsp:include page="../common/style.jsp"></jsp:include>
 </head>
-<body class="horizontal-menu">
+<body>
 <section>
+    <jsp:include page="../common/leftmenu.jsp" flush="true">
+        <jsp:param name="nav" value="4"/>
+    </jsp:include>
     <div class="mainpanel">
-        <jsp:include page="../common/menu.jsp" flush="true">
-            <jsp:param name="nav" value="4"/>
-        </jsp:include>
         <div class="pageheader">
             <h2>
                 <i class="fa  fa-send"></i>单元测试<span>录入接口地址以及接口所需参数进行单个功能的可用性测试</span>

@@ -7,12 +7,12 @@
 <head>
     <jsp:include page="../common/style.jsp"></jsp:include>
 </head>
-<body class="horizontal-menu">
+<body>
 <section>
+    <jsp:include page="../common/leftmenu.jsp" flush="true">
+        <jsp:param name="nav" value="2"/>
+    </jsp:include>
     <div class="mainpanel">
-        <jsp:include page="../common/menu.jsp" flush="true">
-            <jsp:param name="nav" value="2"/>
-        </jsp:include>
         <jsp:include page="../common/pageheader.jsp">
             <jsp:param name="entity" value="项目"/>
             <jsp:param name="index" value="1"/>
@@ -82,7 +82,7 @@
                                     <c:if test="${not empty project}">
                                         <div class="pull-right">
                                             <a class="btn btn-danger btn-block" id="remove_pro"
-                                                    data-id="${project.id}">
+                                               data-id="${project.id}">
                                                 删除该项目
                                             </a>
                                         </div>

@@ -6,12 +6,12 @@
 <head>
     <jsp:include page="../common/style.jsp"></jsp:include>
 </head>
-<body class="horizontal-menu">
+<body>
 <section>
+    <jsp:include page="../common/menu.jsp" flush="true">
+        <jsp:param name="nav" value="1"/>
+    </jsp:include>
     <div class="mainpanel">
-        <jsp:include page="../common/menu.jsp" flush="true">
-            <jsp:param name="nav" value="1"/>
-        </jsp:include>
         <div class="pageheader">
             <h2>
                 <i class="glyphicon glyphicon-cog"></i>账户<span>更改密码</span>

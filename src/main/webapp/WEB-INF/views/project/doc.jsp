@@ -22,11 +22,11 @@
                     <div class="panel panel-success">
                         <div class="panel-heading">
                             <div class="panel-btns">
-                                <a href="" class="minimize">&minus;</a>
+                                <a href="#" class="minimize">&minus;</a>
                             </div>
                             <h4 class="panel-title">${project.title }</h4>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" style="display: none;">
                             <ul>
                                 <li id="host_url">${project.hostUrl }</li>
                                 <li>${project.createdate }</li>
@@ -143,5 +143,13 @@
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
 <script src="${host}/static/js/service/project.js"></script>
+<script type="text/javascript">
+
+    //    $("#project_close").click();
+
+    $(document).on("click", "#project_close", function () {
+        alert('sdsd');
+    });
+</script>
 </body>
 </html>

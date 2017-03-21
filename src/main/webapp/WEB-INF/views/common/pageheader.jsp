@@ -15,8 +15,8 @@
 
         <span>
             <c:choose>
-                <c:when test="${fn:length(project.description) >80 }">
-                    ${fn:substring(project.description, 0, 80)}...
+                <c:when test="${fn:length(project.description) >70 }">
+                    ${fn:substring(project.description, 0, 70)}...
                 </c:when>
                 <c:otherwise>
                     ${project.description }

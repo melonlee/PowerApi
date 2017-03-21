@@ -7,12 +7,12 @@
 <head>
     <jsp:include page="../common/style.jsp"></jsp:include>
 </head>
-<body class="horizontal-menu">
+<body>
 <section>
+    <jsp:include page="../common/leftmenu.jsp" flush="true">
+        <jsp:param name="nav" value="2"/>
+    </jsp:include>
     <div class="mainpanel">
-        <jsp:include page="../common/menu.jsp" flush="true">
-            <jsp:param name="nav" value="2"/>
-        </jsp:include>
         <div class="contentpanel">
             <div class="row">
                 <div class="col-md-12">

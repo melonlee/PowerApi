@@ -6,12 +6,13 @@
 <head>
     <jsp:include page="../common/style.jsp"></jsp:include>
 </head>
-<body class="horizontal-menu">
+<body>
+
 <section>
+    <jsp:include page="../common/leftmenu.jsp" flush="true">
+        <jsp:param name="nav" value="2"/>
+    </jsp:include>
     <div class="mainpanel">
-        <jsp:include page="../common/menu.jsp" flush="true">
-            <jsp:param name="nav" value="2"/>
-        </jsp:include>
         <div class="pageheader">
             <div class="row">
                 <div class="col-md-11">
@@ -21,7 +22,7 @@
                 </div>
                 <div class="col-md-1">
                     <p>
-                        <a class="btn btn-primary btn-block" href="create">创建项目 </a>
+                        <a class="btn btn-primary" href="create">新增项目 </a>
                     </p>
                 </div>
             </div>

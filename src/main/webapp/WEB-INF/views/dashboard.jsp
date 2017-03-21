@@ -9,13 +9,15 @@
     <jsp:include page="common/style.jsp"></jsp:include>
 </head>
 
-<body class="horizontal-menu">
+<body>
 
 <section>
+    <jsp:include page="common/leftmenu.jsp" flush="true">
+        <jsp:param name="nav" value="1"/>
+    </jsp:include>
+
     <div class="mainpanel">
-        <jsp:include page="common/menu.jsp" flush="true">
-            <jsp:param name="nav" value="1"/>
-        </jsp:include>
+
         <div class="pageheader">
             <h2>
                 <i class="fa fa-home"></i>控制台<span>专注API接口服务管理，让您的API接口更稳定，管理更快捷</span>
