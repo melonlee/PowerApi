@@ -8,7 +8,8 @@
     <jsp:include page="../common/style.jsp"></jsp:include>
     <style type="text/css">
         .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
-            background-color: #eee;
+            background-color: #bbbbbb;
+            cursor: hand;
         }
     </style>
 </head>
@@ -26,7 +27,7 @@
                             </div>
                             <h4 class="panel-title">${project.title }</h4>
                         </div>
-                        <div class="panel-body" style="display: none;">
+                        <div class="panel-body">
                             <ul>
                                 <li id="host_url">${project.hostUrl }</li>
                                 <li>${project.createdate }</li>
@@ -145,11 +146,6 @@
 <script src="${host}/static/js/service/project.js"></script>
 <script type="text/javascript">
 
-    //    $("#project_close").click();
-
-    $(document).on("click", "#project_close", function () {
-        alert('sdsd');
-    });
 </script>
 </body>
 </html>

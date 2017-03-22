@@ -73,8 +73,7 @@ function loadInterfaceByModule(moduleId) {
                             '<tr class="f_title" data-obj=\'' + functionObjStr + '\' >'
                             + '<td>' + flag + '&nbsp;'
                             + functionObj.title + '</td>'
-                            + '<td>' + functionObj.url
-                            + '</td>' + '</tr>');
+                            + '</tr>');
                     }
 
                     $("#function_row").on(

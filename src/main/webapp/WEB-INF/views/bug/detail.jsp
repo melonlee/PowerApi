@@ -37,7 +37,7 @@
                                         <label class="col-sm-2 control-label">标题</label>
                                         <div class="col-sm-10">
                                             <input type="text" name="title" class="form-control"
-                                                   value="${bug.title}" placeholder="200"/>
+                                                   value="${bug.title}" placeholder="注册接口返回500..."/>
                                         </div>
                                     </div>
 

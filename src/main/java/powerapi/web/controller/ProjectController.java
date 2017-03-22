@@ -101,7 +101,7 @@ public class ProjectController extends BaseController {
         List<Module> modules = moduleService.selectByProjectId(id);
         model.addAttribute("modules", modules);
         model.addAttribute("project", getProject(id));
-        return "project/doc";
+        return "project/preview";
     }
 
 }

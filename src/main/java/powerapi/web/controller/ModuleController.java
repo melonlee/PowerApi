@@ -72,7 +72,7 @@ public class ModuleController extends BaseController {
     @LogDelete(resource = Constants.LOG_RESOURCE_MODULE)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(Module module) {
-        module.setTitle(moduleService.selectById(module.getId()).getTitle());
+        module.setLogResource(moduleService.selectById(module.getId()).getTitle());
         Integer status = moduleService.deleteById(module.getId()) ? 1 : 0;
         return JsonUtil.getInstance().setStatus(status).result();
     }

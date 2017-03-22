@@ -26,18 +26,23 @@
                         <div class="panel-title">${bug.title}</div>
                     </div>
                     <div class="panel-body">
-                        <div class="mr10 pull-right">
-                            <a class="btn btn-default" type="button"><i class="fa fa-pencil mr5"></i> 编辑</a> &nbsp;&nbsp;
-                            <a href="delete?id=${bug.id }" class="btn btn-danger" type="button"><i
-                                    class="fa fa-trash-o mr5"></i> 删除</a>
-                            <a class="btn btn-success" type="button"><i class="fa fa-trash-o mr5"></i> 解决</a>
-                            <a class="btn btn-warning" type="button"><i class="fa fa-trash-o mr5"></i> 关闭</a>
-                        </div>
-                        <br/><br/>
+
                         <div class="row">
                             <div class="col-sm-12">
                                 <h5 class="subtitle subtitle-lined">描述</h5>
                                 <p>${bug.description}</p>
+                                <br/><br/>
+                                <div class="mr10 pull-right">
+                                    <a href="modify?id=${bug.id }" class="btn btn-default" type="button"><i
+                                            class="fa fa-pencil mr5"></i> 编辑</a>
+                                    <a href="delete?id=${bug.id }" class="btn btn-danger" type="button"><i
+                                            class="fa fa-trash-o mr5"></i> 删除</a>
+
+                                    <c:if test="${bug.status==0}">
+                                        <a href="close?id=${bug.id }" class="btn btn-success" type="button"><i
+                                                class="fa fa-trash-o mr5"></i>标记解决</a>
+                                    </c:if>
+                                </div>
                                 <br/><br/>
                                 <h5 class="subtitle subtitle-lined">讨论</h5>
                                 <div class="tab-content noshadow">
@@ -69,6 +74,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

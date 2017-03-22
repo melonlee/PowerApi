@@ -56,10 +56,10 @@
 
                                     <c:forEach var="bug" items="${bugs}">
                                         <tr>
-                                            <td><c:if test="${bug.status==1}">
+                                            <td><c:if test="${bug.status==0}">
                                                 <span class="pull-right badge badge-danger">未解决</span>
                                             </c:if>
-                                                <c:if test="${bug.status==0}">
+                                                <c:if test="${bug.status==1}">
                                                     <span class="pull-right badge badge-success">已解决</span>
                                                 </c:if>
                                             </td>
@@ -69,9 +69,7 @@
                                             <td>${bug.description}</td>
                                             <td class="table-action"><a
                                                     href="view?id=${bug.id }&proId=${project.id}"
-                                                    class="edit-row"><i class="fa fa-eye"></i></a>&nbsp;<a
-                                                    href="delete?id=${bug.id }" class="delete-row"><i
-                                                    class="fa fa-trash-o"></i></a></td>
+                                                    class="edit-row"><i class="fa fa-eye"></i></a></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

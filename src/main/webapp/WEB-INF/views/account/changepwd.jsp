@@ -8,7 +8,7 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/menu.jsp" flush="true">
+    <jsp:include page="../common/leftmenu.jsp" flush="true">
         <jsp:param name="nav" value="1"/>
     </jsp:include>
     <div class="mainpanel">

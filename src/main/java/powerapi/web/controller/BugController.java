@@ -62,13 +62,27 @@ public class BugController extends BaseController {
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
     public String modify(
             ModelMap model,
-            @RequestParam(value = "proId", required = true) Long proId,
+            @RequestParam(value = "proId", required = false, defaultValue = "0") Long proId,
             @RequestParam(value = "id", required = true) Long id) {
-        model.addAttribute("project", getProject(proId));
+
         Bug bug = bugService.selectById(id);
         model.addAttribute("bug", bug);
+        if (proId == 0) {
+            proId = bug.getpId();
+        }
+        model.addAttribute("project", getProject(proId));
         return "/bug/detail";
     }
+
+    @RequestMapping(value = "/close", method = RequestMethod.GET)
+    public String close(
+            @RequestParam(value = "id", required = true) Long id) {
+        Bug bug = bugService.selectById(id);
+        bug.setStatus(1);
+        bugService.updateById(bug);
+        return "redirect:/bug/all?proId=" + bug.getpId();
+    }
+
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String view(ModelMap model,
@@ -84,11 +98,10 @@ public class BugController extends BaseController {
 
     @LogDelete(resource = Constants.LOG_RESOURCE_BUG)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(
-            ModelMap model,
-            @RequestParam(value = "id", required = false, defaultValue = "0") Long id) {
-        Bug bug = bugService.selectById(id);
-        model.addAttribute("status", bugService.deleteById(id));
+    public String delete(Bug bug) {
+        bug = bugService.selectById(bug.getId());
+        bug.setLogResource(bug.getTitle());
+        bugService.deleteById(bug.getId());
         return "redirect:/bug/all?proId=" + bug.getpId();
     }
 

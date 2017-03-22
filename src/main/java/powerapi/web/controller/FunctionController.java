@@ -86,9 +86,9 @@ public class FunctionController extends BaseController {
     @ResponseBody
     @LogDelete(resource = Constants.LOG_RESOURCE_INTERFACE)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String remove(
-            @RequestParam(value = "id", required = true) int id) {
-        Integer status = functionService.deleteById(id) ? 1 : 0;
+    public String remove(Function function) {
+        function = functionService.selectById(function.getId());
+        Integer status = functionService.deleteById(function.getId()) ? 1 : 0;
         return JsonUtil.getInstance().setStatus(status).result();
     }
 

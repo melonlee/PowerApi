@@ -11,8 +11,6 @@
 <div class="pageheader">
     <h2>
         <i class="fa fa-book"></i>${project.title }
-        <%--<span>${project.relativedate }</span>--%>
-
         <span>
             <c:choose>
                 <c:when test="${fn:length(project.description) >70 }">
@@ -24,7 +22,9 @@
 
             </c:choose>
         </span>
-        <a href="create?proId=${project.id}" class="pull-right btn btn-primary">新增${param.entity}</a>
+        <c:if test="${null!=param.entity}">
+            <a href="create?proId=${project.id}" class="pull-right btn btn-primary">新增${param.entity}</a>
+        </c:if>
     </h2>
 </div>
 
@@ -39,7 +39,7 @@
                 href="../bug/all?proId=${project.id}"><strong>Bug管理</strong></a></li>
         <li ${param.index==4 ? "class='active'" : "" }><a href="../code/all?proId=${project.id}"><strong>业务码管理</strong></a>
         </li>
-        <li ${param.index==5 ? "class='active'" : "" }><a target="_blank"
-                                                          href="../project/doc?id=${project.id}"><strong>文档预览</strong></a>
+        <li ${param.index==5 ? "class='active'" : "" }><a
+                href="../project/doc?id=${project.id}"><strong>文档预览</strong></a>
         </li>
     </ul>

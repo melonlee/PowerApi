@@ -51,7 +51,7 @@
                                         <label class="col-sm-2 control-label">接口后缀</label>
                                         <div class="col-sm-10">
                                             <input type="text" name="pattern" class="form-control"
-                                                   value="${project.pattern}" placeholder="例如:.do .action 默认/"/>
+                                                   value="${project.pattern}" placeholder="例如:.do .action 默认无"/>
                                         </div>
                                     </div>
 

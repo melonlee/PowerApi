@@ -83,10 +83,14 @@
                                                        class="tooltips" data-toggle="tooltip"
                                                        data-placement="top" title="业务码管理"><i
                                                         class="fa fa-file-code-o"></i></a></li>
+                                                <li><a
+                                                        href="doc?id=${project.id}" class="tooltips"
+                                                        data-toggle="tooltip" data-placement="top" title="预览文档"><i
+                                                        class="fa fa-eye"></i></a></li>
                                                 <li><a target="_blank"
                                                        href="doc?id=${project.id}" class="tooltips"
-                                                       data-toggle="tooltip" data-placement="top" title="文档预览"><i
-                                                        class="fa fa-eye"></i></a></li>
+                                                       data-toggle="tooltip" data-placement="top" title="分享文档"><i
+                                                        class="fa fa-external-link"></i></a></li>
                                                     <%--<li><a target="_blank"--%>
                                                     <%--href="../doc/${project.id}" class="tooltips"--%>
                                                     <%--data-toggle="tooltip" data-placement="top" title="成员管理"><i--%>
