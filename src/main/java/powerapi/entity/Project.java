@@ -3,6 +3,8 @@ package powerapi.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import powerapi.common.utils.DateFormatUtil;
+import powerapi.common.utils.EndecryptUtil;
+import powerapi.common.utils.RandomUtil;
 
 import java.util.Date;
 
@@ -32,6 +34,9 @@ public class Project extends BaseEntity {
 
     @TableField(exist = false)
     private String relativedate;
+
+    @TableField(exist = false)
+    private String sharelink;
 
     public String getTitle() {
         return title;
@@ -98,6 +103,9 @@ public class Project extends BaseEntity {
         this.pattern = pattern;
     }
 
+    public String getSharelink() {
+        return EndecryptUtil.encrytBase64(RandomUtil.generateNum().toString() + this.id);
+    }
 
     @Override
     public String toString() {

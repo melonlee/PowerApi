@@ -31,17 +31,6 @@
 <script src="${host}/static/js/basic/custom.js"></script>
 <script src="${host}/static/js/basic/prism.js"></script>
 
-<script type="text/javascript">
-    (function () {
-        function hideAlert() {
-            $("#action_alert").hide();
-        }
-
-        window.setTimeout(hideAlert, 1500);
-    })();
-</script>
-
-
 
 
 

@@ -40,6 +40,6 @@
         <li ${param.index==4 ? "class='active'" : "" }><a href="../code/all?proId=${project.id}"><strong>业务码管理</strong></a>
         </li>
         <li ${param.index==5 ? "class='active'" : "" }><a
-                href="../project/doc?id=${project.id}"><strong>文档预览</strong></a>
+                href="../project/preview?id=${project.id}"><strong>文档预览</strong></a>
         </li>
     </ul>

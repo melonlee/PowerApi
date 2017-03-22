@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import powerapi.common.Constants;
-import powerapi.common.anno.LogAnno;
 import powerapi.common.anno.LogDelete;
 import powerapi.common.anno.LogModify;
 import powerapi.entity.Module;
@@ -96,7 +95,7 @@ public class ProjectController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/doc", method = RequestMethod.GET)
+    @RequestMapping(value = "/preview", method = RequestMethod.GET)
     public String preview(ModelMap model, @RequestParam(value = "id", required = true) Long id) {
         List<Module> modules = moduleService.selectByProjectId(id);
         model.addAttribute("modules", modules);
