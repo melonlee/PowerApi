@@ -49,6 +49,9 @@
                             </div>
                             <div class="panel-footer">
                                 <button class="btn btn-primary" type="submit">提交</button>
+                                <a class="btn btn-default" type="button"
+                                   onclick="javascript:window.history.back()">返回
+                                </a>
                             </div>
                         </div>
                     </form>

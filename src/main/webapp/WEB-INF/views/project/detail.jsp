@@ -75,9 +75,9 @@
                                 <div class="panel-footer">
                                     <div class="pull-left">
                                         <button class="btn btn-primary" type="submit">保存更改</button>
-                                        <button class="btn btn-default" type="button"
-                                                onclick="javascript:window.history.back()">返回
-                                        </button>
+                                        <a class="btn btn-default" type="button"
+                                           onclick="javascript:window.history.back()">返回
+                                        </a>
                                     </div>
                                     <c:if test="${not empty project}">
                                         <div class="pull-right">

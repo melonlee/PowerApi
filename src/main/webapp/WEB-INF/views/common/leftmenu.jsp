@@ -26,7 +26,7 @@
 
         <ul class="nav nav-pills nav-stacked nav-bracket">
             <li ${param.nav==1 ? "class='active'" : "" }><a
-                    href="../dashboard/console.do"><i class="fa fa-home"></i> <span>
+                    href="../dashboard/console"><i class="fa fa-home"></i> <span>
                             总览</span></a></li>
 
             <li ${param.nav==2 ? "class='active'" : "" }><a
