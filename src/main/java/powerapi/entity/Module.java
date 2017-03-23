@@ -3,6 +3,8 @@ package powerapi.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 
+import java.util.List;
+
 /**
  * Created by Melon on 17/3/2.
  */
@@ -26,19 +28,8 @@ public class Module extends BaseEntity {
 
     private Integer status;
 
-    @TableField(value = "is_update")
-    private Integer isUpdate;
-    
     @TableField(exist = false)
-    private Integer functions; // 该模块下的接口数
-
-    public Integer getFunctions() {
-        return functions;
-    }
-
-    public void setFunctions(Integer functions) {
-        this.functions = functions;
-    }
+    private List<Function> functions;
 
     public String getTitle() {
         return title;
@@ -89,12 +80,12 @@ public class Module extends BaseEntity {
         this.status = status;
     }
 
-    public Integer getIsUpdate() {
-        return isUpdate;
+    public List<Function> getFunctions() {
+        return functions;
     }
 
-    public void setIsUpdate(Integer isUpdate) {
-        this.isUpdate = isUpdate;
+    public void setFunctions(List<Function> functions) {
+        this.functions = functions;
     }
 
     @Override
@@ -106,7 +97,6 @@ public class Module extends BaseEntity {
                 ", pId=" + pId +
                 ", userId=" + userId +
                 ", status=" + status +
-                ", isUpdate=" + isUpdate +
                 ", functions=" + functions +
                 '}';
     }
