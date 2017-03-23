@@ -112,7 +112,49 @@
     </div>
 
 </section>
+<div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title">复制下面链接分享该项目文档</h4>
+            </div>
+            <div class="modal-body">
+                <input id="link" type="text" class="form-control">
+
+            </div>
+
+            <div class="modal-footer">
+                <a class="share pull-right btn btn-success" data-clipboard-target="#link">点我复制</a>
+            </div>
+        </div>
+    </div>
+</div>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
 <script src="${host}/static/js/service/project.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
+<script type="text/javascript">
+    /**
+     *
+     * 设置分享链接复制分享
+     *
+     * @type {Clipboard}
+     */
+    var clipboard = new Clipboard('.share');
+
+    clipboard.on('success', function (e) {
+        //
+    });
+
+    clipboard.on('error', function (e) {
+        alert('此功能不支持该浏览器，请手工复制文本框中内容');
+    });
+
+    $(document).on("click", "#share", function () {
+        $("#link").val($(this).data("content"));
+    });
+
+</script>
 </body>
 </html>
