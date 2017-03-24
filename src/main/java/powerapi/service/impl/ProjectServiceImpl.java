@@ -25,17 +25,18 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
 
     public List<Project> getProjectList(Long userId, int page) {
 
-        String cache_key = redisCache.CAHCENAME + "|" + userId + "|projects|" + page;
-        List<Project> result_cache = redisCache.getListCache(cache_key, Project.class);
-        if (result_cache == null) {
-            result_cache = this.selectPage(new Page<Project>(page, 10),
-                    new EntityWrapper<Project>().eq("user_id", userId).orderBy("createdate", false)).getRecords();
-            if (result_cache.size() > 0) {
-                redisCache.putListCacheWithExpireTime(cache_key, result_cache, RedisCache.CAHCETIME);
-            }
-            return result_cache;
-        }
-        return result_cache;
+//        String cache_key = redisCache.CAHCENAME + "|" + userId + "|projects|" + page;
+//        List<Project> result_cache = redisCache.getListCache(cache_key, Project.class);
+//        if (result_cache == null) {
+//            result_cache = this.selectPage(new Page<Project>(page, 10),
+//                    new EntityWrapper<Project>().eq("user_id", userId).orderBy("createdate", false)).getRecords();
+//            if (result_cache.size() > 0) {
+//                redisCache.putListCacheWithExpireTime(cache_key, result_cache, RedisCache.CAHCETIME);
+//            }
+//            return result_cache;
+//        }
+        return this.selectPage(new Page<Project>(page, 10),
+                new EntityWrapper<Project>().eq("user_id", userId).orderBy("createdate", false)).getRecords();
 
     }
 
@@ -66,11 +67,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
 
         boolean status = this.insertOrUpdate(project);
         if (status) {
-            redisCache.clearCache();
             redisCache.putCache(redisCache.CAHCENAME + "|project|" + project.getId(), project);
-            List<Project> projects = getProjectList(project.getUserId(), 0);
-            projects.add(project);
-            redisCache.putListCacheWithExpireTime(redisCache.CAHCENAME + "|" + project.getUserId() + "|projects|" + 0, projects, RedisCache.CAHCETIME);
         }
     }
 }

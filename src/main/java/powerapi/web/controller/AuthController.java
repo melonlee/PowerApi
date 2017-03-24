@@ -40,7 +40,7 @@ public class AuthController extends BaseController {
 
     @RequestMapping(value = "/signup", method = {
             RequestMethod.GET})
-    public String signup() {
+    public String signupview() {
         return "signup";
     }
 
@@ -68,7 +68,7 @@ public class AuthController extends BaseController {
 
     @RequestMapping(value = "/signup", method = {
             RequestMethod.POST})
-    public String signup(ModelMap map, User user) {
+    public String signup(User user, ModelMap map) {
         //检查用户名是否被注册
         User temp = userService.findByUsername(user.getUsername());
         if (null == temp) {

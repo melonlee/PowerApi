@@ -67,7 +67,7 @@
                                     <div class="panel-body" id="function_detail">
                                         <blockquote>
                                             <i class="fa fa-quote-left"></i>
-                                            <p id="detail_url"></p>
+                                            <p id="detail_url" data-projecthost="${project.hostUrl }"></p>
                                         </blockquote>
 
                                         <div class="panel-heading">
