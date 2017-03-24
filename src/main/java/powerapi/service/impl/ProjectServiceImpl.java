@@ -30,7 +30,9 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         if (result_cache == null) {
             result_cache = this.selectPage(new Page<Project>(page, 10),
                     new EntityWrapper<Project>().eq("user_id", userId).orderBy("createdate", false)).getRecords();
-            redisCache.putListCacheWithExpireTime(cache_key, result_cache, RedisCache.CAHCETIME);
+            if (result_cache.size() > 0) {
+                redisCache.putListCacheWithExpireTime(cache_key, result_cache, RedisCache.CAHCETIME);
+            }
             return result_cache;
         }
         return result_cache;

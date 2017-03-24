@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import powerapi.entity.User;
+import powerapi.plugin.PasswordHelper;
 import powerapi.service.UserService;
 
 
@@ -26,6 +27,9 @@ public class AuthController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordHelper passwordHelper;
 
 
     @RequestMapping(value = "/signin", method = {
@@ -47,10 +51,9 @@ public class AuthController extends BaseController {
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPasswd());
         token.setRememberMe(false);
         try {
-            SecurityUtils.getSubject().login(token);
             Subject subject = SecurityUtils.getSubject();
-            Session session = subject.getSession();
-            session.setAttribute("curUser", userService.findByUsername((String) subject.getPrincipal()));
+            subject.login(token);
+            subject.getSession().setAttribute("curUser", userService.findByUsername((String) subject.getPrincipal()));
             return "redirect:/dashboard/console";
         } catch (UnknownAccountException uae) {
             error = "用户名错误!";
@@ -62,4 +65,28 @@ public class AuthController extends BaseController {
         map.addAttribute("error", error);
         return "signin";
     }
+
+    @RequestMapping(value = "/signup", method = {
+            RequestMethod.POST})
+    public String signup(ModelMap map, User user) {
+        //检查用户名是否被注册
+        User temp = userService.findByUsername(user.getUsername());
+        if (null == temp) {
+            //注册
+            String passwdTemp = user.getPasswd();
+            passwordHelper.encryptPassword(user);
+            userService.insert(user);
+            //登录到shiro中
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), passwdTemp);
+            token.setRememberMe(false);
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
+            subject.getSession().setAttribute("curUser", user);
+            return "redirect:/dashboard/console";
+        } else {
+            map.addAttribute("error", "用户名已经被占用!");
+            return "signup";
+        }
+    }
+
 }

@@ -45,11 +45,11 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <c:if test="${param.status==0}">
+                <c:if test="${null!=error}">
                     <div class="alert alert-danger">
                         <button type="button" class="close" data-dismiss="alert"
                                 aria-hidden="true">&times;</button>
-                        注册失败!请检查您输入的信息!
+                            ${error}
                     </div>
                 </c:if>
                 <form method="post" action="signup" id="basicForm2">
@@ -59,17 +59,10 @@
                         已经是会员? <a href="signin"><strong>登录</strong></a>
                     </p>
                     <div class="mb10">
-                        <label class="control-label">邮箱地址</label>
-                        <input type="email" name="email" class="form-control"
-                               title="您输入的邮箱格式不正确!"
-                               placeholder="请输入您的邮箱" required/>
-                    </div>
-
-                    <div class="mb10">
                         <label class="control-label">用户名</label>
                         <input type="text"
                                name="username" class="form-control"
-                               placeholder="您的账户名和登录名"
+                               placeholder="您的账户名"
                                required/>
                     </div>
 
@@ -94,10 +87,5 @@
     </div>
 </section>
 <jsp:include page="common/scripts.jsp"></jsp:include>
-<script>
-    jQuery("#basicForm2").validate({
-        errorLabelContainer: jQuery("#basicForm2 div.error")
-    });
-</script>
 </body>
 </html>

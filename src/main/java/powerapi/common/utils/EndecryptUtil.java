@@ -109,10 +109,10 @@ public class EndecryptUtil {
 
     public static void main(String args[]) {
 
-        String code = RandomUtil.generateNum().toString()+1;
+        String code = RandomUtil.generateNum().toString() + 1;
         String a1 = encrytBase64(code);
         System.out.println(a1);
-        String a2=decryptBase64(a1);
-        System.out.println(a2.substring(6));
+        String a2 = decryptBase64("XMjY1ODc2OTUzMg==");
+        System.out.println(a2);
     }
 }
