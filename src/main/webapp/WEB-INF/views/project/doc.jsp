@@ -209,7 +209,7 @@
                 console.log("data-->", data)
                 if (data.code == 1000) {
                     var module_html = "";
-                    var function_html = "";
+
                     for (var module_count = 0; module_count < data.result.length; module_count++) {
                         var moduleObj = data.result[module_count];
 //                        module_html = module_html + '<li class="nav-parent  active  nav-active"><a href="">' +
@@ -218,6 +218,7 @@
 //                                '<li><a class="function-detail" href="#" ><i class="fa fa-chevron-right"></i>functiontitle</a></li> ' +
 //                                '</ul>'
 //                                + ' </li>';
+                        var function_html = "";
                         for (var function_count = 0; function_count < moduleObj.functions.length; function_count++) {
 
                             var functionObj = moduleObj.functions[function_count];
