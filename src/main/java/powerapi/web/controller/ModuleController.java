@@ -34,7 +34,7 @@ public class ModuleController extends BaseController {
         List<Module> modules = moduleService.selectByProjectId(proId);
         model.addAttribute("modules", modules);
         model.addAttribute("project", project);
-        return "/module/index";
+        return "module/index";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -42,7 +42,7 @@ public class ModuleController extends BaseController {
             ModelMap model,
             @RequestParam(value = "proId", required = true) Long proId) {
         model.addAttribute("project", getProject(proId));
-        return "/module/detail";
+        return "module/detail";
     }
 
 
@@ -57,7 +57,7 @@ public class ModuleController extends BaseController {
             model.addAttribute("module", module);
         }
         model.addAttribute("project", getProject(proId));
-        return "/module/detail";
+        return "module/detail";
     }
 
     @LogModify(resource = Constants.LOG_RESOURCE_MODULE)

@@ -1,7 +1,9 @@
 package powerapi.entity;
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import powerapi.common.utils.JsonUtil;
 
 /**
  * Created by Melon on 17/3/2.
@@ -35,6 +37,10 @@ public class Function extends BaseEntity {
 
     @TableField(value = "response_type")
     private String responseType;
+
+    @TableField(exist = false)
+    private String jsonValue;
+
 
     public String getResponseType() {
         return responseType;
@@ -115,5 +121,37 @@ public class Function extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getJsonValue() {
+        System.out.println("this---->" + this.toString());
+        return JSONUtils.toJSONString(this);
+    }
+
+    public void setJsonValue(String jsonValue) {
+        this.jsonValue = jsonValue;
+    }
+
+    @Override
+    public String toString() {
+
+        String result = "\"id\": \"" + id + "\",   \"title\": \"" + title + "\",  \"params\": \"" + params + "\"     ";
+
+        return result;
+
+//        return "Function{" +
+//                "id='" + id + '\'' +
+//                "title='" + title + '\'' +
+//                ", url='" + url + '\'' +
+//                ", method='" + method + '\'' +
+//                ", isLogin=" + isLogin +
+//                ", params='" + params + '\'' +
+//                ", responseBody='" + responseBody + '\'' +
+//                ", mId=" + mId +
+//                ", status=" + status +
+//                ", description='" + description + '\'' +
+//                ", responseType='" + responseType + '\'' +
+//                '}';
+//    }
     }
 }

@@ -26,10 +26,7 @@
         <div class="tab-content">
             <div class="tab-pane active">
                 <div class="row">
-
                     <c:if test="${modules.size()>0}">
-
-
                         <div class="col-md-12">
                             <div class="col-sm-2 col-lg-2">
                                 <br/>
@@ -110,13 +107,11 @@
                                 </div>
                             </div>
                         </div>
-
                     </c:if>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
 <div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
      data-backdrop="static" aria-hidden="true">
@@ -150,7 +145,7 @@
     var clipboard = new Clipboard('.share');
 
     clipboard.on('success', function (e) {
-        //
+        //to do
     });
 
     clipboard.on('error', function (e) {

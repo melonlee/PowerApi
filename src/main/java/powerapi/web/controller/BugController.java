@@ -37,7 +37,7 @@ public class BugController extends BaseController {
         List<Bug> list = bugService.selectByProjectId(proId);
         model.addAttribute("bugs", list);
         model.addAttribute("project", getProject(proId));
-        return "/bug/index";
+        return "bug/index";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -93,7 +93,7 @@ public class BugController extends BaseController {
         //获取评论
         List<BugComment> comments = bugCommentService.findByBugId(id);
         model.addAttribute("comments", comments);
-        return "/bug/view";
+        return "bug/view";
     }
 
     @LogDelete(resource = Constants.LOG_RESOURCE_BUG)

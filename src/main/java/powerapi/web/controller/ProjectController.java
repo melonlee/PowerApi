@@ -34,7 +34,7 @@ public class ProjectController extends BaseController {
     public String list(ModelMap model, @RequestParam(defaultValue = "1") int page) {
         List<Project> projects = projectService.getProjectList(getCurrentUser().getId(), page);
         model.addAttribute("projects", projects);
-        return "/project/index";
+        return "project/index";
     }
 
     /**
@@ -44,7 +44,7 @@ public class ProjectController extends BaseController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create() {
-        return "/project/create";
+        return "project/create";
     }
 
     /**

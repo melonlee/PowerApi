@@ -91,7 +91,7 @@ public class DashboardController extends BaseController {
             return "redirect:/dashboard/console";
         } catch (UnknownAccountException | IncorrectCredentialsException | LockedAccountException e) {
             map.addAttribute("exception", e.getMessage());
-            return "/common/error";
+            return "common/error";
         }
     }
 }
