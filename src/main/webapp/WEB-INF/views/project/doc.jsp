@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="host"
        value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"></c:set>
+<c:set var="resource_host" value="${pageContext.request.contextPath}"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -79,10 +80,6 @@
         }
 
     </style>
-
-    <script type="text/javascript">
-        var map = {};
-    </script>
 </head>
 <body>
 <div id="preloader">
@@ -96,27 +93,8 @@
     </div>
 
     <div class="leftpanelinner">
-
         <br/>
         <ul class="nav nav-pills nav-stacked nav-bracket" id="module-list">
-
-            <%--<c:forEach var="module" items="${modules}">--%>
-            <%--<li class="nav-parent  active  nav-active"><a href=""></i>--%>
-            <%--<span><i class="fa fa-th-list"></i>${module.title}</span></a>--%>
-            <%--<ul class="children">--%>
-            <%--<c:forEach var="function" items="${module.functions}">--%>
-            <%--<li><a class="function-detail" href="#" data-object='${function.jsonValue}'--%>
-            <%--data-title="${function.title}"--%>
-            <%--data-url="${project.hostUrl}${module.url}${function.url}"--%>
-            <%--data-description="${function.description}" data-params='${function.params}'--%>
-            <%--data-method="${function.method}" data-response="${function.responseBody}"--%>
-            <%--data-type="${function.responseType}"><i--%>
-            <%--class="fa fa-chevron-right"></i>${function.title}</a></li>--%>
-
-            <%--</c:forEach>--%>
-            <%--</ul>--%>
-            <%--</li>--%>
-            <%--</c:forEach>--%>
         </ul>
     </div>
 </div>
@@ -185,18 +163,15 @@
                         <h4 class="panel-title"><i class="fa fa-cloud-download"></i> 返回类型</h4>
                         <p id="response_type"></p>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
+<script src="${resource_host}/static/js/service/format.js"></script>
 <script>
-
-
     $(document).ready(function () {
-
         var function_map = {};
 
         $.ajax({
@@ -206,33 +181,24 @@
             cache: false,
             dataType: 'json',
             success: function (data) {
-                console.log("data-->", data)
                 if (data.code == 1000) {
                     var module_html = "";
-
                     for (var module_count = 0; module_count < data.result.length; module_count++) {
                         var moduleObj = data.result[module_count];
-//                        module_html = module_html + '<li class="nav-parent  active  nav-active"><a href="">' +
-//                                '<span><i class="fa fa-th-list"></i>' + moduleObj.title + '</span></a> ' +
-//                                '<ul class="children"> ' +
-//                                '<li><a class="function-detail" href="#" ><i class="fa fa-chevron-right"></i>functiontitle</a></li> ' +
-//                                '</ul>'
-//                                + ' </li>';
                         var function_html = "";
                         for (var function_count = 0; function_count < moduleObj.functions.length; function_count++) {
-
                             var functionObj = moduleObj.functions[function_count];
                             function_html += '<ul class="children"> ' +
                                     '<li><a class="function-detail" href="#" ><i class="fa fa-chevron-right"></i>' + functionObj.title + '</a></li> ' +
                                     '</ul>';
                             function_map[functionObj.title] = functionObj;
                         }
-
                         module_html += '<li class="nav-parent  active  nav-active"><a href="">' +
                                 '<span><i class="fa fa-th-list"></i>' + moduleObj.title + '</span></a> ' + function_html + ' </li>';
-
                     }
                     $("#module-list").append(module_html);
+                    //获取第一个模块导航条
+                    $("#module_list").find("li:first").find("ul:first").find("li:first").addClass("active");
                 } else {
 //                    $("#more_log").text("暂无更多数据")
                 }
@@ -242,22 +208,21 @@
             }
         });
 
-
         //导航点击事件
         $(document).on("click", ".function-detail", function () {
-
-            console.log(function_map);
             var $curFunction = function_map[$(this).text()];
-            console.log($curFunction);
+
             $("#title").html($curFunction.title);
             $("#url").html($curFunction.url);
             $("#method").html($curFunction.method);
             $("#response_type").html($curFunction.responseType);
-            format($curFunction.responseBody);
-            $("#description").html(description);
+            $("#response_body").html("<pre><code class='language-json'>" + format($curFunction.responseBody) + "</code></pre>");
+            Prism.highlightAll();
+            $("#description").html($curFunction.description);
+
             $("#params").empty();
-            //解析参数数组然后加入到table中
-            var paramsAry = $curFunction.params;
+            var paramsAry = JSON.parse($curFunction.params);
+            console.log(paramsAry);
             for (var loop = 0; loop < paramsAry.params.length; loop++) {
                 var functionDetailObj = paramsAry.params[loop];
                 var isneedstr = functionDetailObj.isneed == 1 ? "是" : "否";
@@ -271,67 +236,7 @@
                         + '</tr>');
             }
         });
-
     });
-
-
-    /**
-     *  格式化接口测试返回回来的JSON源码(对象转换为JSON文本)
-     *
-     */
-    function format(txt, compress/*是否为压缩模式*/) {
-
-        var indentChar = '    ';
-        if (/^\s*$/.test(txt)) {
-            return "无返回示例";
-        }
-        try {
-            var data = eval('(' + txt + ')');
-        }
-        catch (e) {
-            return "无返回示例";
-        }
-        ;
-        var draw = [], last = false, This = this, line = compress ? '' : '\n', nodeCount = 0, maxDepth = 0;
-
-        var notify = function (name, value, isLast, indent/*缩进*/, formObj) {
-            nodeCount++;
-            /*节点计数*/
-            for (var i = 0, tab = ''; i < indent; i++)tab += indentChar;
-            /* 缩进HTML */
-            tab = compress ? '' : tab;
-            /*压缩模式忽略缩进*/
-            maxDepth = ++indent;
-            /*缩进递增并记录*/
-            if (value && value.constructor == Array) {/*处理数组*/
-                draw.push(tab + (formObj ? ('"' + name + '":') : '') + '[' + line);
-                /*缩进'[' 然后换行*/
-                for (var i = 0; i < value.length; i++)
-                    notify(i, value[i], i == value.length - 1, indent, false);
-                draw.push(tab + ']' + (isLast ? line : (',' + line)));
-                /*缩进']'换行,若非尾元素则添加逗号*/
-            } else if (value && typeof value == 'object') {/*处理对象*/
-                draw.push(tab + (formObj ? ('"' + name + '":') : '') + '{' + line);
-                /*缩进'{' 然后换行*/
-                var len = 0, i = 0;
-                for (var key in value)len++;
-                for (var key in value)notify(key, value[key], ++i == len, indent, true);
-                draw.push(tab + '}' + (isLast ? line : (',' + line)));
-                /*缩进'}'换行,若非尾元素则添加逗号*/
-            } else {
-                if (typeof value == 'string')value = '"' + value + '"';
-                draw.push(tab + (formObj ? ('"' + name + '":') : '') + value + (isLast ? '' : ',') + line);
-            }
-            ;
-        };
-        var isLast = true, indent = 0;
-
-        notify('', data, isLast, indent, false);
-
-        $("#response_body").html("<pre><code class='language-json'>" + draw.join('') + "</code></pre>");
-        Prism.highlightAll();
-    }
-
 </script>
 </body>
 </html>
