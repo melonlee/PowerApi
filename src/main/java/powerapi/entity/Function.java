@@ -123,35 +123,4 @@ public class Function extends BaseEntity {
         this.description = description;
     }
 
-    public String getJsonValue() {
-        System.out.println("this---->" + this.toString());
-        return JSONUtils.toJSONString(this);
-    }
-
-    public void setJsonValue(String jsonValue) {
-        this.jsonValue = jsonValue;
-    }
-
-    @Override
-    public String toString() {
-
-        String result = "\"id\": \"" + id + "\",   \"title\": \"" + title + "\",  \"params\": \"" + params + "\"     ";
-
-        return result;
-
-//        return "Function{" +
-//                "id='" + id + '\'' +
-//                "title='" + title + '\'' +
-//                ", url='" + url + '\'' +
-//                ", method='" + method + '\'' +
-//                ", isLogin=" + isLogin +
-//                ", params='" + params + '\'' +
-//                ", responseBody='" + responseBody + '\'' +
-//                ", mId=" + mId +
-//                ", status=" + status +
-//                ", description='" + description + '\'' +
-//                ", responseType='" + responseType + '\'' +
-//                '}';
-//    }
-    }
 }

@@ -98,25 +98,25 @@
     <div class="leftpanelinner">
 
         <br/>
-        <ul class="nav nav-pills nav-stacked nav-bracket">
+        <ul class="nav nav-pills nav-stacked nav-bracket" id="module-list">
 
-            <c:forEach var="module" items="${modules}">
-                <li class="nav-parent  active  nav-active"><a href=""></i>
-                    <span><i class="fa fa-th-list"></i>${module.title}</span></a>
-                    <ul class="children">
-                        <c:forEach var="function" items="${module.functions}">
-                            <li><a class="function-detail" href="#"
-                                   data-title='${function.title}'
-                                   data-url="${project.hostUrl}${module.url}${function.url}"
-                                   data-description="${function.description}" data-params='${function.params}'
-                                   data-method="${function.method}" data-response="${function.responseBody}"
-                                   data-type="${function.responseType}"><i
-                                    class="fa fa-chevron-right"></i>${function.title}</a></li>
+            <%--<c:forEach var="module" items="${modules}">--%>
+            <%--<li class="nav-parent  active  nav-active"><a href=""></i>--%>
+            <%--<span><i class="fa fa-th-list"></i>${module.title}</span></a>--%>
+            <%--<ul class="children">--%>
+            <%--<c:forEach var="function" items="${module.functions}">--%>
+            <%--<li><a class="function-detail" href="#" data-object='${function.jsonValue}'--%>
+            <%--data-title="${function.title}"--%>
+            <%--data-url="${project.hostUrl}${module.url}${function.url}"--%>
+            <%--data-description="${function.description}" data-params='${function.params}'--%>
+            <%--data-method="${function.method}" data-response="${function.responseBody}"--%>
+            <%--data-type="${function.responseType}"><i--%>
+            <%--class="fa fa-chevron-right"></i>${function.title}</a></li>--%>
 
-                        </c:forEach>
-                    </ul>
-                </li>
-            </c:forEach>
+            <%--</c:forEach>--%>
+            <%--</ul>--%>
+            <%--</li>--%>
+            <%--</c:forEach>--%>
         </ul>
     </div>
 </div>
@@ -195,32 +195,82 @@
 <script>
 
 
-    //导航点击事件
-    $(document).on("click", ".function-detail", function () {
+    $(document).ready(function () {
 
-        var $curFunction = $(this);
-        $("#title").html($curFunction.data("title"));
-        $("#url").html($curFunction.data("url"));
-        $("#method").html($curFunction.data("method"));
-        $("#response_type").html($curFunction.data("type"));
-        $("#response_body").html('<pre>' + $curFunction.data("response") + '</pre>');
-        //format($curFunction.data("response"));
-        $("#description").html($curFunction.data("description"));
-        $("#params").empty();
-        //解析参数数组然后加入到table中
-        var paramsAry = $curFunction.data("params");
-        for (var loop = 0; loop < paramsAry.params.length; loop++) {
-            var functionDetailObj = paramsAry.params[loop];
-            var isneedstr = functionDetailObj.isneed == 1 ? "是" : "否";
-            $("#params").append(
-                    '<tr><td>' + functionDetailObj.name + '</td>' + '<td>'
-                    + functionDetailObj.type + '</td>' + '<td>'
-                    + functionDetailObj.desc + '</td>' + '<td>'
-                    + isneedstr + '</td>' + '<td>'
-                    + functionDetailObj.value + '</td>' + '<td>'
-                    + functionDetailObj.defaultvalue + '</td>' + '<td>'
-                    + '</tr>');
-        }
+        var function_map = {};
+
+        $.ajax({
+            type: 'POST',
+            url: '../' + window.location.pathname,
+            data: {},
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                console.log("data-->", data)
+                if (data.code == 1000) {
+                    var module_html = "";
+                    var function_html = "";
+                    for (var module_count = 0; module_count < data.result.length; module_count++) {
+                        var moduleObj = data.result[module_count];
+//                        module_html = module_html + '<li class="nav-parent  active  nav-active"><a href="">' +
+//                                '<span><i class="fa fa-th-list"></i>' + moduleObj.title + '</span></a> ' +
+//                                '<ul class="children"> ' +
+//                                '<li><a class="function-detail" href="#" ><i class="fa fa-chevron-right"></i>functiontitle</a></li> ' +
+//                                '</ul>'
+//                                + ' </li>';
+                        for (var function_count = 0; function_count < moduleObj.functions.length; function_count++) {
+
+                            var functionObj = moduleObj.functions[function_count];
+                            function_html += '<ul class="children"> ' +
+                                    '<li><a class="function-detail" href="#" ><i class="fa fa-chevron-right"></i>' + functionObj.title + '</a></li> ' +
+                                    '</ul>';
+                            function_map[functionObj.title] = functionObj;
+                        }
+
+                        module_html += '<li class="nav-parent  active  nav-active"><a href="">' +
+                                '<span><i class="fa fa-th-list"></i>' + moduleObj.title + '</span></a> ' + function_html + ' </li>';
+
+                    }
+                    $("#module-list").append(module_html);
+                } else {
+//                    $("#more_log").text("暂无更多数据")
+                }
+            },
+            error: function () {
+                alert("获取数据异常，请重试!");
+            }
+        });
+
+
+        //导航点击事件
+        $(document).on("click", ".function-detail", function () {
+
+            console.log(function_map);
+            var $curFunction = function_map[$(this).text()];
+            console.log($curFunction);
+            $("#title").html($curFunction.title);
+            $("#url").html($curFunction.url);
+            $("#method").html($curFunction.method);
+            $("#response_type").html($curFunction.responseType);
+            format($curFunction.responseBody);
+            $("#description").html(description);
+            $("#params").empty();
+            //解析参数数组然后加入到table中
+            var paramsAry = $curFunction.params;
+            for (var loop = 0; loop < paramsAry.params.length; loop++) {
+                var functionDetailObj = paramsAry.params[loop];
+                var isneedstr = functionDetailObj.isneed == 1 ? "是" : "否";
+                $("#params").append(
+                        '<tr><td>' + functionDetailObj.name + '</td>' + '<td>'
+                        + functionDetailObj.type + '</td>' + '<td>'
+                        + functionDetailObj.desc + '</td>' + '<td>'
+                        + isneedstr + '</td>' + '<td>'
+                        + functionDetailObj.value + '</td>' + '<td>'
+                        + functionDetailObj.defaultvalue + '</td>' + '<td>'
+                        + '</tr>');
+            }
+        });
+
     });
 
 
