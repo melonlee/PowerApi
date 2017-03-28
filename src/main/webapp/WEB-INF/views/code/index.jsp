@@ -45,7 +45,7 @@
                                 <table class="table table-success table-buglist">
                                     <thead>
                                     <tr>
-                                        <th></th>
+                                        <th>#</th>
                                         <th>代&nbsp;码&nbsp;</th>
                                         <th>说&nbsp;明&nbsp;</th>
                                         <th></th>
@@ -54,9 +54,7 @@
                                     <tbody>
                                     <c:forEach var="code" items="${codes}">
                                         <tr>
-                                            <td>
-                                                <span class="pull-right badge badge-danger">更新</span>
-                                            </td>
+                                            <td>${code.id}</td>
                                             <td>${code.code}</td>
                                             <td>${code.description}</td>
                                             <td class="table-action"><a

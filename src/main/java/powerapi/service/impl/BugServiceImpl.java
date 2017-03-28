@@ -19,6 +19,6 @@ public class BugServiceImpl extends ServiceImpl<BugMapper, Bug> implements BugSe
 
 
     public List<Bug> selectByProjectId(Long proId) {
-        return this.selectList(new EntityWrapper<Bug>().eq("p_id", proId));
+        return this.selectList(new EntityWrapper<Bug>().eq("p_id", proId).orderBy("createdate", false));
     }
 }

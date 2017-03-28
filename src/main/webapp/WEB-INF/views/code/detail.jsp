@@ -45,24 +45,11 @@
                                                    value="${code.description}" placeholder="主要描述在什么状态下出现该业务码"/>
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">标记变更</label>
-                                        <div class="col-sm-10">
-                                            <div class="ckbox ckbox-danger">
-                                                <input type="checkbox" id="checkbox1" name="isUpdate"
-                                                ${code.isUpdate==1 ? "checked='checked'" : '' } value=1>
-                                                <label for="checkbox1" class="m_checkbox_top"></label>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary" type="submit">提交</button>
                                     <a class="btn btn-default" type="button"
-                                            onclick="javascript:window.history.back()">取消
+                                       onclick="javascript:window.history.back()">取消
                                     </a>
                                 </div>
                             </div>

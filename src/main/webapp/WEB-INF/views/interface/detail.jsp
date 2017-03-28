@@ -30,29 +30,26 @@
                                     </div>
                                 </c:if>
                             </div>
-
                             <div class="col-sm-12 col-lg-12">
-
                                 <div class="panel panel-default">
                                     <div class="panel-body">
+                                        <%--<div class="pull-left" id="tag_div">--%>
+                                        <%--<c:choose>--%>
+                                        <%--<c:when test="${function.status==1}">--%>
+                                        <%--<span class="pull-right badge badge-info">正常</span>--%>
+                                        <%--</c:when>--%>
+                                        <%--<c:when test="${function.status==2}">--%>
+                                        <%--<span class="pull-right badge badge-success">新增</span>--%>
+                                        <%--</c:when>--%>
+                                        <%--<c:when test="${function.status==3}">--%>
+                                        <%--<span class="pull-right badge badge-danger">变更</span>--%>
+                                        <%--</c:when>--%>
+                                        <%--<c:when test="${function.status==4}">--%>
+                                        <%--<span class="pull-right badge badge-warning">异常</span>--%>
+                                        <%--</c:when>--%>
+                                        <%--</c:choose>--%>
 
-                                        <div class="pull-left" id="tag_div">
-                                            <c:choose>
-                                                <c:when test="${function.status==1}">
-                                                    <span class="pull-right badge badge-info">正常</span>
-                                                </c:when>
-                                                <c:when test="${function.status==2}">
-                                                    <span class="pull-right badge badge-success">新增</span>
-                                                </c:when>
-                                                <c:when test="${function.status==3}">
-                                                    <span class="pull-right badge badge-danger">变更</span>
-                                                </c:when>
-                                                <c:when test="${function.status==4}">
-                                                    <span class="pull-right badge badge-warning">异常</span>
-                                                </c:when>
-                                            </c:choose>
-
-                                        </div>
+                                        <%--</div>--%>
                                         <div class="pull-right">
                                             <div class="btn-group mr10">
                                                 <a class="btn btn-sm btn-primary tooltips" type="button"
@@ -61,31 +58,31 @@
                                                         class="fa fa-paper-plane"></i>
                                                 </a>
                                             </div>
-
-                                            <div class="btn-group mr10">
-                                                <div class="btn-group nomargin">
-                                                    <button data-toggle="dropdown"
-                                                            class="btn btn-sm btn-warning dropdown-toggle tooltips"
-                                                            type="button" title="标记接口">
-                                                        <i class="glyphicon glyphicon-tag mr5"></i> <span
-                                                            class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#" class="function_tag" data-status="2"
-                                                               data-id="${function.id}"><i class="fa fa-plus mr5"></i>
-                                                            新增</a></li>
-                                                        <li><a href="#" class="function_tag" data-status="3"
-                                                               data-id="${function.id}"><i
-                                                                class="fa fa-bullhorn mr5"></i> 变更</a></li>
-                                                        <li><a href="#" class="function_tag" data-status="4"
-                                                               data-id="${function.id}"><i class="fa fa-bug mr5"></i>
-                                                            异常</a></li>
-                                                        <li><a href="#" class="function_tag" data-status="1"
-                                                               data-id="${function.id}"><i class="fa fa-check mr5"></i>
-                                                            正常</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                            <!--接口标记功能 暂时屏蔽-->
+                                            <%--<div class="btn-group mr10">--%>
+                                            <%--<div class="btn-group nomargin">--%>
+                                            <%--<button data-toggle="dropdown"--%>
+                                            <%--class="btn btn-sm btn-warning dropdown-toggle tooltips"--%>
+                                            <%--type="button" title="标记接口">--%>
+                                            <%--<i class="glyphicon glyphicon-tag mr5"></i> <span--%>
+                                            <%--class="caret"></span>--%>
+                                            <%--</button>--%>
+                                            <%--<ul class="dropdown-menu">--%>
+                                            <%--<li><a href="#" class="function_tag" data-status="2"--%>
+                                            <%--data-id="${function.id}"><i class="fa fa-plus mr5"></i>--%>
+                                            <%--新增</a></li>--%>
+                                            <%--<li><a href="#" class="function_tag" data-status="3"--%>
+                                            <%--data-id="${function.id}"><i--%>
+                                            <%--class="fa fa-bullhorn mr5"></i> 变更</a></li>--%>
+                                            <%--<li><a href="#" class="function_tag" data-status="4"--%>
+                                            <%--data-id="${function.id}"><i class="fa fa-bug mr5"></i>--%>
+                                            <%--异常</a></li>--%>
+                                            <%--<li><a href="#" class="function_tag" data-status="1"--%>
+                                            <%--data-id="${function.id}"><i class="fa fa-check mr5"></i>--%>
+                                            <%--正常</a></li>--%>
+                                            <%--</ul>--%>
+                                            <%--</div>--%>
+                                            <%--</div>--%>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -100,7 +97,7 @@
 
                                                     <div class="col-sm-3">
                                                         <input type="text" id="url" class="form-control"
-                                                               placeholder="地址:submit.do"
+                                                               placeholder="地址:/login"
                                                                value="${function.url}"/>
                                                     </div>
 
@@ -178,11 +175,8 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody id="params">
-
-
                                                                     </tbody>
                                                                 </table>
-                                                                <!-- table-responsive -->
                                                             </div>
 
                                                             <div class="row">
@@ -202,7 +196,7 @@
                                                 <div class="col-sm-12">
 																			<textarea class="form-control"
                                                                                       id="response_body"
-                                                                                      placeholder="示例内容"
+                                                                                      placeholder="返回的(JSON,XML)内容示例"
                                                                                       rows="5">${function.responseBody}</textarea>
                                                 </div>
                                             </div>
@@ -315,14 +309,6 @@
                                         '<td><select class="select2 m_param_type">' +
                                         '<option value="String">String</option>' +
                                         '<option value="Int">Int</option>' +
-                                        '<option value="Byte">Byte</option>' +
-                                        '<option value="Short">Short</option>' +
-                                        '<option value="Boolean">Boolean</option>' +
-                                        '<option value="Flat">Flat</option>' +
-                                        '<option value="Double">Double</option>' +
-                                        '<option value="Long">Long</option>' +
-                                        '<option value="JSON">JSON</option>' +
-                                        '<option value="File">File</option>' +
                                         '</select></td>' +
                                         '<td class="m_param_desc" contenteditable style="outline: none;"></td>' +
                                         '<td><select class="select2 m_param_isneed">' +

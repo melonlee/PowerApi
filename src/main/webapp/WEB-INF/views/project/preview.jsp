@@ -26,6 +26,17 @@
         <div class="tab-content">
             <div class="tab-pane active">
                 <div class="row">
+
+                    <c:if test="${modules.size()==0}">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                您目前还没有文档可以预览!
+                            </div>
+                        </div>
+                    </c:if>
+
                     <c:if test="${modules.size()>0}">
                         <div class="col-md-12">
                             <div class="col-sm-2 col-lg-2">

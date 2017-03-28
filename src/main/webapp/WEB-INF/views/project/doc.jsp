@@ -122,16 +122,31 @@
                     </div>
 
                     <div class="panel-heading">
+                        <h4 class="panel-title"><i class="fa fa-file-text-o"></i> 接口说明</h4>
+                        <p id="description"></p>
+                    </div>
+
+                    <div class="panel-heading">
                         <h4 class="panel-title">
                             <i class="fa  fa-chain"></i> URL</h4>
                         <p id="url"></p>
                     </div>
 
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><i class="fa fa-file-text-o"></i> 接口说明</h4>
-                        <p id="description"></p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><i class="fa fa-upload"></i> 请求方式</h4>
+                                <p id="method"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><i class="fa fa-cloud-download"></i> 返回类型</h4>
+                                <p id="response_type"></p>
+                            </div>
+                        </div>
                     </div>
-
+                    
                     <div class="panel-heading param-table">
 
                         <h4 class="panel-title"><i class="fa fa-cogs"></i> 接口参数</h4>
@@ -156,14 +171,6 @@
                     <div class="panel-heading">
                         <h4 class="panel-title"><i class="fa fa-code"></i> 返回示例</h4>
                         <p id="response_body"></p>
-                    </div>
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><i class="fa fa-upload"></i> 请求方式</h4>
-                        <p id="method"></p>
-                    </div>
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><i class="fa fa-cloud-download"></i> 返回类型</h4>
-                        <p id="response_type"></p>
                     </div>
                 </div>
             </div>

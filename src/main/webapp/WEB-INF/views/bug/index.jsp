@@ -47,7 +47,6 @@
                                         <th></th>
                                         <th>#</th>
                                         <th>问题描述</th>
-                                        <th>创建者</th>
                                         <th>提出时间</th>
                                         <th></th>
                                     </tr>
@@ -65,8 +64,7 @@
                                             </td>
                                             <td>#${bug.id}</td>
                                             <td> ${bug.title} </td>
-                                            <td>${bug.description}</td>
-                                            <td>${bug.description}</td>
+                                            <td>${bug.relativedate}</td>
                                             <td class="table-action"><a
                                                     href="view?id=${bug.id }&proId=${project.id}"
                                                     class="edit-row"><i class="fa fa-eye"></i></a></td>
