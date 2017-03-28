@@ -1,16 +1,18 @@
-<%@ page import="java.util.List" %>
-<%@ page import="powerapi.entity.Module" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="host"
        value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"></c:set>
-<c:set var="resource_host" value="${pageContext.request.contextPath}"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="../common/style.jsp"></jsp:include>
-
+    <title>Power.API</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="shortcut icon" href="${host}/static/images/logo.jpg" type="image/jpg">
+    <link href="${host}/static/css/style.default.css" rel="stylesheet">
+    <link href="${host}/static/css/prism.css" rel="stylesheet">
     <style type="text/css">
 
         .mainpanel {
@@ -103,7 +105,7 @@
     <div class="contentpanel">
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-body" id="function_detail">
+                <div class="panel-body">
 
                     <blockquote>
                         <i class="fa fa-quote-left"></i>
@@ -130,7 +132,7 @@
                         <p id="description"></p>
                     </div>
 
-                    <div class="panel-heading">
+                    <div class="panel-heading param-table">
 
                         <h4 class="panel-title"><i class="fa fa-cogs"></i> 接口参数</h4>
                         <p>
@@ -169,9 +171,10 @@
     </div>
 </div>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
-<script src="${resource_host}/static/js/service/format.js"></script>
+<script src="${host}/static/js/service/format.js"></script>
 <script>
     $(document).ready(function () {
+        //用来缓存接口
         var function_map = {};
 
         $.ajax({
@@ -182,6 +185,7 @@
             dataType: 'json',
             success: function (data) {
                 if (data.code == 1000) {
+                    $(".panel-body").show();
                     var module_html = "";
                     for (var module_count = 0; module_count < data.result.length; module_count++) {
                         var moduleObj = data.result[module_count];
@@ -191,6 +195,7 @@
                             function_html += '<ul class="children"> ' +
                                     '<li><a class="function-detail" href="#" ><i class="fa fa-chevron-right"></i>' + functionObj.title + '</a></li> ' +
                                     '</ul>';
+                            functionObj.url = "${project.hostUrl}" + moduleObj.url + functionObj.url;
                             function_map[functionObj.title] = functionObj;
                         }
                         module_html += '<li class="nav-parent  active  nav-active"><a href="">' +
@@ -198,9 +203,12 @@
                     }
                     $("#module-list").append(module_html);
                     //获取第一个模块导航条
-                    $("#module_list").find("li:first").find("ul:first").find("li:first").addClass("active");
+                    var $first_function = $("#module-list").find("li:first").find("ul:first").find("li:first");
+                    $first_function.find("a:first").click()
+                    $first_function.addClass("active");
                 } else {
-//                    $("#more_log").text("暂无更多数据")
+                    $(".panel-body").hide();
+                    alert("您目前还没有接口数据,请前往添加!");
                 }
             },
             error: function () {
@@ -208,32 +216,45 @@
             }
         });
 
-        //导航点击事件
+        //左侧导航点击事件
         $(document).on("click", ".function-detail", function () {
-            var $curFunction = function_map[$(this).text()];
 
+            //设置第一个节点的点击样式
+            $(".function-detail").parent().removeClass("active");
+            $(this).parent().addClass("active");
+
+            //解析对象内容
+            var $curFunction = function_map[$(this).text()];
             $("#title").html($curFunction.title);
             $("#url").html($curFunction.url);
             $("#method").html($curFunction.method);
             $("#response_type").html($curFunction.responseType);
-            $("#response_body").html("<pre><code class='language-json'>" + format($curFunction.responseBody) + "</code></pre>");
-            Prism.highlightAll();
             $("#description").html($curFunction.description);
 
+            //设置代码高亮显示
+            $("#response_body").html("<pre><code class='language-json'>" + format($curFunction.responseBody) + "</code></pre>");
+            Prism.highlightAll();
+
+            //设置参数内容填充到表格
             $("#params").empty();
             var paramsAry = JSON.parse($curFunction.params);
-            console.log(paramsAry);
-            for (var loop = 0; loop < paramsAry.params.length; loop++) {
-                var functionDetailObj = paramsAry.params[loop];
-                var isneedstr = functionDetailObj.isneed == 1 ? "是" : "否";
-                $("#params").append(
-                        '<tr><td>' + functionDetailObj.name + '</td>' + '<td>'
-                        + functionDetailObj.type + '</td>' + '<td>'
-                        + functionDetailObj.desc + '</td>' + '<td>'
-                        + isneedstr + '</td>' + '<td>'
-                        + functionDetailObj.value + '</td>' + '<td>'
-                        + functionDetailObj.defaultvalue + '</td>' + '<td>'
-                        + '</tr>');
+            if (paramsAry.params.length > 0) {
+                for (var loop = 0; loop < paramsAry.params.length; loop++) {
+                    var functionDetailObj = paramsAry.params[loop];
+                    var isneedstr = functionDetailObj.isneed == 1 ? "是" : "否";
+                    $("#params").append(
+                            '<tr><td>' + functionDetailObj.name + '</td>' + '<td>'
+                            + functionDetailObj.type + '</td>' + '<td>'
+                            + functionDetailObj.desc + '</td>' + '<td>'
+                            + isneedstr + '</td>' + '<td>'
+                            + functionDetailObj.value + '</td>' + '<td>'
+                            + functionDetailObj.defaultvalue + '</td>' + '<td>'
+                            + '</tr>');
+                }
+                $(".param-table").show();
+            } else {
+                //隐藏表格
+                $(".param-table").hide();
             }
         });
     });

@@ -20,7 +20,6 @@
 <script src="${host}/static/js/basic/morris.min.js"></script>
 <script src="${host}/static/js/basic/raphael-2.1.0.min.js"></script>
 <script src="${host}/static/js/basic/jquery.autogrow-textarea.js"></script>
-<script src="${host}/static/js/basic/bootstrap-timepicker.min.js"></script>
 <script src="${host}/static/js/basic/jquery.maskedinput.min.js"></script>
 <script src="${host}/static/js/basic/jquery.tagsinput.min.js"></script>
 <script src="${host}/static/js/basic/jquery.mousewheel.js"></script>

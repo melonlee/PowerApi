@@ -33,10 +33,11 @@
                     href="../project/all"><i class="fa fa-briefcase"></i> <span>
 							项目管理</span> </a></li>
 
-            <li class="nav-parent ${param.nav==4 ? "active" : "" }"><a href=""><i class="fa fa-send"></i>
+            <li class="nav-parent ${param.nav==4 ? "active nav-active" : "" }"><a href=""><i class="fa fa-send"></i>
                 <span>测试管理</span></a>
-                <ul class="children">
-                    <li><a href="../unit/view"><i class="fa fa-send"></i> 单元测试</a></li>
+                <ul class="children" ${param.nav==4 ? "style='display:block;'" : "" }>
+                    <li ${param.nav==4 ? "class='active'" : "" } ><a href="../unit/view"><i class="fa fa-send"></i> 单元测试</a>
+                    </li>
                     <li><a href="#"><i class="fa fa-truck"></i> 自动化测试 <span
                             class="pull-right badge badge-danger">Beta</span></a></li>
                 </ul>
