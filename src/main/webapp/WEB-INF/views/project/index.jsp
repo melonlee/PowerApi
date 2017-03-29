@@ -9,7 +9,6 @@
     <jsp:include page="../common/style.jsp"></jsp:include>
 </head>
 <body>
-
 <section>
     <jsp:include page="../common/leftmenu.jsp" flush="true">
         <jsp:param name="nav" value="2"/>

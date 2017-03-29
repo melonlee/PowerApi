@@ -119,4 +119,6 @@ public class RedisCache {
     public void clearCache() {
         deleteCacheWithPattern(RedisCache.CAHCENAME + "|*");
     }
+
+
 }

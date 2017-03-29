@@ -12,7 +12,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import powerapi.common.Constants;
 import powerapi.common.anno.LogDelete;
+import powerapi.dto.DashboardDto;
 import powerapi.entity.*;
+import powerapi.plugin.redis.RedisCache;
 import powerapi.service.FunctionService;
 import powerapi.service.ModuleService;
 import powerapi.service.ProjectService;
@@ -34,6 +36,9 @@ public class SignupAdvice {
 
     @Autowired
     private FunctionService functionService;
+
+    @Autowired
+    private RedisCache redisCache;
 
     @Pointcut("execution(* powerapi.web.controller.AuthController.signup(..))")
     public void signupAspect() {
@@ -59,9 +64,14 @@ public class SignupAdvice {
             project.setHostUrl("http://api.host.com");
             project.setVersion("1.0.0");
             project.setUserId(entity.getId());
+            String cache_key = redisCache.CAHCENAME + "|dashboard|" + project.getUserId();
             projectService.insert(project);
             // create module
             if (null != project.getId()) {
+
+                //数据放入缓存
+                DashboardDto dashboardDto = new DashboardDto();
+                dashboardDto.setProjectCount(1);
 
                 Module module = new Module();
                 module.setUserId(entity.getId());
@@ -83,7 +93,9 @@ public class SignupAdvice {
                     function.setResponseBody("{\"code\":1000,\"result\":{\"id\":1,\"nickname\":\"ko\",\"passwd\":\"WEJOSJDFKJSHD23342N23\",\"phone\":\"18612481035\"}}");
                     function.setResponseType("JSON");
                     functionService.insert(function);
+                    dashboardDto.setInterfaceCount(1);
                 }
+                redisCache.putCache(cache_key, dashboardDto);
             }
         }
     }

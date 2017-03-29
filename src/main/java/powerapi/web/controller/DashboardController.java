@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import powerapi.common.utils.JsonUtil;
+import powerapi.dto.DashboardDto;
 import powerapi.entity.Log;
 import powerapi.entity.User;
 import powerapi.plugin.PasswordHelper;
+import powerapi.plugin.redis.RedisCache;
 import powerapi.service.*;
 
 import java.util.List;
@@ -35,15 +37,15 @@ public class DashboardController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RedisCache redisCache;
+
     @RequestMapping(value = "/console", method = RequestMethod.GET)
     public String list(ModelMap modelMap) {
         // 获取各项数据
-        //	Integer testCount = quicktestService.count(user.getId());
-        modelMap.addAttribute("testCount", 1);
-        //	Integer proCount = projectService.count(user.getId());
-        modelMap.addAttribute("proCount", 2);
-        //	Integer bugCount = bugService.count(user.getId());
-        modelMap.addAttribute("bugCount", 3);
+        String cache_key = redisCache.CAHCENAME + "|dashboard|" + getCurrentUser().getId();
+        DashboardDto dashboardDto = redisCache.getCache(cache_key, DashboardDto.class);
+        modelMap.addAttribute("dashboard", null != dashboardDto ? dashboardDto : new DashboardDto());
         return "dashboard";
     }
 
