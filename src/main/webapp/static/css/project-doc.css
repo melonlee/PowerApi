@@ -1,0 +1,65 @@
+.mainpanel {
+    background-color: #1D2939;
+!important;
+}
+
+.nav-bracket .children {
+    display: block;
+!important;
+}
+
+body {
+    line-height: 32px;
+!important;
+}
+
+blockquote p {
+    color: #ccc;
+!important;
+}
+
+.panel {
+    background: #1D2939;
+!important;
+}
+
+.panel-heading {
+    background: #1D2939;
+!important;
+    border-color: #1D2939;
+!important;
+}
+
+.panel-title {
+    color: #ccc;
+!important;
+}
+
+.logopanel h1 {
+    font-size: 39px;
+!important;
+    color: #ccc;
+!important;
+}
+
+.logopanel {
+    background: #1d2939;
+!important;
+}
+
+.panel-heading p {
+    font-size: 18px;
+!important;
+    color: #999;
+!important;
+}
+
+.table > tbody > tr > td {
+    border-top: 0px solid #999;
+!important;
+}
+
+.table {
+    background-color: #1d2939;
+!important;
+}

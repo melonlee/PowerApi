@@ -96,10 +96,6 @@
                                                        data-toggle="tooltip" data-placement="top"
                                                        title="分享文档"><i
                                                             class="fa fa-external-link"></i></a></li>
-                                                    <%--<li><a target="_blank"--%>
-                                                    <%--href="../doc/${project.id}" class="tooltips"--%>
-                                                    <%--data-toggle="tooltip" data-placement="top" title="成员管理"><i--%>
-                                                    <%--class="fa fa-users"></i></a></li>--%>
                                             </ul>
                                         </div>
                                     </div>
@@ -123,7 +119,6 @@
             </div>
             <div class="modal-body">
                 <input id="link" type="text" class="form-control">
-
             </div>
 
             <div class="modal-footer">
@@ -132,30 +127,7 @@
         </div>
     </div>
 </div>
-
 <jsp:include page="../common/scripts.jsp"></jsp:include>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
-<script type="text/javascript">
-    /**
-     *
-     * 设置分享链接复制分享
-     *
-     * @type {Clipboard}
-     */
-    var clipboard = new Clipboard('.share');
-
-    clipboard.on('success', function (e) {
-        //
-    });
-
-    clipboard.on('error', function (e) {
-        alert('此功能不支持该浏览器，请手工复制文本框中内容');
-    });
-
-    $(document).on("click", "#share", function () {
-        $("#link").val($(this).data("content"));
-    });
-
-</script>
+<jsp:include page="../common/sharejs.jsp"></jsp:include>
 </body>
 </html>

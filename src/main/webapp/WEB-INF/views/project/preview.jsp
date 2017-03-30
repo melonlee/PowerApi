@@ -9,7 +9,6 @@
     <style type="text/css">
         .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
             background-color: #bbbbbb;
-            cursor: hand;
         }
     </style>
 </head>
@@ -19,7 +18,6 @@
 </jsp:include>
 <section>
     <div class="mainpanel">
-
         <jsp:include page="../common/pageheader.jsp">
             <jsp:param name="index" value="5"/>
         </jsp:include>
@@ -144,29 +142,8 @@
     </div>
 </div>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
-<script src="${host}/static/js/service/project.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
-<script type="text/javascript">
-    /**
-     *
-     * 设置分享链接复制分享
-     *
-     * @type {Clipboard}
-     */
-    var clipboard = new Clipboard('.share');
-
-    clipboard.on('success', function (e) {
-        //to do
-    });
-
-    clipboard.on('error', function (e) {
-        alert('此功能不支持该浏览器，请手工复制文本框中内容');
-    });
-
-    $(document).on("click", "#share", function () {
-        $("#link").val($(this).data("content"));
-    });
-
-</script>
+<jsp:include page="../common/sharejs.jsp"></jsp:include>
+<script src="${host}/static/js/service/format.js"></script>
+<script src="${host}/static/js/service/project-preview.js"></script>
 </body>
 </html>
