@@ -11,4 +11,6 @@ import java.util.List;
 public interface BugService extends IService<Bug> {
 
     List<Bug> selectByProjectId(Long proId);
+
+    List<Bug> selectUnCloseBugs(Long projectId);
 }

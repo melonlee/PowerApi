@@ -26,7 +26,7 @@ $(document).ready(function () {
                         function_html += '<ul class="children"> ' +
                             '<li><a class="function-detail" href="#" ><i class="fa fa-chevron-right"></i>' + functionObj.title + '</a></li> ' +
                             '</ul>';
-                        functionObj.url = "${project.hostUrl}" + moduleObj.url + functionObj.url;
+                        functionObj.url = $(".project-host").data("host") + moduleObj.url + functionObj.url;
                         function_map[functionObj.title] = functionObj;
                     }
                     module_html += '<li class="nav-parent  active  nav-active"><a href="">' +
@@ -49,6 +49,10 @@ $(document).ready(function () {
 
     //左侧导航点击事件
     $(document).on("click", ".function-detail", function () {
+
+        $("#bug-list").hide();
+        $("#code-list").hide();
+        $("#interface-list").show();
 
         //设置第一个节点的点击样式
         $(".function-detail").parent().removeClass("active");
@@ -87,5 +91,20 @@ $(document).ready(function () {
             //隐藏表格
             $(".param-table").hide();
         }
+    });
+
+    $(document).on("click", ".bug-btn", function () {
+
+        $("#bug-list").show();
+        $("#code-list").hide();
+        $("#interface-list").hide();
+
+    });
+
+
+    $(document).on("click", ".code-btn", function () {
+        $("#bug-list").hide();
+        $("#code-list").show();
+        $("#interface-list").hide();
     });
 });

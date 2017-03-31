@@ -21,4 +21,9 @@ public class BugServiceImpl extends ServiceImpl<BugMapper, Bug> implements BugSe
     public List<Bug> selectByProjectId(Long proId) {
         return this.selectList(new EntityWrapper<Bug>().eq("p_id", proId).orderBy("createdate", false));
     }
+
+    @Override
+    public List<Bug> selectUnCloseBugs(Long proId) {
+        return this.selectList(new EntityWrapper<Bug>().eq("p_id", proId).eq("status", 0).orderBy("createdate", false));
+    }
 }
