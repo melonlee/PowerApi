@@ -37,21 +37,11 @@ function loadInterfaceByModule(moduleId) {
                 if (data.code == 1000) {
                     for (loop = 0; loop < data.result.length; loop++) {
                         functionObj = data.result[loop];
-                        var flag = "";
-                        if (functionObj.status == 2) {
-                            flag = '<span class="pull-left badge badge-success">新增 </span>';
-                        } else if (functionObj.status == 3) {
-                            flag = '<span class="pull-left badge badge-danger">变更</span>';
-                        } else if (functionObj.status == 4) {
-                            flag = '<span class="pull-left badge badge-warning">异常</span>';
-                        }
                         $("#function_row")
                             .append(
                                 '<tr class="interface_row">'
                                 + '<td><a href="../function/view?id=' + functionObj.id + '&proId=' + proId +
                                 '&mId=' + functionObj.mId + '">'
-                                + flag
-                                + '&nbsp;'
                                 + functionObj.title
                                 + '</a></td>'
                                 + '<td>'
