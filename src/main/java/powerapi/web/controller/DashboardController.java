@@ -43,9 +43,8 @@ public class DashboardController extends BaseController {
     @RequestMapping(value = "/console", method = RequestMethod.GET)
     public String list(ModelMap modelMap) {
         // 获取各项数据
-        String cache_key = redisCache.CAHCENAME + "|dashboard|" + getCurrentUser().getId();
-        DashboardDto dashboardDto = redisCache.getCache(cache_key, DashboardDto.class);
-        modelMap.addAttribute("dashboard", null != dashboardDto ? dashboardDto : new DashboardDto());
+        DashboardDto dashboardDto = userService.dasboardData(getCurrentUser().getId());
+        modelMap.addAttribute("dashboard", dashboardDto);
         return "dashboard";
     }
 

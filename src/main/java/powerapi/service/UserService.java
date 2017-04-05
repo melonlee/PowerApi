@@ -1,6 +1,7 @@
 package powerapi.service;
 
 import com.baomidou.mybatisplus.service.IService;
+import powerapi.dto.DashboardDto;
 import powerapi.entity.User;
 
 import java.util.Set;
@@ -15,4 +16,6 @@ public interface UserService extends IService<User> {
     Set<String> findPermissions(String username);
 
     User findByUsername(String username);
+
+    DashboardDto dasboardData(Long id);
 }

@@ -99,10 +99,10 @@ public class BugController extends BaseController {
     @LogDelete(resource = Constants.LOG_RESOURCE_BUG)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(Bug bug) {
-        bug = bugService.selectById(bug.getId());
-        bug.setLogResource(bug.getTitle());
+        Bug bugTemp = bugService.selectById(bug.getId());
+        bug.setTitle(bugTemp.getTitle());
         bugService.deleteById(bug.getId());
-        return "redirect:/bug/all?proId=" + bug.getpId();
+        return "redirect:/bug/all?proId=" + bugTemp.getpId();
     }
 
     @ResponseBody

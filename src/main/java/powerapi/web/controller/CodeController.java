@@ -70,10 +70,11 @@ public class CodeController extends BaseController {
 
     @LogDelete(resource = Constants.LOG_RESOURCE_CODE)
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String remove(@RequestParam(value = "id", required = true) Long id) {
-        Code code = codeService.selectById(id);
-        codeService.deleteById(id);
-        return "redirect:/code/all?proId=" + code.getpId();
+    public String remove(Code code) {
+        Code codeTemp = codeService.selectById(code.getId());
+        code.setCode(codeTemp.getCode());
+        codeService.deleteById(code.getId());
+        return "redirect:/code/all?proId=" + codeTemp.getpId();
     }
 
 }
