@@ -31,78 +31,19 @@
         <div class="contentpanel">
             <div class="row">
                 <div class="people-list">
-                    <div class="row">
-                        <c:if test="${param.status.equals('true')}">
-                            <div class="col-md-12" id="action_alert">
-                                <div class="alert alert-success">
-                                    <button type="button" class="close" data-dismiss="alert"
-                                            aria-hidden="true">&times;</button>
-                                    操作成功!
-                                </div>
-                            </div>
-                        </c:if>
-                        <c:if test="${projects.size()==0}">
-                            <div class="col-md-12">
-                                <div class="alert alert-danger">
-                                    <button type="button" class="close" data-dismiss="alert"
-                                            aria-hidden="true">&times;</button>
-                                    您目前还没有创建项目!
-                                </div>
-                            </div>
-                        </c:if>
-                        <c:forEach var="project" items="${projects}">
-
-                            <div class="col-md-6">
-                                <div class="people-item">
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <h4 class="person-name">
-                                                <a href="view?id=${project.id}">${project.title}</a><span
-                                                    class="pull-right badge badge-danger">Version:${project.version}</span>
-                                            </h4>
-                                            <div class="text-muted">
-                                                <i class="fa fa-calendar"></i> ${project.relativedate}
-                                            </div>
-                                            <div class="text-muted m_textoverflow">
-                                                <i class="fa fa-briefcase"></i> ${project.description}
-                                            </div>
-                                            <ul class="social-list">
-                                                <li><a href="view?id=${project.id}"
-                                                       class="tooltips" data-toggle="tooltip"
-                                                       data-placement="top" title="基础管理"><i
-                                                        class="fa fa-gear"></i></a></li>
-                                                <li><a
-                                                        href="../module/all?proId=${project.id}"
-                                                        class="tooltips" data-toggle="tooltip"
-                                                        data-placement="top" title="接口管理"><i
-                                                        class="fa fa-code-fork"></i></a></li>
-                                                <li><a href="../bug/all?proId=${project.id}"
-                                                       class="tooltips" data-toggle="tooltip"
-                                                       data-placement="top" title="Bug管理"><i
-                                                        class="fa fa-bug"></i></a></li>
-                                                <li><a href="../code/all?proId=${project.id}"
-                                                       class="tooltips" data-toggle="tooltip"
-                                                       data-placement="top" title="业务码管理"><i
-                                                        class="fa fa-file-code-o"></i></a></li>
-                                                <li><a
-                                                        href="preview?id=${project.id}" class="tooltips"
-                                                        data-toggle="tooltip" data-placement="top" title="预览文档"><i
-                                                        class="fa fa-eye"></i></a></li>
-                                                <li>
-                                                    <a href="#" data-toggle="modal" id="share"
-                                                       data-target=".bs-example-modal-static"
-                                                       data-content="${host}/${project.sharelink}"
-                                                       class="tooltips"
-                                                       data-toggle="tooltip" data-placement="top"
-                                                       title="分享文档"><i
-                                                            class="fa fa-external-link"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
+                    <div class="row" id="project-area">
+                        <div id="projects">
+                        </div>
                     </div>
+                </div>
+
+                <div class="row">
+                    <ul class="pager">
+                        <li><a href="#" id="previous"><i class="fa fa-angle-left"></i> 上一页</a>
+                        </li>
+                        <li><a href="#" id="next">下一页 <i
+                                class="fa fa-angle-right"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -129,5 +70,76 @@
 </div>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
 <jsp:include page="../common/sharejs.jsp"></jsp:include>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        var page = 1;
+
+        $("#previous").parent().addClass("disabled");
+
+        loadProjects();
+
+        function loadProjects() {
+            $.ajax({
+                type: 'POST',
+                url: '../project/all',
+                data: {
+                    page: page
+                },
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 1000) {
+                        $("#projects").empty();
+                        page++;
+                        console.log(data.result);
+                        var project_html = "";
+                        for (var loop = 0; loop < data.result.length; loop++) {
+                            var project = data.result[loop];
+                            project_html += '<div class="col-md-6">' +
+                                    ' <div class="people-item"> ' +
+                                    '<div class="media"> ' +
+                                    '<div class="media-body"> ' +
+                                    '<h4 class="person-name">' +
+                                    ' <a href="view?id=' + project.id + '">' + project.title + '</a>' +
+                                    '<span class="pull-right badge badge-danger">Version:' + project.version + '</span> </h4>' +
+                                    ' <div class="text-muted"> ' +
+                                    '<i class="fa fa-calendar"></i> ' + project.relativedate + '</div>' +
+                                    ' <div class="text-muted m_textoverflow"> ' +
+                                    '<i class="fa fa-briefcase"></i> ' + project.description + ' </div> ' +
+                                    '<ul class="social-list"> ' +
+                                    '<li><a href="view?id=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="基础管理"><i class="fa fa-gear"></i></a></li>  ' +
+                                    '<li><a href="../module/all?proId=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="接口管理"><i class="fa fa-code-fork"></i></a></li> ' +
+                                    '<li><a href="../bug/all?proId=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="Bug管理"><i class="fa fa-bug"></i></a></li>' +
+                                    '<li><a href="../code/all?proId=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="业务码管理"><i class="fa fa-file-code-o"></i></a></li> ' +
+                                    '<li><a href="preview?id=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="预览文档"><i class="fa fa-eye"></i></a></li> ' +
+                                    '<li> <a href="#" data-toggle="modal" id="share" data-target=".bs-example-modal-static" data-content="${host}/' + project.sharelink + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="分享文档"><i class="fa fa-external-link"></i></a></li> </ul>  </div> </div> </div> </div>';
+
+                        }
+
+                        $("#projects").append(project_html);
+                    } else {
+                        $("#project-area").prepend(' <div class="col-md-12"> <div class="alert alert-danger"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>  暂无更多数据! </div> </div>');
+                    }
+                },
+                error: function () {
+                    $("#project-area").prepend(' <div class="col-md-12"> <div class="alert alert-danger"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>  您目前还没有创建项目! </div> </div>');
+                }
+            });
+        }
+
+
+        $(document).on("click", "#previous", function () {
+            loadProjects();
+        });
+
+
+        $(document).on("click", "#next", function () {
+            loadProjects();
+        });
+    });
+</script>
 </body>
 </html>

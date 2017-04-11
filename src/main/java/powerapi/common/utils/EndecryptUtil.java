@@ -3,13 +3,11 @@ package powerapi.common.utils;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import org.apache.shiro.codec.Base64;
-import org.apache.shiro.codec.H64;
 import org.apache.shiro.codec.Hex;
 import org.apache.shiro.crypto.AesCipherService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 
 import java.security.Key;
-import java.util.Random;
 
 /**
  * Created by Melon on 17/3/22.

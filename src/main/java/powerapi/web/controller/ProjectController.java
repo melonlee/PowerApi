@@ -8,9 +8,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import powerapi.common.Constants;
 import powerapi.common.anno.LogDelete;
 import powerapi.common.anno.LogModify;
+import powerapi.common.utils.JsonUtil;
 import powerapi.entity.Module;
 import powerapi.entity.Project;
 import powerapi.service.ModuleService;
@@ -30,10 +32,15 @@ public class ProjectController extends BaseController {
      * @param page
      * @return
      */
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public String list(ModelMap model, @RequestParam(defaultValue = "1") int page) {
+    @ResponseBody
+    @RequestMapping(value = "/all", method = RequestMethod.POST)
+    public String list(@RequestParam(defaultValue = "1") int page) {
         List<Project> projects = projectService.getProjectList(getCurrentUser().getId(), page);
-        model.addAttribute("projects", projects);
+        return JsonUtil.getInstance().setList(projects).result();
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public String listview() {
         return "project/index";
     }
 

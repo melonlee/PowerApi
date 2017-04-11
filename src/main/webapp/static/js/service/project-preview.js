@@ -76,7 +76,6 @@ $(document).ready(function () {
                     }
                 },
                 error: function () {
-                    alert("获取数据异常，请重试!");
                 }
             });
     }
