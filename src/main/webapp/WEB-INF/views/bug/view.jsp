@@ -14,7 +14,7 @@
         <jsp:param name="nav" value="2"/>
     </jsp:include>
     <div class="mainpanel">
-        <jsp:include page="../common/pageheader.jsp">
+        <jsp:include page="../common/header.jsp">
             <jsp:param name="entity" value="Bug"/>
             <jsp:param name="index" value="3"/>
         </jsp:include>

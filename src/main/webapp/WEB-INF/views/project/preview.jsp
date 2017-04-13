@@ -18,7 +18,7 @@
 </jsp:include>
 <section>
     <div class="mainpanel">
-        <jsp:include page="../common/pageheader.jsp">
+        <jsp:include page="../common/header.jsp">
             <jsp:param name="index" value="5"/>
         </jsp:include>
         <div class="tab-content">

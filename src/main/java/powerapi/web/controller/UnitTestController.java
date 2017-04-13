@@ -61,11 +61,13 @@ public class UnitTestController extends BaseController {
 
     private HashMap<String, String> getParamsOrHeadersMap(JSONArray array) {
         HashMap<String, String> resultMap = new HashMap<>();
-        int loop = 0;
-        while (loop < array.size()) {
-            JSONObject jsonObject = array.getJSONObject(loop);
-            resultMap.put(jsonObject.getString("name"), jsonObject.getString("value"));
-            loop++;
+        if (null != array && array.size() > 0) {
+            int loop = 0;
+            while (loop < array.size()) {
+                JSONObject jsonObject = array.getJSONObject(loop);
+                resultMap.put(jsonObject.getString("name"), jsonObject.getString("value"));
+                loop++;
+            }
         }
         return resultMap;
     }
