@@ -143,7 +143,7 @@ public class FunctionController extends BaseController {
             param.setValue(paramJson.getString("value"));
             paramsMap.put(param.getName(), param.getValue());
         }
-        UnitTest unitTest = HttpUtil.doPost(requestDto.getUrl(), paramsMap);
+        UnitTest unitTest = HttpUtil.doRequest(requestDto, paramsMap, null);
         unitTest.setUserId(getCurrentUser().getId());
         unitTest.setParams(requestDto.getParams());
         unitTestService.insert(unitTest);

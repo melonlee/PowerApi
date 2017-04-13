@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import powerapi.common.utils.HttpUtil;
 import powerapi.common.utils.JsonUtil;
 import powerapi.dto.RequestDto;
-import powerapi.dto.RequestParamDto;
 import powerapi.entity.UnitTest;
 import powerapi.service.UnitTestService;
 
@@ -40,24 +39,34 @@ public class UnitTestController extends BaseController {
             InvocationTargetException {
 
         JSONObject paramObject = JSONObject.parseObject(requestDto.getParams());
-        JSONArray params = paramObject.getJSONArray("params");
-        RequestParamDto paramDto;
-        HashMap<String, String> paramsMap = new HashMap<String, String>();
-        int loop = 0;
-        while (loop < params.size()) {
-            JSONObject paramJson = params.getJSONObject(loop);
-            paramDto = new RequestParamDto();
-            paramDto.setName(paramJson.getString("name"));
-            paramDto.setType(paramJson.getString("type"));
-            paramDto.setValue(paramJson.getString("value"));
-            paramsMap.put(paramDto.getName(), paramDto.getValue());
-            loop++;
-        }
-        UnitTest unitTest = HttpUtil.doPost(requestDto.getUrl(), paramsMap);
+
+        /**
+         * 解析header
+         * 解析参数
+         *
+         */
+        HashMap<String, String> paramsMap = getParamsOrHeadersMap(paramObject.getJSONArray("params"));
+        HashMap<String, String> headersMap = getParamsOrHeadersMap(paramObject.getJSONArray("headers"));
+
+        /**
+         * 提交测试
+         */
+        UnitTest unitTest = HttpUtil.doRequest(requestDto, paramsMap, headersMap);
         unitTest.setUserId(getCurrentUser().getId());
         unitTest.setParams(requestDto.getParams());
         unitTestService.insert(unitTest);
         return JsonUtil.getInstance().setBean(unitTest, null != unitTest.getId() ? 1 : 0)
                 .result();
+    }
+
+    private HashMap<String, String> getParamsOrHeadersMap(JSONArray array) {
+        HashMap<String, String> resultMap = new HashMap<>();
+        int loop = 0;
+        while (loop < array.size()) {
+            JSONObject jsonObject = array.getJSONObject(loop);
+            resultMap.put(jsonObject.getString("name"), jsonObject.getString("value"));
+            loop++;
+        }
+        return resultMap;
     }
 }

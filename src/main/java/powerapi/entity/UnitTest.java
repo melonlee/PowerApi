@@ -109,4 +109,19 @@ public class UnitTest extends BaseEntity {
         this.responseSize = responseSize;
     }
 
+    @Override
+    public String toString() {
+        return "UnitTest{" +
+                "userId=" + userId +
+                ", method='" + method + '\'' +
+                ", url='" + url + '\'' +
+                ", params='" + params + '\'' +
+                ", responseCode=" + responseCode +
+                ", responseHeader='" + responseHeader + '\'' +
+                ", responseBody='" + responseBody + '\'' +
+                ", requestTime=" + requestTime +
+                ", responseSize=" + responseSize +
+                '}';
+    }
+
 }

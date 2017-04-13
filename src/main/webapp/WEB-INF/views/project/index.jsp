@@ -77,7 +77,7 @@
 
         var page = 1;
 
-        $("#previous").parent().addClass("disabled");
+        // $("#previous").parent().addClass("disabled");
 
         loadProjects();
 
@@ -93,7 +93,6 @@
                 success: function (data) {
                     if (data.code == 1000) {
                         $("#projects").empty();
-                        page++;
                         console.log(data.result);
                         var project_html = "";
                         for (var loop = 0; loop < data.result.length; loop++) {
@@ -132,11 +131,13 @@
 
 
         $(document).on("click", "#previous", function () {
+            page--;
             loadProjects();
         });
 
 
         $(document).on("click", "#next", function () {
+            page++;
             loadProjects();
         });
     });
