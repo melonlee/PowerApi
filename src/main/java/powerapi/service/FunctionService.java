@@ -12,4 +12,6 @@ import java.util.List;
 public interface FunctionService extends IService<Function> {
 
     List<Function> selectByModuleId(Long mId);
+
+    List<Function> selectByProjectId(Long pId);
 }

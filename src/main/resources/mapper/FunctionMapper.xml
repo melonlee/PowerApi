@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="powerapi.mapper.FunctionMapper">
+
+    <resultMap id="moduleResultMap" type="powerapi.entity.Module">
+        <result column="m_title" property="title" jdbcType="VARCHAR"/>
+        <result column="m_url" property="url" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <resultMap id="BaseResultMap" type="powerapi.entity.Function">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
@@ -16,6 +22,7 @@
         <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="response_type" property="responseType"
                 jdbcType="VARCHAR"/>
+        <association property="module" javaType="powerapi.entity.Module" resultMap="moduleResultMap"/>
     </resultMap>
     <sql id="Base_Column_List">
 		id, title, url, method, is_login, params, response_body,
@@ -31,4 +38,11 @@
         from t_function
         where m_id = #{mId,jdbcType=INTEGER}
     </select>
+
+    <select id="selectByProjectId" resultMap="BaseResultMap"
+            parameterType="java.lang.Long">
+       select t_module.title as m_title,t_module.url as m_url,
+       t_function.* from t_module left join t_function on t_module.id = t_function.m_id where t_module.p_id=#{pId}
+    </select>
+
 </mapper>

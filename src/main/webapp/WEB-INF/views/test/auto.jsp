@@ -246,62 +246,61 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td><a href="">Critical</a></td>
-                                        <td>1</td>
-                                        <td>3分钟前</td>
-                                        <td>
-                                            <div class="progress progress-striped active">
-                                                <div style="width: 20%" aria-valuemax="100" aria-valuemin="0"
-                                                     aria-valuenow="20" role="progressbar"
-                                                     class="progress-bar progress-bar-warning">
+                                        <tr>
+                                            <td><a href="">Critical</a></td>
+                                            <td>1</td>
+                                            <td>3分钟前</td>
+                                            <td>
+                                                <div class="progress progress-striped active">
+                                                    <div style="width: 20%" aria-valuemax="100" aria-valuemin="0"
+                                                         aria-valuenow="20" role="progressbar"
+                                                         class="progress-bar progress-bar-warning">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>20%</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a data-toggle="dropdown" class="dropdown-toggle">
-                                                    <i class="fa fa-cog"></i>
-                                                </a>
-                                                <ul role="menu" class="dropdown-menu pull-right">
-                                                    <li><a href="#"><i class="fa fa-eye"></i> 查看监控详情</a></li>
-                                                    <li><a href="#"><i class="fa fa-cog"></i> 设置监控参数</a></li>
-                                                    <li class="divider"></li>
-                                                    <li><a href="#"><i class="fa fa-trash-o"></i> 撤销监控</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><a href="">Trivial</a></td>
-                                        <td>9</td>
-                                        <td>2小时前</td>
-                                        <td>
-                                            <div class="progress progress-striped active">
-                                                <div style="width: 100%" aria-valuemax="100" aria-valuemin="0"
-                                                     aria-valuenow="20" role="progressbar"
-                                                     class="progress-bar progress-bar-success">
+                                            </td>
+                                            <td>20%</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a data-toggle="dropdown" class="dropdown-toggle">
+                                                        <i class="fa fa-cog"></i>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-menu pull-right">
+                                                        <li><a href="#"><i class="fa fa-eye"></i> 查看监控详情</a></li>
+                                                        <li><a href="#"><i class="fa fa-cog"></i> 设置监控参数</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="#"><i class="fa fa-trash-o"></i> 撤销监控</a></li>
+                                                    </ul>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>100%</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a data-toggle="dropdown" class="dropdown-toggle">
-                                                    <i class="fa fa-cog"></i>
-                                                </a>
-                                                <ul role="menu" class="dropdown-menu pull-right">
-                                                    <li><a href="#"><i class="fa fa-eye"></i> 查看监控详情</a></li>
-                                                    <li><a href="#"><i class="fa fa-cog"></i> 设置监控参数</a></li>
-                                                    <li class="divider"></li>
-                                                    <li><a href="#"><i class="fa fa-trash-o"></i> 撤销监控</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
 
+                                        <tr>
+                                            <td><a href="">Trivial</a></td>
+                                            <td>9</td>
+                                            <td>2小时前</td>
+                                            <td>
+                                                <div class="progress progress-striped active">
+                                                    <div style="width: 100%" aria-valuemax="100" aria-valuemin="0"
+                                                         aria-valuenow="20" role="progressbar"
+                                                         class="progress-bar progress-bar-success">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>100%</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a data-toggle="dropdown" class="dropdown-toggle">
+                                                        <i class="fa fa-cog"></i>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-menu pull-right">
+                                                        <li><a href="#"><i class="fa fa-eye"></i> 查看监控详情</a></li>
+                                                        <li><a href="#"><i class="fa fa-cog"></i> 设置监控参数</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="#"><i class="fa fa-trash-o"></i> 撤销监控</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -309,11 +308,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
         <div class="contentpanel">
-
         </div>
     </div>
 </section>

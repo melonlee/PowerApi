@@ -41,6 +41,8 @@ public class Function extends BaseEntity {
     @TableField(exist = false)
     private String jsonValue;
 
+    @TableField(exist = false)
+    private Module module;
 
     public String getResponseType() {
         return responseType;
@@ -123,4 +125,37 @@ public class Function extends BaseEntity {
         this.description = description;
     }
 
+    public String getJsonValue() {
+        return jsonValue;
+    }
+
+    public void setJsonValue(String jsonValue) {
+        this.jsonValue = jsonValue;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
+    }
+
+    @Override
+    public String toString() {
+        return "Function{" +
+                "title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", method='" + method + '\'' +
+                ", isLogin=" + isLogin +
+                ", params='" + params + '\'' +
+                ", responseBody='" + responseBody + '\'' +
+                ", mId=" + mId +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                ", responseType='" + responseType + '\'' +
+                ", jsonValue='" + jsonValue + '\'' +
+                ", module=" + module.toString() +
+                '}';
+    }
 }

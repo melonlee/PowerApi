@@ -23,7 +23,7 @@ public class UnitTest extends BaseEntity {
     private String params;
 
     @TableField(value = "response_code")
-    private Integer responseCode;
+    private int responseCode;
 
     @TableField(value = "response_header")
     private String responseHeader;
@@ -32,10 +32,13 @@ public class UnitTest extends BaseEntity {
     private String responseBody;
 
     @TableField(value = "request_time")
-    private Integer requestTime;// 请求耗时
+    private int requestTime;// 请求耗时
 
     @TableField(value = "response_size")
-    private Integer responseSize;// 请求返回内容大小
+    private int responseSize;// 请求返回内容大小
+
+    @TableField(value = "auto_id")
+    private Long autoId;  //标记是否是自动化中的测试内容
 
     public Long getUserId() {
         return userId;
@@ -69,14 +72,6 @@ public class UnitTest extends BaseEntity {
         this.params = params;
     }
 
-    public Integer getResponseCode() {
-        return responseCode;
-    }
-
-    public void setResponseCode(Integer responseCode) {
-        this.responseCode = responseCode;
-    }
-
     public String getResponseHeader() {
         return responseHeader;
     }
@@ -93,20 +88,36 @@ public class UnitTest extends BaseEntity {
         this.responseBody = responseBody;
     }
 
-    public Integer getRequestTime() {
-        return requestTime;
+    public Long getAutoId() {
+        return autoId;
     }
 
-    public void setRequestTime(Integer requestTime) {
-        this.requestTime = requestTime;
+    public void setAutoId(Long autoId) {
+        this.autoId = autoId;
     }
 
-    public Integer getResponseSize() {
+    public int getResponseSize() {
         return responseSize;
     }
 
-    public void setResponseSize(Integer responseSize) {
+    public void setResponseSize(int responseSize) {
         this.responseSize = responseSize;
+    }
+
+    public int getRequestTime() {
+        return requestTime;
+    }
+
+    public void setRequestTime(int requestTime) {
+        this.requestTime = requestTime;
+    }
+
+    public int getResponseCode() {
+        return responseCode;
+    }
+
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
     }
 
     @Override
