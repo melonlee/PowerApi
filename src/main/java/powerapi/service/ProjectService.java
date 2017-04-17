@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ProjectService extends IService<Project> {
 
-    List<Project> getProjectList(Long userId, int page);
+    List<Project> getProjectList(Long userId);
 
     Project findProjectById(Long id);
 

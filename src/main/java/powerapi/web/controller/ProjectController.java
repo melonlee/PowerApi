@@ -28,14 +28,12 @@ public class ProjectController extends BaseController {
      * 根据页码获取项目列表
      * 根据创建时间倒排
      *
-     * @param model
-     * @param page
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/all", method = RequestMethod.POST)
-    public String list(@RequestParam(defaultValue = "1") int page) {
-        List<Project> projects = projectService.getProjectList(getCurrentUser().getId(), page);
+    public String list() {
+        List<Project> projects = projectService.getProjectList(getCurrentUser().getId());
         return JsonUtil.getInstance().setList(projects).result();
     }
 

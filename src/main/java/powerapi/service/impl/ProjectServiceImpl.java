@@ -23,7 +23,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
     @Autowired
     private RedisCache redisCache;
 
-    public List<Project> getProjectList(Long userId, int page) {
+    public List<Project> getProjectList(Long userId) {
 
 //        String cache_key = redisCache.CAHCENAME + "|" + userId + "|projects|" + page;
 //        List<Project> result_cache = redisCache.getListCache(cache_key, Project.class);
@@ -35,9 +35,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
 //            }
 //            return result_cache;
 //        }
-        return this.selectPage(new Page<Project>(page, 10),
-                new EntityWrapper<Project>().eq("user_id", userId).orderBy("createdate", false)).getRecords();
-
+        return this.selectList(new EntityWrapper<Project>().eq("user_id", userId).orderBy("createdate", false));
     }
 
     @Override

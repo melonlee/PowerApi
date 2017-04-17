@@ -26,3 +26,4 @@
 <script src="${host}/static/js/basic/md5.js"></script>
 <script src="${host}/static/js/basic/custom.js"></script>
 <script src="${host}/static/js/basic/prism.js"></script>
+<script src="${host}/static/js/basic/bootstrap-wizard.min.js"></script>
