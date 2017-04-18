@@ -28,20 +28,19 @@
             </div>
         </div>
         <div class="contentpanel">
-
             <!--设置测试-->
             <div class="row" id="settings">
-                <div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>注意!
-                        在进行自动化测试前请确保您录入的接口数据中的参数的[示例]值不为空!</strong>
-                </div>
-
                 <div class="col-md-12">
+
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong>注意!
+                            在进行自动化测试前请确保您录入的接口数据中的参数的[示例]值不为空!</strong>
+                    </div>
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-btns">
-                                <a href="" class="panel-close">&times;</a>
                             </div>
                             <h4 class="panel-title">设置自动化测试项目</h4>
                             <p>您可以默认整个项目进行测试或者勾选出不进行测试的接口</p>
@@ -65,7 +64,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-4">本次测试标题</label>
                                             <div class="col-sm-8">
-                                                <input type="text" name="title" class="form-control"
+                                                <input type="text" id="title" class="form-control"
                                                        placeholder="例如:1.0上线前本地第2次测试"/>
                                             </div>
                                         </div>
@@ -76,21 +75,6 @@
                                                 <select class="select2" id="projects">
                                                     <option value="0">选择项目</option>
                                                 </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-sm-4">是否测试所有接口</label>
-                                            <div class="col-sm-8">
-                                                <div class="rdio rdio-primary">
-                                                    <input type="radio" checked="checked" id="male2" value="m"
-                                                           name="radio">
-                                                    <label for="male2">是</label>
-                                                </div>
-                                                <div class="rdio rdio-primary">
-                                                    <input type="radio" value="f" id="female2" name="radio">
-                                                    <label for="female2">否</label>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -131,10 +115,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <ul class="pager wizard">
-                                    <li class="previous"><a href="javascript:void(0)">上一步</a></li>
-                                    <li class="next"><a href="javascript:void(0)">下一步</a></li>
-                                </ul>
+
+                                <div class="pager wizard">
+                                    <a class="btn btn-primary pull-right" id="submit" type="button">提交测试 </a>
+                                    <button id="loading" data-toggle="modal"
+                                            style="display: none;" data-target=".bs-example-modal-sm">loading
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -237,70 +224,50 @@
                                 <table class="table">
                                     <thead>
                                     <tr class="table-head-alt">
-                                        <th>项目</th>
-                                        <th>接口数</th>
-                                        <th>开始时间</th>
-                                        <th>进度</th>
+                                        <th>#记录</th>
+                                        <th>接口总数</th>
+                                        <th>测试失败数</th>
+                                        <th>测试时间</th>
+                                        <th>总耗时</th>
+                                        <th>正确率</th>
                                         <th>&nbsp;</th>
                                         <th>&nbsp;</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="autotest" items="${finished}">
                                         <tr>
-                                            <td><a href="">Critical</a></td>
-                                            <td>1</td>
-                                            <td>3分钟前</td>
+                                            <td>${autotest.title}</td>
+                                            <td>${autotest.totalcount}</td>
+                                            <td>${autotest.errorcount}</td>
+                                            <td>${autotest.relativedate}</td>
+                                            <td>${autotest.totaltime/1000}秒</td>
                                             <td>
-                                                <div class="progress progress-striped active">
-                                                    <div style="width: 20%" aria-valuemax="100" aria-valuemin="0"
-                                                         aria-valuenow="20" role="progressbar"
-                                                         class="progress-bar progress-bar-warning">
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>20%</td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <a data-toggle="dropdown" class="dropdown-toggle">
-                                                        <i class="fa fa-cog"></i>
-                                                    </a>
-                                                    <ul role="menu" class="dropdown-menu pull-right">
-                                                        <li><a href="#"><i class="fa fa-eye"></i> 查看监控详情</a></li>
-                                                        <li><a href="#"><i class="fa fa-cog"></i> 设置监控参数</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="#"><i class="fa fa-trash-o"></i> 撤销监控</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td><a href="">Trivial</a></td>
-                                            <td>9</td>
-                                            <td>2小时前</td>
-                                            <td>
-                                                <div class="progress progress-striped active">
-                                                    <div style="width: 100%" aria-valuemax="100" aria-valuemin="0"
-                                                         aria-valuenow="20" role="progressbar"
+                                                <div class="progress progress-success active">
+                                                    <div style="width: ${((autotest.totalcount-autotest.errorcount)/autotest.totalcount)*100}%"
+                                                         aria-valuemax="100" aria-valuemin="0"
+                                                         aria-valuenow="${((autotest.totalcount-autotest.errorcount)/autotest.totalcount)*100}"
+                                                         role="progressbar"
                                                          class="progress-bar progress-bar-success">
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>100%</td>
+                                            <td>${((autotest.totalcount-autotest.errorcount)/autotest.totalcount)*100}%</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a data-toggle="dropdown" class="dropdown-toggle">
                                                         <i class="fa fa-cog"></i>
                                                     </a>
                                                     <ul role="menu" class="dropdown-menu pull-right">
-                                                        <li><a href="#"><i class="fa fa-eye"></i> 查看监控详情</a></li>
-                                                        <li><a href="#"><i class="fa fa-cog"></i> 设置监控参数</a></li>
+                                                        <li><a href="#"><i class="fa fa-eye"></i> 查看测试记录</a></li>
+                                                        <li><a href="#"><i class="fa fa-rocket"></i> 再次进行测试</a></li>
                                                         <li class="divider"></li>
-                                                        <li><a href="#"><i class="fa fa-trash-o"></i> 撤销监控</a></li>
+                                                        <li><a href="#"><i class="fa fa-trash-o"></i> 删除测试记录</a></li>
                                                     </ul>
                                                 </div>
                                             </td>
                                         </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -313,6 +280,21 @@
         </div>
     </div>
 </section>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+                <div class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                         style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
 <script>
     jQuery(document).ready(function () {
@@ -392,6 +374,50 @@
                 },
                 error: function () {
                     alert('项目数据获取失败');
+                }
+            });
+        });
+
+        $(document).on("click", "#submit", function () {
+
+            $("#loading").click();
+
+            //解析headers
+            var headerObj = {}, headersAry = [], $m_header_rows = $(
+                    "#headers").find(".m_header_row");
+
+            for (var loop = 0, header_len = $m_header_rows.length; loop < header_len; loop++) {
+                var $header_row = $m_header_rows.eq(loop), header = {};
+
+                header.name = $header_row.find(".m_header_name").text();
+                header.value = $header_row.find(".m_header_value").text();
+
+                headersAry.push(header);
+            }
+
+            headerObj.headers = headersAry;
+
+            var headerStr = JSON.stringify(headerObj);
+            console.log(headerStr);
+
+            $.ajax({
+                type: 'POST',
+                url: '../auto/test',
+                data: {
+                    title: $("#title").val(),
+                    pId: $("#projects").val(),
+                    headers: headerStr
+                },
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 1000) {
+                        $("#loading").click();
+                    }
+                },
+                error: function () {
+                    $("#loading").click();
+                    alert("提交测试失败,请重试!");
                 }
             });
         });
