@@ -10,6 +10,7 @@
             classpath:/spring/spring-mvc.xml;
             classpath:/spring/spring-shiro.xml;
             classpath:/spring/spring-redis.xml;
+            classpath:/spring/spring-rabbitmq.xml;
         </param-value>
     </context-param>
 

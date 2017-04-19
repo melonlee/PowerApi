@@ -1,7 +1,9 @@
 package powerapi.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ import powerapi.service.FunctionService;
 import powerapi.service.ProjectService;
 import powerapi.service.UnitTestService;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,12 +48,15 @@ public class AutoTestController extends BaseController {
     @Autowired
     private UnitTestService unitTestService;
 
+    @Resource
+    private AmqpTemplate amqpTemplate;
 
     @RequestMapping("/view")
     public String view(ModelMap model) {
 
         List<AutoTest> autoTests = autoTestService.findFinishedTest(getCurrentUser().getId());
         model.addAttribute("finished", autoTests);
+
         return "/test/auto";
     }
 
@@ -66,74 +72,14 @@ public class AutoTestController extends BaseController {
     public String test(@RequestParam(value = "title", required = true) String title,
                        @RequestParam(value = "pId", required = true) Long pId,
                        @RequestParam(value = "headers", required = true) String headers) {
-
-        System.out.println("headers====>>>>>" + headers);
-
-        Long currentTimeMillis = System.currentTimeMillis();
-        Project project = projectService.findProjectById(pId);
-
-        JSONArray headerJsonArray = JSONObject.parseObject(headers).getJSONArray("headers");
-        HashMap<String, String> headersMap = null;
-        if (null != headerJsonArray && headerJsonArray.size() > 0) {
-            headersMap = getParamsOrHeadersMap(headerJsonArray);
-        }
-        List<Function> functionList = functionService.selectByProjectId(project.getId());
-
-        RequestDto requestDto;
-
-        powerapi.entity.AutoTest autoBean = new powerapi.entity.AutoTest();
-        autoBean.setTitle("#" + title + "-" + project.getTitle());
-        autoBean.setUserId(getCurrentUser().getId());
-        autoBean.setTotalcount(functionList.size());
-        autoBean.setpId(project.getId());
-        autoTestService.insert(autoBean);
-        int errorcount = 0;
-        for (Function function : functionList) {
-
-            requestDto = new RequestDto();
-
-            JSONObject paramObject = JSONObject.parseObject(function.getParams());
-
-            requestDto.setMethod(function.getMethod());
-            requestDto.setUrl(project.getHostUrl() + function.getModule().getUrl() + function.getUrl());
-
-            /**
-             * 解析header
-             * 解析参数
-             *
-             */
-            HashMap<String, String> paramsMap = getParamsOrHeadersMap(paramObject.getJSONArray("params"));
-
-            /**
-             * 提交测试
-             */
-            UnitTest unitTest = HttpUtil.doRequest(requestDto, paramsMap, headersMap);
-            if (unitTest.getResponseCode() != 200) {
-                errorcount++;
-            }
-            unitTest.setUserId(getCurrentUser().getId());
-            unitTest.setParams(requestDto.getParams());
-            unitTest.setAutoId(autoBean.getId());
-            unitTestService.insert(unitTest);
-        }
-        autoBean.setTotaltime((int) (System.currentTimeMillis() - currentTimeMillis));
-        autoBean.setErrorcount(errorcount);
-        autoBean.setStatus(1);
-        autoTestService.updateById(autoBean);
-        return JsonUtil.getInstance().setStatus(autoBean.getId().intValue()).result();
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("title", title);
+        params.put("pId", pId);
+        params.put("headers", headers);
+        params.put("uId", getCurrentUser().getId());
+        amqpTemplate.convertAndSend("autoTestKey", JSON.toJSONString(params));
+        return JsonUtil.getInstance().setStatus(1).result();
     }
 
 
-    private HashMap<String, String> getParamsOrHeadersMap(JSONArray array) {
-        HashMap<String, String> resultMap = new HashMap<>();
-        if (null != array && array.size() > 0) {
-            int loop = 0;
-            while (loop < array.size()) {
-                JSONObject jsonObject = array.getJSONObject(loop);
-                resultMap.put(jsonObject.getString("name"), jsonObject.getString("value"));
-                loop++;
-            }
-        }
-        return resultMap;
-    }
 }
