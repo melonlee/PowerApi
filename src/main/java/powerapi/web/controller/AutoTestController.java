@@ -67,6 +67,20 @@ public class AutoTestController extends BaseController {
         return JsonUtil.getInstance().setList(projects).result();
     }
 
+
+    /**
+     * 获取正在进行测试的数据
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/testing", method = RequestMethod.GET)
+    public String loadtesting() {
+
+        List<AutoTest> tests = autoTestService.findTesting(getCurrentUser().getId());
+        return JsonUtil.getInstance().setList(tests).result();
+    }
+
     @ResponseBody
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String test(@RequestParam(value = "title", required = true) String title,
@@ -77,7 +91,7 @@ public class AutoTestController extends BaseController {
         params.put("pId", pId);
         params.put("headers", headers);
         params.put("uId", getCurrentUser().getId());
-        amqpTemplate.convertAndSend("autoTestKey", JSON.toJSONString(params));
+        amqpTemplate.convertAndSend("queueTestKey", JSON.toJSONString(params));
         return JsonUtil.getInstance().setStatus(1).result();
     }
 

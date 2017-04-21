@@ -42,11 +42,22 @@ public class AutoTestWorkConsumer implements MessageListener {
     @Override
     public void onMessage(Message message) {
 
+
+        if (null == message.getBody() || message.getBody().length < 1)
+            return;
+
+
         JSONObject jsonObject = JSONObject.parseObject(new String(message.getBody()));
+
+        if (null == jsonObject)
+            return;
 
         Long currentTimeMillis = System.currentTimeMillis();
 
         Project project = projectService.findProjectById(jsonObject.getLong("pId"));
+
+        if (null == project)
+            return;
 
         JSONArray headerJsonArray = JSONObject.parseObject(jsonObject.getString("headers")).getJSONArray("headers");
         HashMap<String, String> headersMap = null;

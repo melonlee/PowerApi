@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface AutoTestService extends IService<AutoTest> {
     List<AutoTest> findFinishedTest(Long userId);
+
+    List<AutoTest> findTesting(Long id);
 }

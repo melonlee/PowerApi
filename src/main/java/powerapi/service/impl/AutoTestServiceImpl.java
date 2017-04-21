@@ -18,4 +18,9 @@ public class AutoTestServiceImpl extends ServiceImpl<AutoTestMapper, AutoTest> i
     public List<AutoTest> findFinishedTest(Long userId) {
         return this.selectList(new EntityWrapper<AutoTest>().eq("status", 1).eq("user_id", userId).orderBy("createdate", false));
     }
+
+    @Override
+    public List<AutoTest> findTesting(Long userId) {
+        return this.selectList(new EntityWrapper<AutoTest>().eq("status", 0).eq("user_id", userId).orderBy("createdate", false));
+    }
 }

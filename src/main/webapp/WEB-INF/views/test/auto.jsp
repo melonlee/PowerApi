@@ -130,94 +130,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">正在测试中的项目</h4>
-                        </div>
-
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr class="table-head-alt">
-                                        <th>项目</th>
-                                        <th>接口数</th>
-                                        <th>开始时间</th>
-                                        <th>进度</th>
-                                        <th>&nbsp;</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><a href="">Critical</a></td>
-                                        <td>1</td>
-                                        <td>3分钟前</td>
-                                        <td>
-                                            <div class="progress progress-striped active">
-                                                <div style="width: 20%" aria-valuemax="100" aria-valuemin="0"
-                                                     aria-valuenow="20" role="progressbar"
-                                                     class="progress-bar progress-bar-warning">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>20%</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a data-toggle="dropdown" class="dropdown-toggle">
-                                                    <i class="fa fa-cog"></i>
-                                                </a>
-                                                <ul role="menu" class="dropdown-menu pull-right">
-                                                    <li><a href="#"><i class="fa fa-eye"></i> 查看监控详情</a></li>
-                                                    <li><a href="#"><i class="fa fa-cog"></i> 设置监控参数</a></li>
-                                                    <li class="divider"></li>
-                                                    <li><a href="#"><i class="fa fa-trash-o"></i> 撤销监控</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><a href="">Trivial</a></td>
-                                        <td>9</td>
-                                        <td>2小时前</td>
-                                        <td>
-                                            <div class="progress progress-striped active">
-                                                <div style="width: 100%" aria-valuemax="100" aria-valuemin="0"
-                                                     aria-valuenow="20" role="progressbar"
-                                                     class="progress-bar progress-bar-success">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>100%</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a data-toggle="dropdown" class="dropdown-toggle">
-                                                    <i class="fa fa-cog"></i>
-                                                </a>
-                                                <ul role="menu" class="dropdown-menu pull-right">
-                                                    <li><a href="#"><i class="fa fa-eye"></i> 查看监控详情</a></li>
-                                                    <li><a href="#"><i class="fa fa-cog"></i> 设置监控参数</a></li>
-                                                    <li class="divider"></li>
-                                                    <li><a href="#"><i class="fa fa-trash-o"></i> 撤销监控</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
                     <div class="panel panel-success">
                         <div class="panel-heading">
-                            <h4 class="panel-title">已完成测试的项目</h4>
+                            <h4 class="panel-title">测试记录</h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -236,7 +151,7 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach var="autotest" items="${finished}">
-                                        <tr>
+                                        <tr class="autotest-row">
                                             <td>${autotest.title}</td>
                                             <td>${autotest.totalcount}</td>
                                             <td>${autotest.errorcount}</td>
@@ -262,7 +177,9 @@
                                                         <li><a href="#"><i class="fa fa-eye"></i> 查看测试记录</a></li>
                                                         <li><a href="#"><i class="fa fa-rocket"></i> 再次进行测试</a></li>
                                                         <li class="divider"></li>
-                                                        <li><a href="#"><i class="fa fa-trash-o"></i> 删除测试记录</a></li>
+                                                        <li><a href="#" data-aid="${autotest.id}"
+                                                               class="delete-autotest"><i
+                                                                class="fa fa-trash-o"></i> 删除测试记录</a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -412,6 +329,8 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data.code == 1000) {
+                        $("#settings").hide();
+                        $("#create").show();
                         $("#loading").click();
                     }
                 },
@@ -421,6 +340,58 @@
                 }
             });
         });
+
+
+        function loadtesting() {
+
+            $.ajax({
+                type: 'GET',
+                url: '../auto/testing',
+                data: {},
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 1000) {
+                        $("#testing-data").empty();
+                        var testing_tbody = "";
+                        for (var loop = 0; loop < data.result.length; loop++) {
+                            var test_data = data.result[loop];
+                            testing_tbody += ' <tr>  <td>' + test_data.title + '</td>  <td>' + test_data.title + '</td> <td>3分钟前</td> </tr>';
+
+                        }
+                        $("#testing-data").append(testing_tbody);
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+        $(document).on("click", ".delete-autotest", function () {
+            console.log($(this).data("aid"));
+            $(this).parents(".autotest-row").remove();
+//            $.ajax({
+//                type: 'GET',
+//                url: '../auto/delete',
+//                data: {
+//                    id: $(this).data("aid")
+//                },
+//                cache: false,
+//                dataType: 'json',
+//                success: function (data) {
+//                    console.log(data);
+//                    if (data.code == 1000) {
+//                        $(this).parents(".autotest-row").remove();
+//                    }
+//                },
+//                error: function () {
+//                    alert("删除失败,请重试!");
+//                }
+//            });
+        });
+
     });
 </script>
 
