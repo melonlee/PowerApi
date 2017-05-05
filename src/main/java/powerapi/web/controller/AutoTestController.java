@@ -60,6 +60,20 @@ public class AutoTestController extends BaseController {
         return "/test/auto";
     }
 
+    @RequestMapping("/detail")
+    public String detail(ModelMap model, @RequestParam(value = "id", required = true) Long id) {
+
+        AutoTest autoTest = autoTestService.selectById(id);
+        List<UnitTest> testList = unitTestService.findAutoTestList(id);
+        model.addAttribute("autoTest", autoTest);
+        model.addAttribute("testList", testList);
+        return "/test/detail";
+    }
+
+
+    /**
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String list() {
@@ -93,6 +107,13 @@ public class AutoTestController extends BaseController {
         params.put("uId", getCurrentUser().getId());
         amqpTemplate.convertAndSend("queueTestKey", JSON.toJSONString(params));
         return JsonUtil.getInstance().setStatus(1).result();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam(value = "id", required = true) Long id) {
+
+        return JsonUtil.getInstance().setStatus(autoTestService.deleteById(id) == true ? 1 : 0).result();
     }
 
 

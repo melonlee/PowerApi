@@ -174,7 +174,8 @@
                                                         <i class="fa fa-cog"></i>
                                                     </a>
                                                     <ul role="menu" class="dropdown-menu pull-right">
-                                                        <li><a href="#"><i class="fa fa-eye"></i> 查看测试记录</a></li>
+                                                        <li><a href="detail?id=${autotest.id}"><i class="fa fa-eye"></i>
+                                                            查看测试记录</a></li>
                                                         <li><a href="#"><i class="fa fa-rocket"></i> 再次进行测试</a></li>
                                                         <li class="divider"></li>
                                                         <li><a href="#" data-aid="${autotest.id}"
@@ -371,25 +372,24 @@
 
         $(document).on("click", ".delete-autotest", function () {
             console.log($(this).data("aid"));
-            $(this).parents(".autotest-row").remove();
-//            $.ajax({
-//                type: 'GET',
-//                url: '../auto/delete',
-//                data: {
-//                    id: $(this).data("aid")
-//                },
-//                cache: false,
-//                dataType: 'json',
-//                success: function (data) {
-//                    console.log(data);
-//                    if (data.code == 1000) {
-//                        $(this).parents(".autotest-row").remove();
-//                    }
-//                },
-//                error: function () {
-//                    alert("删除失败,请重试!");
-//                }
-//            });
+            $.ajax({
+                type: 'GET',
+                url: '../auto/delete',
+                data: {
+                    id: $(this).data("aid")
+                },
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 1000) {
+                        $(this).parents(".autotest-row").remove();
+                    }
+                },
+                error: function () {
+                    alert("删除失败,请重试!");
+                }
+            });
         });
 
     });
