@@ -41,17 +41,25 @@
                         <table class="table table-invoice">
                             <thead>
                             <tr>
-                                <th>测试项</th>
+                                <th>测试项--${testList.size()}</th>
                                 <th>请求方式</th>
                                 <th>请求耗时</th>
-                                <th>返回状态码</th>
                             </tr>
                             </thead>
                             <tbody>
 
                             <c:forEach var="unittest" items="${testList}">
                                 <tr>
-                                    <td>
+                                    <td><c:choose>
+                                        <c:when test="${unittest.responseCode!=200}">
+                                                 <span
+                                                         class="pull-right badge badge-danger">${unittest.responseCode}</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                                 <span
+                                                         class="pull-right badge badge-success">${unittest.responseCode}</span>
+                                        </c:otherwise>
+                                    </c:choose>
                                         <div class="text-primary"><strong>${unittest.url}
                                         </strong>
                                         </div>
@@ -60,21 +68,6 @@
                                     </td>
                                     <td>${unittest.method}</td>
                                     <td>${unittest.requestTime}</td>
-                                    <td>
-
-                                        <c:choose>
-
-                                            <c:when test="${unittest.responseCode!=200}">
-                                                 <span
-                                                         class="pull-right badge badge-danger">${unittest.responseCode}</span>
-                                            </c:when>
-
-                                            <c:otherwise>
-                                                 <span
-                                                         class="pull-right badge badge-success">${unittest.responseCode}</span>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>

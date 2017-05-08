@@ -1,6 +1,7 @@
 package powerapi.web.exception;
 
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.session.UnknownSessionException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,4 +32,11 @@ public class UnauthorizedExceptionHandler {
         return mv;
     }
 
+    @ExceptionHandler({UnknownSessionException.class})
+    public ModelAndView processUnknownSessionException(NativeWebRequest request, MissingServletRequestParameterException e) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("exception", e.getMessage());
+        mv.setViewName("/signin");
+        return mv;
+    }
 }

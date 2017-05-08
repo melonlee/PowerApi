@@ -44,9 +44,10 @@
                     <h4 class="nomargin">登录</h4>
                     <input type="text" name="username" class="form-control uname"
                            placeholder="用户名"/> <input type="password" name="passwd"
-                                                      class="form-control pword" placeholder="密码"/> <a href="">
-                    <small>忘记密码?</small>
-                </a>
+                                                      class="form-control pword" placeholder="密码"/>
+                    <%--<small>忘记密码?</small>--%>
+                    <br/> <input type="checkbox" value="1" readonly="readonly" checked="checked" name="rememberme"/> 记住我
+
                     <button class="btn btn-success btn-block">登录</button>
 
                 </form>

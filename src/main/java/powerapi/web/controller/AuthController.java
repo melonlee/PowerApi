@@ -17,6 +17,8 @@ import powerapi.entity.User;
 import powerapi.plugin.PasswordHelper;
 import powerapi.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * Created by Melon on 17/2/23.
@@ -46,10 +48,11 @@ public class AuthController extends BaseController {
 
     @RequestMapping(value = "/signin", method = {
             RequestMethod.POST})
-    public String signin(ModelMap map, User user) {
+    public String signin(ModelMap map, User user, HttpServletRequest request) {
+
         String error;
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPasswd());
-        token.setRememberMe(false);
+        token.setRememberMe(null != request.getParameter("rememberme") ? true : false);
         try {
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
@@ -78,7 +81,7 @@ public class AuthController extends BaseController {
             userService.insert(user);
             //登录到shiro中
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), passwdTemp);
-            token.setRememberMe(false);
+            token.setRememberMe(true);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
             subject.getSession().setAttribute("curUser", user);
