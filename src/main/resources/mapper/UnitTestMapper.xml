@@ -5,6 +5,8 @@
     <resultMap id="BaseResultMap" type="powerapi.entity.UnitTest">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="auto_id" property="autoId" jdbcType="INTEGER"/>
+        <result column="f_id" property="functionId" jdbcType="INTEGER"/>
         <result column="method" property="method" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
         <result column="params" property="params" jdbcType="VARCHAR"/>
@@ -18,9 +20,11 @@
         <result column="request_time" property="requestTime" jdbcType="INTEGER"/>
         <result column="response_size" property="responseSize"
                 jdbcType="INTEGER"/>
+        <result column="title" property="functionTitle"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-		id, user_id, method, url, params, response_code,
+		id, user_id, method, url, params, response_code,auto_id,f_id,
 		response_header,
 		response_body,
 		createdate, request_time, response_size
@@ -39,5 +43,11 @@
 		#{userId,jdbcType=INTEGER}
 
 	</select>
+
+    <select id="findAutoTestList" resultMap="BaseResultMap">
+        select t_unit_test.*,t_function.title as title from t_unit_test
+         left join t_function on t_unit_test.f_id = t_function.id
+          where t_unit_test.auto_id=#{aid} order by t_unit_test.response_code desc
+    </select>
 
 </mapper>

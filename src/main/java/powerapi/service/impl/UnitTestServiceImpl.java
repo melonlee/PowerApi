@@ -8,6 +8,7 @@ import powerapi.entity.UnitTest;
 import powerapi.mapper.UnitTestMapper;
 import powerapi.service.UnitTestService;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,8 +16,13 @@ import java.util.List;
  */
 @Service
 public class UnitTestServiceImpl extends ServiceImpl<UnitTestMapper, UnitTest> implements UnitTestService {
+
+    @Resource
+    private UnitTestMapper unitTestMapper;
+
     @Override
     public List<UnitTest> findAutoTestList(Long aid) {
-        return this.selectList(new EntityWrapper<UnitTest>().eq("auto_id", aid).orderBy("response_code", false));
+
+        return unitTestMapper.findAutoTestList(aid);
     }
 }

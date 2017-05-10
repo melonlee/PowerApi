@@ -40,6 +40,12 @@ public class UnitTest extends BaseEntity {
     @TableField(value = "auto_id")
     private Long autoId;  //标记是否是自动化中的测试内容
 
+    @TableField(value = "f_id")
+    private Long functionId;
+
+    @TableField(exist = false)
+    private String functionTitle;
+
     public Long getUserId() {
         return userId;
     }
@@ -118,6 +124,22 @@ public class UnitTest extends BaseEntity {
 
     public void setResponseCode(int responseCode) {
         this.responseCode = responseCode;
+    }
+
+    public Long getFunctionId() {
+        return functionId;
+    }
+
+    public void setFunctionId(Long functionId) {
+        this.functionId = functionId;
+    }
+
+    public String getFunctionTitle() {
+        return functionTitle;
+    }
+
+    public void setFunctionTitle(String functionTitle) {
+        this.functionTitle = functionTitle;
     }
 
     @Override

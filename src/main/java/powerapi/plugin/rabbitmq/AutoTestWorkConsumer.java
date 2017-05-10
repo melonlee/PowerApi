@@ -99,7 +99,8 @@ public class AutoTestWorkConsumer implements MessageListener {
                 errorcount++;
             }
             unitTest.setUserId(jsonObject.getLong("uId"));
-            unitTest.setParams(requestDto.getParams());
+            unitTest.setFunctionId(function.getId());
+            unitTest.setParams(function.getParams());
             unitTest.setAutoId(autoBean.getId());
             unitTestService.insert(unitTest);
         }
