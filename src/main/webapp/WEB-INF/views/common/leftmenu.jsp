@@ -44,17 +44,6 @@
                                 class="pull-right badge badge-danger">Beta</span></a></li>
                 </ul>
             </li>
-            <%--<li><a><i class="fa fa-briefcase"></i> <span>--%>
-							<%--性能管理</span> </a></li>--%>
-
-            <%--<li><a><i class="fa fa-briefcase"></i> <span>--%>
-							<%--Mock管理</span> </a></li>--%>
-
-            <%--<li><a><i class="fa fa-briefcase"></i> <span>--%>
-							<%--团队管理</span> </a></li>--%>
-            <%--<li><a><i class="fa fa-briefcase"></i> <span>--%>
-							<%--系统设置</span> </a></li>--%>
-
         </ul>
 
         <div class="infosummary">
