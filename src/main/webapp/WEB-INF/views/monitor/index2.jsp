@@ -17,7 +17,7 @@
 
     <div class="mainpanel">
 
-        <jsp:include page="../common/menu.jsp" flush="true">
+        <jsp:include page="../common/leftmenu.jsp" flush="true">
             <jsp:param name="nav" value="6"/>
         </jsp:include>
 

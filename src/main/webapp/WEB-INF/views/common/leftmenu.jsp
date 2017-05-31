@@ -44,6 +44,39 @@
                                 class="pull-right badge badge-danger">Beta</span></a></li>
                 </ul>
             </li>
+
+            <li ${param.nav==6 ? "class='active'" : "" }><a
+                    href="../mock/all"><i class="fa fa-cubes"></i> <span>
+							Mock管理</span> </a></li>
+
+            <li ${param.nav==7 ? "class='active'" : "" }><a
+                    href="../monitor/all"><i class="fa fa-shield"></i> <span>
+							监控管理</span> </a></li>
+
+            <li class="nav-parent ${param.nav==8 ||  param.nav==9 ? "active nav-active" : "" }"><a href=""><i
+                    class="fa fa-trophy"></i>
+                <span>团队管理</span></a>
+                <ul class="children" ${param.nav==8 ||  param.nav==9  ? "style='display:block;'" : "" }>
+                    <li ${param.nav==8 ? "class='active'" : "" } ><a href="../group/all"><i class="fa fa-users"></i>创建/管理团队</a>
+                    </li>
+                    <li  ${param.nav==9 ? "class='active'" : "" } ><a href="../group/members"><i class="fa fa-user"></i>
+                        成员管理 <span
+                                class="pull-right badge badge-danger">Beta</span></a></li>
+                </ul>
+            </li>
+
+            <li class="nav-parent ${param.nav==10 ||  param.nav==11 ? "active nav-active" : "" }"><a href=""><i
+                    class="fa fa-gear"></i>
+                <span>系统设置</span></a>
+                <ul class="children" ${param.nav==10 ||  param.nav==11  ? "style='display:block;'" : "" }>
+                    <li ${param.nav==10 ? "class='active'" : "" } ><a href="../setting/view"><i
+                            class="fa fa-volume-up"></i>通知设置</a>
+                    </li>
+                    <li ${param.nav==11 ? "class='active'" : "" } ><a href="../setting/view"><i
+                            class="fa fa-sitemap"></i>角色管理</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
         <div class="infosummary">
