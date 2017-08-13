@@ -45,9 +45,19 @@
                 </ul>
             </li>
 
-            <li ${param.nav==6 ? "class='active'" : "" }><a
-                    href="../mock/all"><i class="fa fa-cubes"></i> <span>
-							Mock管理</span> </a></li>
+
+            <li class="nav-parent ${param.nav==6 ||  param.nav==9 ? "active nav-active" : "" }"><a href=""><i
+                    class="fa fa-cubes"></i>
+                <span>Mock管理</span></a>
+                <ul class="children" ${param.nav==8 ||  param.nav==9  ? "style='display:block;'" : "" }>
+                    <li ${param.nav==8 ? "class='active'" : "" } ><a href="../mock/all"><i class="fa fa-users"></i>手动Mock</a>
+                    </li>
+                    <li  ${param.nav==9 ? "class='active'" : "" } ><a href="../group/members"><i class="fa fa-user"></i>
+                        自动Mock <span
+                                class="pull-right badge badge-danger">Beta</span></a></li>
+                </ul>
+            </li>
+
 
             <li ${param.nav==7 ? "class='active'" : "" }><a
                     href="../monitor/all"><i class="fa fa-shield"></i> <span>
@@ -69,10 +79,10 @@
                     class="fa fa-gear"></i>
                 <span>系统设置</span></a>
                 <ul class="children" ${param.nav==10 ||  param.nav==11  ? "style='display:block;'" : "" }>
-                    <li ${param.nav==10 ? "class='active'" : "" } ><a href="../setting/view"><i
+                    <li ${param.nav==10 ? "class='active'" : "" } ><a href="../message/all"><i
                             class="fa fa-volume-up"></i>通知设置</a>
                     </li>
-                    <li ${param.nav==11 ? "class='active'" : "" } ><a href="../setting/view"><i
+                    <li ${param.nav==11 ? "class='active'" : "" } ><a href="../role/all"><i
                             class="fa fa-sitemap"></i>角色管理</a>
                     </li>
                 </ul>

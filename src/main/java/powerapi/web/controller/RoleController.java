@@ -34,34 +34,34 @@ public class RoleController {
     private PermissionService permissionService;
 
 
-    @RequiresPermissions("role:view")
+//    @RequiresPermissions("role:view")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String all(ModelMap map) {
 
         List<Role> roles = roleService.findAll();
         map.addAttribute("roles", roles);
-        return "/role/index.ftl";
+        return "/role/index";
     }
 
-    @RequiresPermissions("role:create")
+//    @RequiresPermissions("role:create")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(ModelMap modelMap) {
         modelMap.addAttribute("role", new Role());
         modelMap.addAttribute("permissions", permissionService.findAll());
-        return "/role/detail.ftl";
+        return "/role/detail";
     }
 
-    @RequiresPermissions("role:view")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String create(ModelMap modelMap, @PathVariable("id") Long id) {
+//    @RequiresPermissions("role:view")
 
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String view(ModelMap modelMap,  @RequestParam(value = "id", required = true) Long id) {
         modelMap.addAttribute("role", roleService.findOne(id));
         List<Permission> permissions = permissionService.findByRole(id);
         modelMap.addAttribute("permissions", permissions);
-        return "/role/detail.ftl";
+        return "/role/detail";
     }
 
-    @RequiresPermissions("role:modify")
+//    @RequiresPermissions("role:modify")
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify(ModelMap modelMap, Role role) {
         if (null != role.getId()) {
@@ -72,7 +72,7 @@ public class RoleController {
             role = roleService.createRole(role);
         }
 
-        if (null != role && role.getPermissions().size() > 0) {
+        if (null!=role.getPermissions()&& role.getPermissions().size()>0) {
             for (Long permissionId : role.getPermissions()) {
                 roleService.correlationPermissions(role.getId(), permissionId);
             }
@@ -80,7 +80,7 @@ public class RoleController {
         return "redirect:/role/all";
     }
 
-    @RequiresPermissions("role:delete")
+//    @RequiresPermissions("role:delete")
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(ModelMap modelMap,
                          @RequestParam(value = "id", required = false, defaultValue = "") Long id) {
