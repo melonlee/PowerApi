@@ -1,5 +1,6 @@
 package powerapi.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -9,26 +10,27 @@ import java.text.SimpleDateFormat;
 /**
  * Created by Melon on 17/3/17.
  */
-@TableName("t_bug")
-public class Group {
-    public SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:m:s");
-    @TableId(type = IdType.AUTO)
-    private long id;
-    private String title;
+@TableName("t_group")
+public class Group  extends BaseEntity{
 
-    public long getId() {
-        return id;
+    private String name;
+
+    @TableField(value = "user_id")
+    private Long userId;
+
+    public String getName() {
+        return name;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTitle() {
-        return title;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
