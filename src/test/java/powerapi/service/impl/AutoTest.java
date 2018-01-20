@@ -42,7 +42,7 @@ public class AutoTest extends BaseTest {
     @Test
     public void testJsonArray() {
 
-        String headers = "{\"headers\":[{\"name\":\"1212122323\",\"value\":\"23232323\"}]}";
+        String headers = "{\"headers\":[{\"name\":\"test1\",\"value\":\"test2\"}]}";
 
         JSONObject jsonObject = JSONObject.parseObject(headers);
         JSONArray headerJsonArray = jsonObject.getJSONArray("headers");
