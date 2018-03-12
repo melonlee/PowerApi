@@ -8,15 +8,13 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/leftmenu.jsp" flush="true">
-        <jsp:param name="nav" value="1"/>
-    </jsp:include>
-    <div class="mainpanel">
-        <div class="pageheader">
-            <h2>
-                <i class="glyphicon glyphicon-cog"></i>账户<span>更改密码</span>
-            </h2>
-        </div>
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <div class="pageheader">
+        <h2>
+            <i class="glyphicon glyphicon-cog"></i>账户<span>更改密码</span>
+        </h2>
         <div class="contentpanel">
             <div class="row">
                 <div class="col-md-12">

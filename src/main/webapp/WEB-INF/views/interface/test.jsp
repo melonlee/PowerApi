@@ -8,10 +8,10 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/leftmenu.jsp" flush="true">
-        <jsp:param name="nav" value="4"/>
-    </jsp:include>
-    <div class="mainpanel">
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <div class="contentpanel">
         <jsp:include page="../common/header.jsp">
             <jsp:param name="entity" value="接口"/>
             <jsp:param name="index" value="2"/>
@@ -74,7 +74,8 @@
                                         <div class="col-md-12">
                                             <div class="alert alert-info">
                                                 <button type="button" class="close" data-dismiss="alert"
-                                                        aria-hidden="true">&times;</button>
+                                                        aria-hidden="true">&times;
+                                                </button>
                                                 点击[+参数]按钮在列表中直接输入所需参数
                                             </div>
                                         </div>
@@ -108,7 +109,8 @@
                             </div>
                             <div class="panel-footer">
                                 <button id="submit" class="btn btn-primary">提交测试</button>
-                                <button type="button" onclick="javascript:window.location.href='../module/all?proId='+${project.id}"
+                                <button type="button"
+                                        onclick="javascript:window.location.href='../module/all?proId='+${project.id}"
                                         class="btn btn-default">返回
                                 </button>
                                 <button id="loading" class="btn btn-primary" data-toggle="modal"
@@ -146,7 +148,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 
@@ -195,25 +196,25 @@
                 var functionDetailObj = paramsAry.params[loop];
 
                 str += '<tr class="m_param_row">'
-                        + '<td class="m_param_name" contenteditable style="outline: none;">'
-                        + functionDetailObj.name + '</td>'
-                        + '<td><select class="select2 m_param_type">';
+                    + '<td class="m_param_name" contenteditable style="outline: none;">'
+                    + functionDetailObj.name + '</td>'
+                    + '<td><select class="select2 m_param_type">';
                 for (var j = 0, len = typeAry.length; j < len; j++) {
                     var typeNow = typeAry[j];
                     if (functionDetailObj.type == typeNow) {
                         str += '<option value="' + typeNow + '" selected>'
-                                + typeNow + '</option>';
+                            + typeNow + '</option>';
                     } else {
                         str += '<option value="' + typeNow + '">' + typeNow
-                                + '</option>';
+                            + '</option>';
                     }
                 }
                 str += '</select></td>'
-                        + '<td class="m_param_value" contenteditable style="outline: none; overflow:hidden;">'
-                        + functionDetailObj.value
-                        + '</td>'
-                        + '<td class="table-action">'
-                        + '<a href="#" class="m_param_delete delete-row"><i class="fa fa-trash-o"></i></a></td> </tr>';
+                    + '<td class="m_param_value" contenteditable style="outline: none; overflow:hidden;">'
+                    + functionDetailObj.value
+                    + '</td>'
+                    + '<td class="table-action">'
+                    + '<a href="#" class="m_param_delete delete-row"><i class="fa fa-trash-o"></i></a></td> </tr>';
             }
 
             $("#params").append(str);
@@ -223,97 +224,97 @@
     }
 
     $("#addParam")
-            .click(
-                    function () {
+        .click(
+            function () {
 
-                        $("#params")
-                                .append(
-                                        '<tr class="m_param_row">'
-                                        + '<td class="m_param_name" contenteditable style="outline: none;"></td>'
-                                        + '<td><select class="select2 m_param_type">'
-                                        + '<option value="String">String</option>'
-                                        + '<option value="Int">Int</option>'
-                                        + '</select></td>'
-                                        + '<td class="m_param_value" contenteditable style="outline: none; overflow:hidden;"></td>'
-                                        + '<td class="table-action">'
-                                        + '<a href="#" class="m_param_delete delete-row"><i class="fa fa-trash-o"></i></a></td> </tr>');
-                    });
+                $("#params")
+                    .append(
+                        '<tr class="m_param_row">'
+                        + '<td class="m_param_name" contenteditable style="outline: none;"></td>'
+                        + '<td><select class="select2 m_param_type">'
+                        + '<option value="String">String</option>'
+                        + '<option value="Int">Int</option>'
+                        + '</select></td>'
+                        + '<td class="m_param_value" contenteditable style="outline: none; overflow:hidden;"></td>'
+                        + '<td class="table-action">'
+                        + '<a href="#" class="m_param_delete delete-row"><i class="fa fa-trash-o"></i></a></td> </tr>');
+            });
 
     $("#submit")
-            .click(
-                    function () {
+        .click(
+            function () {
 
-                        $("#loading").click();
+                $("#loading").click();
 
-                        var paramObj = {}, paramsAry = [], $m_param_rows = $(
-                                "#params").find(".m_param_row");
+                var paramObj = {}, paramsAry = [], $m_param_rows = $(
+                    "#params").find(".m_param_row");
 
-                        console.log($m_param_rows);
+                console.log($m_param_rows);
 
-                        for (var i = 0, len = $m_param_rows.length; i < len; i++) {
-                            var $row = $m_param_rows.eq(i), param = {};
+                for (var i = 0, len = $m_param_rows.length; i < len; i++) {
+                    var $row = $m_param_rows.eq(i), param = {};
 
-                            param.name = $row.find(".m_param_name").text();
-                            param.type = $row.find(".m_param_type").val();
-                            param.value = $row.find(".m_param_value").text();
+                    param.name = $row.find(".m_param_name").text();
+                    param.type = $row.find(".m_param_type").val();
+                    param.value = $row.find(".m_param_value").text();
 
-                            paramsAry.push(param);
+                    paramsAry.push(param);
+                }
+
+                paramObj.params = paramsAry;
+
+                var paramStr = JSON.stringify(paramObj);
+                console.log(paramStr);
+                console.log($("#method").val());
+                console.log($("#url").val());
+
+                //提交
+
+                $
+                    .ajax({
+                        type: 'POST',
+                        url: '../function/test',
+                        data: {
+                            method: $("#method").val(),
+                            url: $("#url").val(),
+                            params: paramStr
+                        },
+                        cache: false,
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#loading").click();
+                            /* 	data = JSON.parse(data); */
+                            if (data.code == 1000) {
+                                $("#responsecode")
+                                    .html(
+                                        "返回码:"
+                                        + data.result.responseCode
+                                        + "<br/>请求时间:"
+                                        + data.result.createdate
+                                        + "<br/>请求耗时:"
+                                        + data.result.requestTime
+                                        + "毫秒"
+                                        + "<br/>返回内容大小:"
+                                        + data.result.responseSize
+                                        + "B");
+                                $("#responseheader")
+                                    .html(
+                                        "头信息:"
+                                        + data.result.responseHeader);
+                                //对返回结果进行格式化
+                                format(data.result.responseBody);
+                                $("#returns").show();
+                            } else {
+                                alert('数据提交失败，请重试!');
+                            }
+                        },
+                        error: function () {
+                            $("#loading").click();
+                            alert("获取数据异常，请重试!");
                         }
-
-                        paramObj.params = paramsAry;
-
-                        var paramStr = JSON.stringify(paramObj);
-                        console.log(paramStr);
-                        console.log($("#method").val());
-                        console.log($("#url").val());
-
-                        //提交
-
-                        $
-                                .ajax({
-                                    type: 'POST',
-                                    url: '../function/test',
-                                    data: {
-                                        method: $("#method").val(),
-                                        url: $("#url").val(),
-                                        params: paramStr
-                                    },
-                                    cache: false,
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        $("#loading").click();
-                                        /* 	data = JSON.parse(data); */
-                                        if (data.code == 1000) {
-                                            $("#responsecode")
-                                                    .html(
-                                                            "返回码:"
-                                                            + data.result.responseCode
-                                                            + "<br/>请求时间:"
-                                                            + data.result.createdate
-                                                            + "<br/>请求耗时:"
-                                                            + data.result.requestTime
-                                                            + "毫秒"
-                                                            + "<br/>返回内容大小:"
-                                                            + data.result.responseSize
-                                                            + "B");
-                                            $("#responseheader")
-                                                    .html(
-                                                            "头信息:"
-                                                            + data.result.responseHeader);
-                                            //对返回结果进行格式化
-                                            format(data.result.responseBody);
-                                            $("#returns").show();
-                                        } else {
-                                            alert('数据提交失败，请重试!');
-                                        }
-                                    },
-                                    error: function () {
-                                        $("#loading").click();
-                                        alert("获取数据异常，请重试!");
-                                    }
-                                });
-
                     });
+
+            });
 
     $(document).on("click", ".m_param_delete", function () {
         $(this).parents(".m_param_row").remove();
@@ -338,7 +339,7 @@
         var notify = function (name, value, isLast, indent/*缩进*/, formObj) {
             nodeCount++;
             /*节点计数*/
-            for (var i = 0, tab = ''; i < indent; i++)tab += indentChar;
+            for (var i = 0, tab = ''; i < indent; i++) tab += indentChar;
             /* 缩进HTML */
             tab = compress ? '' : tab;
             /*压缩模式忽略缩进*/
@@ -355,12 +356,12 @@
                 draw.push(tab + (formObj ? ('"' + name + '":') : '') + '{' + line);
                 /*缩进'{' 然后换行*/
                 var len = 0, i = 0;
-                for (var key in value)len++;
-                for (var key in value)notify(key, value[key], ++i == len, indent, true);
+                for (var key in value) len++;
+                for (var key in value) notify(key, value[key], ++i == len, indent, true);
                 draw.push(tab + '}' + (isLast ? line : (',' + line)));
                 /*缩进'}'换行,若非尾元素则添加逗号*/
             } else {
-                if (typeof value == 'string')value = '"' + value + '"';
+                if (typeof value == 'string') value = '"' + value + '"';
                 draw.push(tab + (formObj ? ('"' + name + '":') : '') + value + (isLast ? '' : ',') + line);
             }
             ;

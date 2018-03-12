@@ -48,8 +48,8 @@ public class AutoTestController extends BaseController {
     @Autowired
     private UnitTestService unitTestService;
 
-    @Resource
-    private AmqpTemplate amqpTemplate;
+//    @Resource
+//    private AmqpTemplate amqpTemplate;
 
     @RequestMapping("/view")
     public String view(ModelMap model) {
@@ -105,7 +105,7 @@ public class AutoTestController extends BaseController {
         params.put("pId", pId);
         params.put("headers", headers);
         params.put("uId", getCurrentUser().getId());
-        amqpTemplate.convertAndSend("queueTestKey", JSON.toJSONString(params));
+//        amqpTemplate.convertAndSend("queueTestKey", JSON.toJSONString(params));
         return JsonUtil.getInstance().setStatus(1).result();
     }
 

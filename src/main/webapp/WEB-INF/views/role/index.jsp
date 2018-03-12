@@ -8,10 +8,9 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/leftmenu.jsp" flush="true">
-        <jsp:param name="nav" value="11"/>
-    </jsp:include>
-    <div class="mainpanel">
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
         <div class="pageheader">
             <div class="row">
                 <div class="col-md-11">
@@ -82,7 +81,6 @@
                 </c:if>
             </div>
         </div>
-    </div>
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>

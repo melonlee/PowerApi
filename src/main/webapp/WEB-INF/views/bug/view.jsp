@@ -10,10 +10,10 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/leftmenu.jsp" flush="true">
-        <jsp:param name="nav" value="2"/>
-    </jsp:include>
-    <div class="mainpanel">
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <div class="contentpanel">
         <jsp:include page="../common/header.jsp">
             <jsp:param name="entity" value="Bug"/>
             <jsp:param name="index" value="3"/>
@@ -66,8 +66,8 @@
                                         <br/>
                                         <h5 class="subtitle subtitle-lined">留言</h5>
                                         <div class="mb20"></div>
-                                    <textarea placeholder="..." rows="5" class="form-control"
-                                              id="bug_content"></textarea>
+                                        <textarea placeholder="..." rows="5" class="form-control"
+                                                  id="bug_content"></textarea>
                                         <div class="mb10"></div>
                                         <button class="btn btn-primary" id="comment_submit">提交评论</button>
                                     </div>
@@ -79,7 +79,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
@@ -102,14 +101,14 @@
                 if (data.code == 1000) {
                     //拼接评论结果
                     $(".comment-list").append('<li class="media">' +
-                            '<a href="#" class="pull-left">' +
-                            '<img alt="" src= "${host}/static/images/logo.jpg" class="media-object"></a>' +
-                            '<div class="media-body">' +
-                            '<h4>' + username + '</h4>' +
-                            '<small class="text-muted">' + generateNow() + '</small>' +
-                            '<p>' + $("#bug_content").val() + '</p>' +
-                            '</div>' +
-                            '</li>');
+                        '<a href="#" class="pull-left">' +
+                        '<img alt="" src= "${host}/static/images/logo.jpg" class="media-object"></a>' +
+                        '<div class="media-body">' +
+                        '<h4>' + username + '</h4>' +
+                        '<small class="text-muted">' + generateNow() + '</small>' +
+                        '<p>' + $("#bug_content").val() + '</p>' +
+                        '</div>' +
+                        '</li>');
                     $("#bug_content").val('');
                 } else {
                     alert('数据提交失败，请重试!');
@@ -126,6 +125,7 @@
     function p(s) {
         return s < 10 ? '0' + s : s;
     }
+
     function generateNow() {
         var myDate = new Date();
         var year = myDate.getFullYear();

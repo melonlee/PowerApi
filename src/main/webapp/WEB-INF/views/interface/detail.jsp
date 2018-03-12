@@ -8,10 +8,10 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/leftmenu.jsp" flush="true">
-        <jsp:param name="nav" value="2"/>
-    </jsp:include>
-    <div class="mainpanel">
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <div class="contentpanel">
         <jsp:include page="../common/header.jsp">
             <jsp:param name="entity" value="接口"/>
             <jsp:param name="index" value="2"/>
@@ -25,7 +25,8 @@
                                 <c:if test="${status>0}">
                                     <div class="alert alert-success">
                                         <button type="button" class="close" data-dismiss="alert"
-                                                aria-hidden="true">&times;</button>
+                                                aria-hidden="true">&times;
+                                        </button>
                                         操作成功!
                                     </div>
                                 </c:if>
@@ -156,7 +157,8 @@
                                                                     <div class="alert alert-info">
                                                                         <button type="button" class="close"
                                                                                 data-dismiss="alert"
-                                                                                aria-hidden="true">&times;</button>
+                                                                                aria-hidden="true">&times;
+                                                                        </button>
                                                                         点击[+参数]按钮在列表中直接输入所需参数
                                                                     </div>
                                                                 </div>
@@ -229,7 +231,6 @@
             </div>
         </div>
     </div>
-    </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
 
@@ -263,24 +264,24 @@
                 var functionDetailObj = paramsAry.params[loop];
 
                 str += '<tr class="m_param_row">'
-                        + '<td class="m_param_name" contenteditable style="outline: none;">'
-                        + functionDetailObj.name + '</td>'
-                        + '<td><select class="select2 m_param_type">';
+                    + '<td class="m_param_name" contenteditable style="outline: none;">'
+                    + functionDetailObj.name + '</td>'
+                    + '<td><select class="select2 m_param_type">';
                 for (var j = 0, len = typeAry.length; j < len; j++) {
                     var typeNow = typeAry[j];
                     if (functionDetailObj.type == typeNow) {
                         str += '<option value="' + typeNow + '" selected>' + typeNow
-                                + '</option>';
+                            + '</option>';
                     } else {
                         str += '<option value="' + typeNow + '">' + typeNow
-                                + '</option>';
+                            + '</option>';
                     }
                 }
                 str += '</select></td>'
-                        + '<td  class="m_param_desc" contenteditable style="outline: none;">'
-                        + functionDetailObj.desc
-                        + '</td>' +
-                        '<td><select class="select2 m_param_isneed">';
+                    + '<td  class="m_param_desc" contenteditable style="outline: none;">'
+                    + functionDetailObj.desc
+                    + '</td>' +
+                    '<td><select class="select2 m_param_isneed">';
 
                 if (functionDetailObj.isneed == "1") {
                     str += '<option  value="1" selected>是</option><option  value="0">否</option>';
@@ -288,10 +289,10 @@
                     str += '<option  value="0" selected>否</option><option  value="1">是</option>';
                 }
                 str += '</select></td>'
-                        + '<td class="m_param_value" contenteditable style="outline: none;">' + functionDetailObj.value + '</td>'
-                        + '<td class="m_param_defaultvalue" contenteditable style="outline: none;">' + functionDetailObj.defaultvalue + '</td>'
-                        + '<td class="table-action"><a href="#" class="m_param_delete delete-row"><i class="fa fa-trash-o"></i></a></td>' +
-                        '</tr>';
+                    + '<td class="m_param_value" contenteditable style="outline: none;">' + functionDetailObj.value + '</td>'
+                    + '<td class="m_param_defaultvalue" contenteditable style="outline: none;">' + functionDetailObj.defaultvalue + '</td>'
+                    + '<td class="table-action"><a href="#" class="m_param_delete delete-row"><i class="fa fa-trash-o"></i></a></td>' +
+                    '</tr>';
             }
 
             $("#params").append(str);
@@ -300,27 +301,27 @@
     }
 
     $("#addParam")
-            .click(
-                    function () {
+        .click(
+            function () {
 
-                        $("#params")
-                                .append(
-                                        '<tr class="m_param_row"><td class="m_param_name" contenteditable style="outline: none;"></td>' +
-                                        '<td><select class="select2 m_param_type">' +
-                                        '<option value="String">String</option>' +
-                                        '<option value="Int">Int</option>' +
-                                        '</select></td>' +
-                                        '<td class="m_param_desc" contenteditable style="outline: none;"></td>' +
-                                        '<td><select class="select2 m_param_isneed">' +
-                                        '<option value="1">是</option>' +
-                                        '<option value="0">否</option>' +
-                                        '</select></td>' +
-                                        '<td class="m_param_value" contenteditable style="outline: none;"></td>' +
-                                        '<td class="m_param_defaultvalue" contenteditable style="outline: none;"></td>' +
-                                        '<td class="table-action"><a href="#"' +
-                                        ' class="m_param_delete delete-row"><i class="fa fa-trash-o"></i></a></td>' +
-                                        '</tr>');
-                    });
+                $("#params")
+                    .append(
+                        '<tr class="m_param_row"><td class="m_param_name" contenteditable style="outline: none;"></td>' +
+                        '<td><select class="select2 m_param_type">' +
+                        '<option value="String">String</option>' +
+                        '<option value="Int">Int</option>' +
+                        '</select></td>' +
+                        '<td class="m_param_desc" contenteditable style="outline: none;"></td>' +
+                        '<td><select class="select2 m_param_isneed">' +
+                        '<option value="1">是</option>' +
+                        '<option value="0">否</option>' +
+                        '</select></td>' +
+                        '<td class="m_param_value" contenteditable style="outline: none;"></td>' +
+                        '<td class="m_param_defaultvalue" contenteditable style="outline: none;"></td>' +
+                        '<td class="table-action"><a href="#"' +
+                        ' class="m_param_delete delete-row"><i class="fa fa-trash-o"></i></a></td>' +
+                        '</tr>');
+            });
 
 
     //点击导航
@@ -385,64 +386,64 @@
 
     //提交
     $("#submit")
-            .click(
-                    function () {
+        .click(
+            function () {
 
-                        var paramObj = {}, paramsAry = [], $m_param_rows = $(
-                                "#params").find(".m_param_row");
+                var paramObj = {}, paramsAry = [], $m_param_rows = $(
+                    "#params").find(".m_param_row");
 
-                        console.log($m_param_rows);
+                console.log($m_param_rows);
 
-                        for (var i = 0, len = $m_param_rows.length; i < len; i++) {
-                            var $row = $m_param_rows.eq(i), param = {};
+                for (var i = 0, len = $m_param_rows.length; i < len; i++) {
+                    var $row = $m_param_rows.eq(i), param = {};
 
-                            param.name = $row.find(".m_param_name").text();
-                            param.type = $row.find(".m_param_type").val();
-                            param.desc = $row.find(".m_param_desc").text();
-                            param.isneed = $row.find(".m_param_isneed").val();
-                            param.value = $row.find(".m_param_value").text();
-                            param.defaultvalue = $row.find(".m_param_defaultvalue").text();
-                            paramsAry.push(param);
+                    param.name = $row.find(".m_param_name").text();
+                    param.type = $row.find(".m_param_type").val();
+                    param.desc = $row.find(".m_param_desc").text();
+                    param.isneed = $row.find(".m_param_isneed").val();
+                    param.value = $row.find(".m_param_value").text();
+                    param.defaultvalue = $row.find(".m_param_defaultvalue").text();
+                    paramsAry.push(param);
+                }
+
+                paramObj.params = paramsAry;
+
+                var paramStr = JSON.stringify(paramObj);
+                console.log(paramStr);
+                console.log($("#response_body").val());
+                console.log($("#description").val());
+                //提交
+                $.ajax({
+                    type: 'POST',
+                    url: '../function/modify',
+                    data: {
+                        mId:${param.mId},
+                        id: $("#id").val(),
+                        title: $("#title").val(),
+                        description: $("#description").val(),
+                        responseType: $("#response_type").val(),
+                        method: $("#method").val(),
+                        url: $("#url").val(),
+                        params: paramStr,
+                        responseBody: $("#response_body").val()
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        /*  data = JSON.parse(data); */
+                        if (data.code == 1000) {
+                            window.location.href = "../module/all.do?proId=" +${project.id};
+                        } else {
+                            alert("提交数据异常，请重试!");
                         }
 
-                        paramObj.params = paramsAry;
+                    },
+                    error: function () {
+                        alert("获取数据异常，请重试!");
+                    }
+                });
 
-                        var paramStr = JSON.stringify(paramObj);
-                        console.log(paramStr);
-                        console.log($("#response_body").val());
-                        console.log($("#description").val());
-                        //提交
-                        $.ajax({
-                            type: 'POST',
-                            url: '../function/modify',
-                            data: {
-                                mId:${param.mId},
-                                id: $("#id").val(),
-                                title: $("#title").val(),
-                                description: $("#description").val(),
-                                responseType: $("#response_type").val(),
-                                method: $("#method").val(),
-                                url: $("#url").val(),
-                                params: paramStr,
-                                responseBody: $("#response_body").val()
-                            },
-                            cache: false,
-                            dataType: 'json',
-                            success: function (data) {
-                                /*  data = JSON.parse(data); */
-                                if (data.code == 1000) {
-                                    window.location.href = "../module/all.do?proId=" +${project.id};
-                                } else {
-                                    alert("提交数据异常，请重试!");
-                                }
-
-                            },
-                            error: function () {
-                                alert("获取数据异常，请重试!");
-                            }
-                        });
-
-                    });
+            });
 </script>
 </body>
 </html>

@@ -10,37 +10,35 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/leftmenu.jsp" flush="true">
-        <jsp:param name="nav" value="2"/>
-    </jsp:include>
-    <div class="mainpanel">
-        <div class="pageheader">
-            <div class="row">
-                <div class="col-md-11">
-                    <h2>
-                        <i class="fa fa-briefcase"></i>项目管理<span>包括:接口;Bug;状态码;文档;成员信息</span>
-                    </h2>
-                </div>
-                <div class="col-md-1">
-                    <p>
-                        <a class="btn btn-primary" href="create">新增项目 </a>
-                    </p>
-                </div>
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <div class="pageheader">
+        <div class="row">
+            <div class="col-md-11">
+                <h2>
+                    <i class="fa fa-briefcase"></i>项目管理<span>包括:接口;Bug;状态码;文档;成员信息</span>
+                </h2>
+            </div>
+            <div class="col-md-1">
+                <p>
+                    <a class="btn btn-primary" href="create">新增项目 </a>
+                </p>
             </div>
         </div>
-        <div class="contentpanel">
-            <div class="row">
-                <div class="people-list">
-                    <div class="row" id="project-area">
-                        <div id="projects">
-                        </div>
+    </div>
+    <div class="contentpanel">
+        <div class="row">
+            <div class="people-list">
+                <div class="row" id="project-area">
+                    <div id="projects">
                     </div>
                 </div>
             </div>
-            <button id="loading" class="btn btn-primary" data-toggle="modal"
-                    style="display: none;" data-target=".bs-example-modal-sm">loading
-            </button>
         </div>
+        <button id="loading" class="btn btn-primary" data-toggle="modal"
+                style="display: none;" data-target=".bs-example-modal-sm">loading
+        </button>
     </div>
 </section>
 
@@ -99,23 +97,23 @@
                     for (var loop = 0; loop < data.result.length; loop++) {
                         var project = data.result[loop];
                         project_html += '<div class="col-md-6">' +
-                                ' <div class="people-item"> ' +
-                                '<div class="media"> ' +
-                                '<div class="media-body"> ' +
-                                '<h4 class="person-name">' +
-                                ' <a href="view?id=' + project.id + '">' + project.title + '</a>' +
-                                '<span class="pull-right badge badge-danger">Version:' + project.version + '</span> </h4>' +
-                                ' <div class="text-muted"> ' +
-                                '<i class="fa fa-calendar"></i> ' + project.relativedate + '</div>' +
-                                ' <div class="text-muted m_textoverflow"> ' +
-                                '<i class="fa fa-briefcase"></i> ' + project.description + ' </div> ' +
-                                '<ul class="social-list"> ' +
-                                '<li><a href="view?id=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="基础管理"><i class="fa fa-gear"></i></a></li>  ' +
-                                '<li><a href="../module/all?proId=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="接口管理"><i class="fa fa-code-fork"></i></a></li> ' +
-                                '<li><a href="../bug/all?proId=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="Bug管理"><i class="fa fa-bug"></i></a></li>' +
-                                '<li><a href="../code/all?proId=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="业务码管理"><i class="fa fa-file-code-o"></i></a></li> ' +
-                                '<li><a href="preview?id=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="预览文档"><i class="fa fa-eye"></i></a></li> ' +
-                                '<li> <a href="#" data-toggle="modal" id="share" data-target=".bs-example-modal-static" data-content="${host}/' + project.sharelink + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="分享文档"><i class="fa fa-external-link"></i></a></li> </ul>  </div> </div> </div> </div>';
+                            ' <div class="people-item"> ' +
+                            '<div class="media"> ' +
+                            '<div class="media-body"> ' +
+                            '<h4 class="person-name">' +
+                            ' <a href="view?id=' + project.id + '">' + project.title + '</a>' +
+                            '<span class="pull-right badge badge-danger">Version:' + project.version + '</span> </h4>' +
+                            ' <div class="text-muted"> ' +
+                            '<i class="fa fa-calendar"></i> ' + project.relativedate + '</div>' +
+                            ' <div class="text-muted m_textoverflow"> ' +
+                            '<i class="fa fa-briefcase"></i> ' + project.description + ' </div> ' +
+                            '<ul class="social-list"> ' +
+                            '<li><a href="view?id=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="基础管理"><i class="fa fa-gear"></i></a></li>  ' +
+                            '<li><a href="../module/all?proId=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="接口管理"><i class="fa fa-code-fork"></i></a></li> ' +
+                            '<li><a href="../bug/all?proId=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="Bug管理"><i class="fa fa-bug"></i></a></li>' +
+                            '<li><a href="../code/all?proId=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="业务码管理"><i class="fa fa-file-code-o"></i></a></li> ' +
+                            '<li><a href="preview?id=' + project.id + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="预览文档"><i class="fa fa-eye"></i></a></li> ' +
+                            '<li> <a href="#" data-toggle="modal" id="share" data-target=".bs-example-modal-static" data-content="${host}/' + project.sharelink + '" class="tooltips" data-toggle="tooltip" data-placement="top" title="分享文档"><i class="fa fa-external-link"></i></a></li> </ul>  </div> </div> </div> </div>';
 
                     }
 

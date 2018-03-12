@@ -8,10 +8,10 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/leftmenu.jsp" flush="true">
-        <jsp:param name="nav" value="2"/>
-    </jsp:include>
-    <div class="mainpanel">
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <div class="contentpanel">
         <jsp:include page="../common/header.jsp">
             <jsp:param name="entity" value="Bug"/>
             <jsp:param name="index" value="3"/>
@@ -24,7 +24,8 @@
                         <div class="col-md-12" id="action_alert">
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert"
-                                        aria-hidden="true">&times;</button>
+                                        aria-hidden="true">&times;
+                                </button>
                                 操作成功!
                             </div>
                         </div>
@@ -33,7 +34,8 @@
                         <div class="col-md-12">
                             <div class="alert alert-danger">
                                 <button type="button" class="close" data-dismiss="alert"
-                                        aria-hidden="true">&times;</button>
+                                        aria-hidden="true">&times;
+                                </button>
                                 您目前还没有Bug清单!
                             </div>
                         </div>
@@ -78,7 +80,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>

@@ -14,13 +14,10 @@
 
 <section>
 
-
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
     <div class="mainpanel">
-
-        <jsp:include page="../common/leftmenu.jsp" flush="true">
-            <jsp:param name="nav" value="6"/>
-        </jsp:include>
-
         <div class="pageheader">
             <div class="row">
                 <div class="col-md-11">

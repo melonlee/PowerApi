@@ -9,14 +9,10 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/leftmenu.jsp" flush="true">
-        <jsp:param name="nav" value="2"/>
-    </jsp:include>
-    <div class="mainpanel">
-        <jsp:include page="../common/header.jsp">
-            <jsp:param name="entity" value="项目"/>
-            <jsp:param name="index" value="1"/>
-        </jsp:include>
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <div class="contentpanel">
         <div class="tab-content">
             <div class="tab-pane active">
                 <div class="row">
@@ -94,7 +90,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>

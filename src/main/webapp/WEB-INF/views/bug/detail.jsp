@@ -8,10 +8,10 @@
 </head>
 <body>
 <section>
-    <jsp:include page="../common/leftmenu.jsp" flush="true">
-        <jsp:param name="nav" value="2"/>
-    </jsp:include>
-    <div class="mainpanel">
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <div class="contentpanel">
         <jsp:include page="../common/header.jsp">
             <jsp:param name="entity" value="Bug"/>
             <jsp:param name="index" value="3"/>
@@ -63,7 +63,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 <jsp:include page="../common/scripts.jsp"></jsp:include>
